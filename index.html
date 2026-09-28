@@ -10,9 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- Firebase SDKs (Real-Time Cloud Synchronization) -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -35,8 +32,6 @@
     .dark ::-webkit-scrollbar-track { background: #0b0f19; }
     ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     .dark ::-webkit-scrollbar-thumb { background: #334155; }
-    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-    .dark ::-webkit-scrollbar-thumb:hover { background: #475569; }
   </style>
 </head>
 <body class="bg-slate-100 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col font-sans transition-colors duration-200">
@@ -57,7 +52,7 @@
             </div>
             <div class="flex items-center gap-2">
               <span id="save-status-indicator" class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
-                <i class="fa-solid fa-cloud-arrow-up text-[9px]"></i> Connecting to Cloud...
+                <i class="fa-solid fa-cloud text-[9px]"></i> Connecting to Cloud...
               </span>
             </div>
           </div>
@@ -71,13 +66,12 @@
           <button onclick="switchExam('RRB_JE')" id="exam-btn-RRB_JE" class="exam-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all">RRB JE 2026</button>
         </div>
 
-        <!-- Utility Toolbar -->
+        <!-- Right Controls -->
         <div class="flex items-center space-x-2">
-          <!-- Cloud Settings / User Profile Modal Trigger -->
-          <button onclick="openCloudModal()" title="Cloud Sync Settings" class="px-2.5 py-1.5 rounded-xl border border-indigo-500/40 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-bold text-xs flex items-center gap-1.5 shadow-sm hover:scale-105 transition-all">
-            <i class="fa-solid fa-cloud text-xs"></i>
-            <span class="hidden sm:inline">Sync ID:</span>
-            <span id="header-user-id" class="font-mono text-indigo-500">amar-prep</span>
+          <!-- Refresh from Cloud Button -->
+          <button onclick="syncFromCloud(true)" title="Force Refresh from Cloud" class="px-2.5 py-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-xs flex items-center gap-1.5 shadow-sm hover:scale-105 transition-all">
+            <i class="fa-solid fa-arrows-rotate"></i>
+            <span class="hidden sm:inline">Refresh Cloud</span>
           </button>
 
           <!-- Light/Dark Toggle -->
@@ -130,7 +124,7 @@
     </div>
   </header>
 
-  <!-- LIVE COUNTDOWN TICKERS -->
+  <!-- COUNTDOWNS -->
   <div class="bg-slate-200/70 dark:bg-slate-900 border-b border-slate-300 dark:border-slate-800 py-2.5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
@@ -183,7 +177,7 @@
         </div>
       </div>
 
-      <!-- 3 ANIMATED CHART WIDGETS -->
+      <!-- Charts -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm flex flex-col items-center">
           <div class="w-full flex justify-between items-center mb-2">
@@ -231,14 +225,14 @@
         </div>
       </div>
 
-      <!-- Subject Deep Tracer Matrix -->
+      <!-- Subject Matrix -->
       <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-4 shadow-sm">
         <div class="flex items-center justify-between">
           <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
             <i class="fa-solid fa-list-check text-indigo-500"></i>
             <span>Subject-by-Subject Deep Tracer</span>
           </h3>
-          <span class="text-xs text-slate-400">Instant updates across theory, PYQs, and revision rounds</span>
+          <span class="text-xs text-slate-400">Instant updates synced to your cloud database</span>
         </div>
         <div id="subject-matrix-container" class="space-y-3"></div>
       </div>
@@ -414,9 +408,7 @@
 
   </main>
 
-  <!-- MODALS -->
-
-  <!-- 1. TEST LOG MODAL WITH AUTO-ACCURACY & MARKS -->
+  <!-- TEST ENTRY MODAL WITH ACCURACY & MARKS ENGINE -->
   <div id="modal-test-entry" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center">
@@ -505,7 +497,7 @@
     </div>
   </div>
 
-  <!-- 2. RECORD MISTAKE MODAL -->
+  <!-- RECORD MISTAKE MODAL -->
   <div id="modal-mistake" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center">
@@ -552,46 +544,11 @@
     </div>
   </div>
 
-  <!-- 3. CLOUD SYNC CONFIGURATION MODAL -->
-  <div id="modal-cloud" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl">
-      <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
-        <div class="flex items-center gap-2">
-          <i class="fa-solid fa-cloud-arrow-up text-indigo-500 text-lg"></i>
-          <div>
-            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Cloud Sync Configuration</h3>
-            <p class="text-[11px] text-slate-500">Live automatic synchronization across Mobile and Laptop</p>
-          </div>
-        </div>
-        <button onclick="closeCloudModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-
-      <div class="space-y-3 text-xs">
-        <div>
-          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Personal Sync ID (Username)</label>
-          <input type="text" id="cloud-user-id" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2.5 font-bold text-slate-800 dark:text-white"/>
-          <p class="text-[10px] text-slate-400 mt-1">Both your phone and laptop must use this exact same Sync ID.</p>
-        </div>
-
-        <div>
-          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Database URL (Pre-configured)</label>
-          <input type="text" id="cloud-db-url" readonly class="w-full bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg p-2.5 font-mono text-[11px] text-slate-500"/>
-        </div>
-      </div>
-
-      <div class="flex justify-end gap-2 pt-2">
-        <button onclick="closeCloudModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-semibold">Close</button>
-        <button onclick="saveCloudConfig()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold shadow">Save Sync ID</button>
-      </div>
-    </div>
-  </div>
-
   <!-- SCRIPT ENGINE -->
   <script>
-    // PRE-CONFIGURED FIREBASE REALTIME DATABASE URL FROM YOUR SCREENSHOT
-    const PRESET_FIREBASE_URL = "https://prep-tracker-3b08c-default-rtdb.firebaseio.com";
+    // PRE-SET DATABASE ENDPOINT (NO API KEYS NEEDED)
+    const DB_ENDPOINT = "https://prep-tracker-3b08c-default-rtdb.firebaseio.com/users/amar-prep.json";
 
-    // OFFICIAL SYLLABUS SCHEMAS
     const SYLLABUS_SCHEMAS = {
       ESE: {
         title: "ESE 2027 (UPSC Engineering Services EE)",
@@ -1021,7 +978,6 @@
       }
     };
 
-    // MADE EASY TEST SCHEDULES (48 GATE + 34 ESE)
     const MADE_EASY_GATE_TESTS = [
       { id: 1, type: "Topicwise", name: "Electric Circuits (Part-1): Elements, KCL/KVL, Theorems, AC Power", ques: 17, marks: 25, time: "45 min" },
       { id: 2, type: "Topicwise", name: "Electric Circuits (Part-2): Transients, Resonance, 2-Port, 3-Phase", ques: 17, marks: 25, time: "45 min" },
@@ -1122,8 +1078,7 @@
       { name: "Engineering Mathematics / Aptitude", key: "MATH" }
     ];
 
-    // APPLICATION STATE WITH LOCAL FALLBACK
-    const STORAGE_KEY = "POWERPREP_EE_ULTRA_PERSIST_V6";
+    const STORAGE_KEY = "POWERPREP_EE_PERSIST_FINAL_V7";
     let state = {
       theme: 'dark',
       activeExam: "ESE",
@@ -1133,95 +1088,108 @@
       customTests: [],
       mistakes: [],
       planner: {},
-      cloudDbUrl: PRESET_FIREBASE_URL,
-      cloudUserId: "amar-prep"
     };
 
-    let firebaseDb = null;
     let chartSyllabus = null;
     let chartTests = null;
     let chartMistakes = null;
     let activeModalTestId = null;
     let currentTestObject = null;
+    let cloudSaveTimer = null;
 
     // INITIALIZATION
     function init() {
-      loadState();
-      // Ensure preset URL is used
-      if (!state.cloudDbUrl) state.cloudDbUrl = PRESET_FIREBASE_URL;
-      if (!state.cloudUserId) state.cloudUserId = "amar-prep";
-
-      document.getElementById('header-user-id').innerText = state.cloudUserId;
-
+      loadLocalState();
       applyTheme(state.theme);
       renderExamPills();
       updateCountdowns();
       setInterval(updateCountdowns, 60000);
-      initFirebaseAutoSync();
+
+      // Auto-fetch latest progress from Cloud immediately
+      syncFromCloud(false);
       renderActiveExamView();
       setPlannerToday();
     }
 
-    // FIREBASE REAL-TIME SYNC
-    function initFirebaseAutoSync() {
-      const url = state.cloudDbUrl || PRESET_FIREBASE_URL;
-      const user = state.cloudUserId || "amar-prep";
-
+    // CLOUD SYNC ENGINE (REST API - 100% RELIABLE)
+    async function syncFromCloud(showUserAlert) {
+      updateSaveIndicator("Connecting to Cloud...", false);
       try {
-        if (!firebase.apps.length) {
-          firebase.initializeApp({ databaseURL: url });
-        }
-        firebaseDb = firebase.database();
-        updateSaveIndicator("Cloud Connected", true);
-
-        // Listen for live updates from Firebase
-        firebaseDb.ref(`users/${user}`).on('value', (snapshot) => {
-          const cloudData = snapshot.val();
-          if (cloudData) {
+        const response = await fetch(DB_ENDPOINT);
+        if (response.ok) {
+          const cloudData = await response.json();
+          if (cloudData && (cloudData.syllabusProgress || cloudData.testsData)) {
             state.syllabusProgress = cloudData.syllabusProgress || {};
             state.testsData = cloudData.testsData || {};
             state.mistakes = cloudData.mistakes || [];
             state.planner = cloudData.planner || {};
             if (cloudData.activeExam) state.activeExam = cloudData.activeExam;
 
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-            updateDashboardStats();
-            renderCharts();
-            renderSyllabusTree();
-            renderTestSeries();
-            renderMistakes();
-            updateSaveIndicator("Cloud Synced", true);
+            saveLocalState();
+            renderActiveExamView();
+            updateSaveIndicator("Synced with Cloud ☁️", true);
+            if (showUserAlert) alert("All latest progress fetched from Cloud!");
+          } else {
+            updateSaveIndicator("Cloud Ready (Empty) ☁️", true);
           }
-        });
+        }
       } catch (err) {
-        console.error("Firebase auto sync error:", err);
+        console.error("Cloud fetch error:", err);
+        updateSaveIndicator("Offline (Saved locally)", false);
+      }
+    }
+
+    async function pushToCloud() {
+      try {
+        updateSaveIndicator("Pushing to Cloud...", false);
+        const response = await fetch(DB_ENDPOINT, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            syllabusProgress: state.syllabusProgress,
+            testsData: state.testsData,
+            mistakes: state.mistakes,
+            planner: state.planner,
+            activeExam: state.activeExam,
+            theme: state.theme,
+            updatedAt: Date.now()
+          })
+        });
+        if (response.ok) {
+          updateSaveIndicator("Live Synced to Cloud ☁️", true);
+        }
+      } catch (err) {
+        console.error("Cloud push failed:", err);
         updateSaveIndicator("Saved locally", false);
       }
     }
 
-    function openCloudModal() {
-      document.getElementById('cloud-user-id').value = state.cloudUserId || "amar-prep";
-      document.getElementById('cloud-db-url').value = state.cloudDbUrl || PRESET_FIREBASE_URL;
-      document.getElementById('modal-cloud').classList.remove('hidden');
+    function saveState() {
+      saveLocalState();
+      clearTimeout(cloudSaveTimer);
+      updateSaveIndicator("Saving...", false);
+      cloudSaveTimer = setTimeout(pushToCloud, 400);
     }
 
-    function closeCloudModal() {
-      document.getElementById('modal-cloud').classList.add('hidden');
+    function saveLocalState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
     }
 
-    function saveCloudConfig() {
-      const user = document.getElementById('cloud-user-id').value.trim() || "amar-prep";
-      state.cloudUserId = user;
-      document.getElementById('header-user-id').innerText = user;
-      saveState();
-      closeCloudModal();
-      location.reload();
+    function loadLocalState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          state = { ...state, ...JSON.parse(saved) };
+        }
+      } catch (e) {}
     }
 
     function updateSaveIndicator(text, isCloud) {
       const ind = document.getElementById('save-status-indicator');
       if (ind) {
-        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         const icon = isCloud ? 'fa-cloud text-emerald-500' : 'fa-circle text-[7px] text-indigo-400';
         ind.innerHTML = `<i class="fa-solid ${icon}"></i> ${text} (${time})`;
       }
@@ -1248,7 +1216,7 @@
       }
     }
 
-    // COUNTDOWN CALCULATOR
+    // COUNTDOWNS
     function updateCountdowns() {
       const now = new Date();
       const deadlines = {
@@ -1340,7 +1308,7 @@
       renderCrossExamMatrix();
     }
 
-    // IMMEDIATE WEIGHTED SYLLABUS SCORE
+    // GRANULAR PROGRESS ENGINE
     function calculateExamSyllabusScore(exam) {
       const schema = SYLLABUS_SCHEMAS[exam];
       let totalTopicScore = 0;
@@ -1617,7 +1585,7 @@
       renderCharts();
     }
 
-    // 3. MADE EASY TEST SERIES (WITH ACCURACY & MARKS)
+    // 3. MADE EASY TEST SERIES (WITH AUTO-ACCURACY & SCORE)
     function getActiveExamTestsList() {
       if (state.activeExam === 'GATE') return MADE_EASY_GATE_TESTS;
       if (state.activeExam === 'ESE') return MADE_EASY_ESE_TESTS;
@@ -2035,46 +2003,6 @@
       });
     }
 
-    // PERSISTENCE ENGINE (LOCAL + CLOUD AUTO-WRITE)
-    function saveState() {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-        updateSaveIndicator("Saved locally", false);
-
-        // Auto-push live to Firebase Realtime Database
-        if (firebaseDb) {
-          const user = state.cloudUserId || "amar-prep";
-          firebaseDb.ref(`users/${user}`).set({
-            activeExam: state.activeExam,
-            syllabusProgress: state.syllabusProgress,
-            testsData: state.testsData,
-            mistakes: state.mistakes,
-            planner: state.planner,
-            lastUpdated: Date.now()
-          }).then(() => {
-            updateSaveIndicator("Cloud Synced", true);
-          }).catch(err => {
-            console.error("Cloud push failed:", err);
-            updateSaveIndicator("Saved locally (Offline)", false);
-          });
-        }
-      } catch (e) {
-        console.error("Local storage error:", e);
-      }
-    }
-
-    function loadState() {
-      try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          state = { ...state, ...parsed };
-        }
-      } catch (e) {
-        console.error("Error loading state:", e);
-      }
-    }
-
     function exportData() {
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
       const downloadAnchor = document.createElement('a');
@@ -2108,7 +2036,6 @@
       reader.readAsText(file);
     }
 
-    // Start Application
     window.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
