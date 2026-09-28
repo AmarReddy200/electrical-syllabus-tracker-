@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PowerPrep EE Ultra: ESE | GATE | SSC JE | RRB JE</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- QRCode.js CDN for mobile transfer -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#1e1b4b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    .dark ::-webkit-scrollbar-track { background: #0b0f19; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    .dark ::-webkit-scrollbar-thumb { background: #334155; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    .dark ::-webkit-scrollbar-thumb:hover { background: #475569; }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col font-sans transition-colors duration-200">
+
+  <!-- TOP HEADER -->
+  <header class="border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/20 text-white font-black text-lg">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h1 class="font-black text-base sm:text-lg text-slate-900 dark:text-white leading-tight">PowerPrep EE</h1>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">ULTRA</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">Integrated Syllabus & Test Suite</p>
+              <span id="save-status-indicator" class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                <i class="fa-solid fa-circle text-[6px]"></i> Saved
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Exam Switcher Pills -->
+        <div class="hidden lg:flex items-center bg-slate-200/80 dark:bg-slate-800/90 p-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner">
+          <button onclick="switchExam('ESE')" id="exam-btn-ESE" class="exam-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all">ESE 2027</button>
+          <button onclick="switchExam('GATE')" id="exam-btn-GATE" class="exam-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all">GATE 2027</button>
+          <button onclick="switchExam('SSC_JE')" id="exam-btn-SSC_JE" class="exam-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all">SSC JE 2026</button>
+          <button onclick="switchExam('RRB_JE')" id="exam-btn-RRB_JE" class="exam-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all">RRB JE 2026</button>
+        </div>
+
+        <!-- Utility Toolbar -->
+        <div class="flex items-center space-x-2">
+          <!-- Sync to Phone Modal Trigger -->
+          <button onclick="openSyncModal()" title="Sync with Phone" class="px-2.5 py-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-xs flex items-center gap-1.5 shadow-sm hover:scale-105 transition-all">
+            <i class="fa-solid fa-mobile-screen"></i>
+            <span class="hidden sm:inline">Phone Sync</span>
+          </button>
+
+          <!-- Sprint vs Marathon Mode Pill -->
+          <button onclick="togglePacingMode()" id="pacing-toggle-btn" title="Toggle Pacing Engine" class="px-2.5 py-1.5 rounded-xl border text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm">
+            <i id="pacing-icon" class="fa-solid fa-gauge-high"></i>
+            <span id="pacing-label" class="hidden sm:inline">Marathon Mode</span>
+          </button>
+
+          <!-- GATE Virtual Calc Trigger -->
+          <button onclick="openCalcModal()" title="GATE Virtual Scientific Calculator" class="p-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 border border-slate-300 dark:border-slate-700 hover:scale-105 transition-all">
+            <i class="fa-solid fa-calculator text-sm"></i>
+          </button>
+
+          <!-- Light/Dark Toggle -->
+          <button onclick="toggleTheme()" id="theme-toggle-btn" title="Toggle Light/Dark Theme" class="p-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-amber-400 border border-slate-300 dark:border-slate-700 hover:scale-105 transition-all">
+            <i id="theme-icon" class="fa-solid fa-sun text-sm"></i>
+          </button>
+
+          <!-- Backup Export/Import -->
+          <button onclick="exportData()" title="Backup JSON Data" class="px-2.5 py-1.5 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-300 flex items-center space-x-1">
+            <i class="fa-solid fa-download"></i> <span class="hidden md:inline">Export</span>
+          </button>
+          <label title="Import JSON Data" class="cursor-pointer px-2.5 py-1.5 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-300 flex items-center space-x-1">
+            <i class="fa-solid fa-upload"></i> <span class="hidden md:inline">Import</span>
+            <input type="file" id="importInput" onchange="importData(event)" class="hidden" accept=".json"/>
+          </label>
+        </div>
+      </div>
+
+      <!-- Mobile Exam Selector -->
+      <div class="lg:hidden pb-3">
+        <select onchange="switchExam(this.value)" id="mobile-exam-select" class="w-full bg-slate-200 dark:bg-slate-800 text-xs font-bold rounded-lg p-2 border border-slate-300 dark:border-slate-700">
+          <option value="ESE">ESE (UPSC) 2027</option>
+          <option value="GATE">GATE EE 2027</option>
+          <option value="SSC_JE">SSC JE 2026</option>
+          <option value="RRB_JE">RRB JE 2026</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- MODULE NAVIGATION -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-200 dark:border-slate-800/80 flex overflow-x-auto gap-2 py-2">
+      <button onclick="switchModule('dashboard')" id="mod-dashboard" class="mod-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center space-x-2 whitespace-nowrap">
+        <i class="fa-solid fa-chart-pie"></i><span>Integrated Dashboard</span>
+      </button>
+      <button onclick="switchModule('syllabus')" id="mod-syllabus" class="mod-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center space-x-2 whitespace-nowrap">
+        <i class="fa-solid fa-book-open"></i><span>Syllabus & Spaced Revisions</span>
+      </button>
+      <button onclick="switchModule('testseries')" id="mod-testseries" class="mod-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center space-x-2 whitespace-nowrap">
+        <i class="fa-solid fa-pen-ruler"></i><span>MADE EASY Test Series</span>
+      </button>
+      <button onclick="switchModule('mistakes')" id="mod-mistakes" class="mod-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center space-x-2 whitespace-nowrap">
+        <i class="fa-solid fa-bug text-rose-500"></i><span>Mistakes & Blindspots</span>
+      </button>
+      <button onclick="switchModule('schedule')" id="mod-schedule" class="mod-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center space-x-2 whitespace-nowrap">
+        <i class="fa-solid fa-calendar-check text-emerald-500"></i><span>Schedule & Speed Pacer</span>
+      </button>
+      <button onclick="switchModule('vault')" id="mod-vault" class="mod-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center space-x-2 whitespace-nowrap">
+        <i class="fa-solid fa-key text-amber-500"></i><span>Formula Vault</span>
+      </button>
+      <button onclick="switchModule('crossExam')" id="mod-crossExam" class="mod-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center space-x-2 whitespace-nowrap">
+        <i class="fa-solid fa-network-wired text-cyan-500"></i><span>Unified EE Tracer</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- LIVE COUNTDOWN TICKERS -->
+  <div class="bg-slate-200/70 dark:bg-slate-900 border-b border-slate-300 dark:border-slate-800 py-2.5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
+        <!-- RRB JE -->
+        <div id="countdown-card-RRB_JE" class="p-2 rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950/60 shadow-sm transition-all">
+          <div class="text-[10px] uppercase font-bold text-slate-500">RRB JE (30 Oct 2026)</div>
+          <div id="timer-RRB_JE" class="text-xs sm:text-sm md:text-base font-black text-amber-500 font-mono">--d --h</div>
+        </div>
+        <!-- SSC JE -->
+        <div id="countdown-card-SSC_JE" class="p-2 rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950/60 shadow-sm transition-all">
+          <div class="text-[10px] uppercase font-bold text-slate-500">SSC JE (02 Nov 2026)</div>
+          <div id="timer-SSC_JE" class="text-xs sm:text-sm md:text-base font-black text-sky-500 font-mono">--d --h</div>
+        </div>
+        <!-- ESE Prelims -->
+        <div id="countdown-card-ESE" class="p-2 rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950/60 shadow-sm transition-all">
+          <div class="text-[10px] uppercase font-bold text-slate-500">ESE Pre (31 Jan 2027)</div>
+          <div id="timer-ESE" class="text-xs sm:text-sm md:text-base font-black text-indigo-500 font-mono">--d --h</div>
+        </div>
+        <!-- GATE EE -->
+        <div id="countdown-card-GATE" class="p-2 rounded-xl border border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-950/60 shadow-sm transition-all">
+          <div class="text-[10px] uppercase font-bold text-slate-500">GATE EE (08 Feb 2027)</div>
+          <div id="timer-GATE" class="text-xs sm:text-sm md:text-base font-black text-emerald-500 font-mono">--d --h</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+
+    <!-- 1. INTEGRATED DASHBOARD -->
+    <section id="view-dashboard" class="space-y-6">
+      <div class="bg-gradient-to-r from-indigo-900/20 via-purple-900/10 to-indigo-900/20 dark:from-slate-900 dark:via-indigo-950/40 dark:to-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white dark:bg-slate-900">
+        <div>
+          <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 mb-1">
+            Active Examination Focus
+          </div>
+          <h2 id="dash-exam-title" class="text-2xl font-black text-slate-900 dark:text-white">ESE 2027</h2>
+          <p id="dash-exam-desc" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">UPSC Preliminary Stage-I (GS + EE) & Mains Stage-II Conventional Papers.</p>
+        </div>
+        <div class="flex items-center gap-3 w-full md:w-auto">
+          <div class="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 px-4 py-2.5 rounded-xl text-center flex-1 md:flex-initial shadow-sm">
+            <span class="text-[10px] uppercase text-slate-500 font-bold tracking-wider block">Syllabus Done</span>
+            <div id="stat-overall-syllabus" class="text-xl font-black text-indigo-600 dark:text-indigo-400">0%</div>
+          </div>
+          <div class="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 px-4 py-2.5 rounded-xl text-center flex-1 md:flex-initial shadow-sm">
+            <span class="text-[10px] uppercase text-slate-500 font-bold tracking-wider block">Tests Written</span>
+            <div id="stat-tests-written" class="text-xl font-black text-emerald-600 dark:text-emerald-400">0 / 0</div>
+          </div>
+          <div class="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 px-4 py-2.5 rounded-xl text-center flex-1 md:flex-initial shadow-sm">
+            <span class="text-[10px] uppercase text-slate-500 font-bold tracking-wider block">Blindspots</span>
+            <div id="stat-blindspots-count" class="text-xl font-black text-rose-600 dark:text-rose-400">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLINDSPOT ALERT BANNER -->
+      <div id="blindspot-banner" class="hidden bg-rose-500/10 border border-rose-500/30 p-4 rounded-2xl flex items-start justify-between gap-4">
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-lg bg-rose-500/20 text-rose-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div>
+            <h4 class="font-bold text-xs text-rose-600 dark:text-rose-400 uppercase tracking-wider">Critical Preparation Blindspot Detected</h4>
+            <p id="blindspot-text" class="text-xs text-slate-600 dark:text-slate-300 mt-0.5">Recurring errors detected in these topics.</p>
+          </div>
+        </div>
+        <button onclick="switchModule('mistakes')" class="px-3 py-1.5 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-semibold whitespace-nowrap shadow">
+          Analyze Blindspots
+        </button>
+      </div>
+
+      <!-- 3 ANIMATED CHART WIDGETS -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Syllabus Chart -->
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm flex flex-col items-center">
+          <div class="w-full flex justify-between items-center mb-2">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">Syllabus Completion</h3>
+            <i class="fa-solid fa-book-bookmark text-indigo-500"></i>
+          </div>
+          <div class="relative w-44 h-44 flex items-center justify-center">
+            <canvas id="chart-syllabus"></canvas>
+            <div id="chart-syllabus-label" class="absolute text-center">
+              <span class="text-2xl font-black text-slate-800 dark:text-white">0%</span>
+              <span class="block text-[10px] text-slate-400">Covered</span>
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-500 mt-2 text-center">Theory, PYQs & Spaced Revisions Progress</p>
+        </div>
+
+        <!-- Tests Chart -->
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm flex flex-col items-center">
+          <div class="w-full flex justify-between items-center mb-2">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">MADE EASY Tests Status</h3>
+            <i class="fa-solid fa-clipboard-check text-emerald-500"></i>
+          </div>
+          <div class="relative w-44 h-44 flex items-center justify-center">
+            <canvas id="chart-tests"></canvas>
+            <div id="chart-tests-label" class="absolute text-center">
+              <span class="text-2xl font-black text-slate-800 dark:text-white">0</span>
+              <span class="block text-[10px] text-slate-400">Written</span>
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-500 mt-2 text-center">Analyzed vs Unanalyzed vs Pending Tests</p>
+        </div>
+
+        <!-- Mistakes Chart -->
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm flex flex-col items-center">
+          <div class="w-full flex justify-between items-center mb-2">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">Mistakes Breakdown</h3>
+            <i class="fa-solid fa-pie-chart text-rose-500"></i>
+          </div>
+          <div class="relative w-44 h-44 flex items-center justify-center">
+            <canvas id="chart-mistakes"></canvas>
+            <div id="chart-mistakes-label" class="absolute text-center">
+              <span class="text-2xl font-black text-slate-800 dark:text-white">0</span>
+              <span class="block text-[10px] text-slate-400">Logged</span>
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-500 mt-2 text-center">Conceptual, Calculation, Formula & Guesswork</p>
+        </div>
+      </div>
+
+      <!-- Subject-by-Subject Deep Matrix -->
+      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-4 shadow-sm">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-list-check text-indigo-500"></i>
+            <span>Subject-by-Subject Deep Tracer</span>
+          </h3>
+          <span class="text-xs text-slate-400">80/20 Yield, Theory, PYQs & Revision rounds</span>
+        </div>
+        <div id="subject-matrix-container" class="space-y-3">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. SYLLABUS & SPACED REVISION TRACKER -->
+    <section id="view-syllabus" class="hidden space-y-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white">Syllabus Completion & Spaced Revisions</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Every checkbox saved immediately. Theory (40%) + PYQs (40%) + Revisions (20%).</p>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <select id="syllabus-filter-yield" onchange="renderSyllabusTree()" class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs rounded-lg px-3 py-1.5 font-semibold">
+            <option value="ALL">All Yield Categories</option>
+            <option value="HIGH">High Yield (80/20 Priority)</option>
+            <option value="CORE">Core Technical</option>
+            <option value="GS">Scoring GS / Aptitude</option>
+          </select>
+          <select id="syllabus-filter-subject" onchange="renderSyllabusTree()" class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs rounded-lg px-3 py-1.5">
+            <option value="ALL">All Subjects</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="syllabus-tree-container" class="space-y-4">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+    <!-- 3. MADE EASY TEST SERIES TRACKER -->
+    <section id="view-testseries" class="hidden space-y-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white">MADE EASY Online Test Series (OTS) Schedule</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Official calibrated tests for GATE (48 Tests) & ESE Prelims (34 Tests). Enter Correct/Incorrect questions for auto-marks and accuracy.</p>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <select id="test-filter-status" onchange="renderTestSeries()" class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs rounded-lg px-3 py-1.5 font-medium">
+            <option value="ALL">All Tests</option>
+            <option value="PENDING">Pending Tests</option>
+            <option value="ATTEMPTED">Attempted Tests</option>
+            <option value="ANALYZED">Mistakes Analyzed</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-100 dark:bg-slate-800/80 uppercase font-semibold text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700/60">
+              <tr>
+                <th class="px-4 py-3">#</th>
+                <th class="px-4 py-3">Test Title & Topics Covered</th>
+                <th class="px-4 py-3">Format</th>
+                <th class="px-4 py-3 text-center">Marks / Qs</th>
+                <th class="px-4 py-3 text-center">Score (Auto)</th>
+                <th class="px-4 py-3 text-center">Accuracy %</th>
+                <th class="px-4 py-3 text-center">Analysis Status</th>
+                <th class="px-4 py-3 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="test-table-body" class="divide-y divide-slate-200 dark:divide-slate-800">
+              <!-- Injected via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. MISTAKES & BLINDSPOTS NOTEBOOK -->
+    <section id="view-mistakes" class="hidden space-y-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white">Mistakes Analysis & Blindspot Radar</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Classify every test error by cause and prevent repeat mistakes under exam conditions.</p>
+        </div>
+        <button onclick="openMistakeModal()" class="px-3.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-semibold flex items-center gap-2 shadow">
+          <i class="fa-solid fa-plus"></i> Record New Mistake
+        </button>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <select id="mistake-filter-type" onchange="renderMistakes()" class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs rounded-lg px-3 py-1.5 font-medium">
+          <option value="ALL">All Mistake Types</option>
+          <option value="Conceptual">Conceptual Flaw</option>
+          <option value="Calculation">Calculation / Silly Error</option>
+          <option value="Formula">Formula Forgot</option>
+          <option value="TimePressure">Time Pressure / Guessed</option>
+        </select>
+        <select id="mistake-filter-status" onchange="renderMistakes()" class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs rounded-lg px-3 py-1.5 font-medium">
+          <option value="ALL">All Statuses</option>
+          <option value="Pending">Analysis Pending</option>
+          <option value="Analyzed">Analyzed & Understood</option>
+          <option value="Mastered">Mastered & Re-tested</option>
+        </select>
+      </div>
+
+      <div id="mistakes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Injected via JS -->
+      </div>
+      <div id="mistakes-empty-state" class="hidden p-8 text-center text-slate-500 text-xs">
+        No mistakes found matching this filter!
+      </div>
+    </section>
+
+    <!-- 5. SCHEDULE A DAY & SPEED PACER -->
+    <section id="view-schedule" class="hidden space-y-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white">Schedule a Day & Speed Pacer</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Plan daily targets, automate spaced repetition, and simulate real exam pacing.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="date" id="planner-date" onchange="loadDaySchedule()" class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs rounded-lg px-3 py-1.5 font-bold" />
+          <button onclick="setPlannerToday()" class="px-2.5 py-1.5 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-xs rounded-lg font-semibold">Today</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Goals & Queue -->
+        <div class="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-4 shadow-sm">
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+              <i class="fa-solid fa-bullseye text-emerald-500"></i> Daily Targets & Spaced Reviews
+            </h3>
+            <span id="daily-completion-badge" class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">0% Done</span>
+          </div>
+
+          <!-- Add Item Form -->
+          <div class="flex gap-2">
+            <input type="text" id="new-daily-target" placeholder="e.g., Read Op-Amp Linear ICs & solve 20 GATE PYQs" class="flex-1 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 text-xs placeholder-slate-400 focus:outline-none focus:border-indigo-500" onkeydown="if(event.key === 'Enter') addDailyTask()"/>
+            <select id="new-daily-tag" class="bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-xs rounded-lg px-2">
+              <option value="Theory">Theory</option>
+              <option value="PYQs">PYQs</option>
+              <option value="Test">Test</option>
+              <option value="Revision">Revision</option>
+              <option value="Drill">Speed Drill</option>
+            </select>
+            <button onclick="addDailyTask()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold shadow">
+              Add
+            </button>
+          </div>
+
+          <div id="daily-tasks-list" class="space-y-2 mt-4">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- Speed Pacer & Reflection -->
+        <div class="space-y-4">
+          <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-3 shadow-sm">
+            <div class="flex justify-between items-center">
+              <h3 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-stopwatch text-indigo-500"></i> Exam Speed Pacer
+              </h3>
+              <span id="pacer-mode-badge" class="px-2 py-0.5 rounded text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">Marathon (180s/Q)</span>
+            </div>
+
+            <div class="text-center py-2">
+              <div id="pacer-timer" class="text-3xl font-black font-mono text-slate-800 dark:text-white">03:00</div>
+              <p id="pacer-subtext" class="text-[11px] text-slate-500 mt-1">Simulated time per GATE Numerical question</p>
+            </div>
+
+            <div class="flex gap-2">
+              <button onclick="startPacerTimer()" class="flex-1 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold">Start</button>
+              <button onclick="pausePacerTimer()" class="py-1.5 px-3 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-xs font-semibold rounded-lg">Pause</button>
+              <button onclick="resetPacerTimer()" class="py-1.5 px-3 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-xs font-semibold rounded-lg">Reset</button>
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-3 shadow-sm">
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-2">
+              <i class="fa-solid fa-feather text-amber-500"></i> Daily Learning Reflection
+            </h3>
+            <textarea id="daily-reflection-text" oninput="saveDailyReflection()" placeholder="Formulas forgotten today, speed insights, or test series takeaways..." class="w-full h-24 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-3 text-xs placeholder-slate-400 focus:outline-none focus:border-indigo-500 resize-none"></textarea>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. FORMULA VAULT -->
+    <section id="view-vault" class="hidden space-y-6">
+      <div>
+        <h2 class="text-xl font-bold text-slate-900 dark:text-white">Electrical Engineering Formula Vault</h2>
+        <p class="text-xs text-slate-500 dark:text-slate-400">High-yield revision flashcards for critical equations across Core EE disciplines.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 space-y-2 shadow-sm">
+          <div class="flex justify-between items-center text-xs font-bold text-indigo-500">
+            <span>Electrical Machines</span>
+            <span class="bg-indigo-500/10 px-2 py-0.5 rounded">Transformers</span>
+          </div>
+          <h4 class="font-bold text-slate-900 dark:text-white text-xs">Maximum Efficiency Condition</h4>
+          <div class="p-2.5 bg-slate-50 dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 font-mono text-[11px] text-slate-700 dark:text-slate-300">
+            x = √(P_i / P_cu,fl)<br>
+            η_max = (x · S cosφ) / (x · S cosφ + 2P_i)
+          </div>
+          <p class="text-[10px] text-slate-500">Occurs when variable copper losses equal constant iron core losses.</p>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 space-y-2 shadow-sm">
+          <div class="flex justify-between items-center text-xs font-bold text-emerald-500">
+            <span>Power Systems</span>
+            <span class="bg-emerald-500/10 px-2 py-0.5 rounded">Transmission</span>
+          </div>
+          <h4 class="font-bold text-slate-900 dark:text-white text-xs">Surge Impedance Loading (SIL)</h4>
+          <div class="p-2.5 bg-slate-50 dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 font-mono text-[11px] text-slate-700 dark:text-slate-300">
+            Z_c = √(L / C)<br>
+            SIL = (V_L)² / Z_c (MW)
+          </div>
+          <p class="text-[10px] text-slate-500">At SIL, reactive power generated equals reactive power consumed.</p>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 space-y-2 shadow-sm">
+          <div class="flex justify-between items-center text-xs font-bold text-purple-500">
+            <span>Power Electronics</span>
+            <span class="bg-purple-500/10 px-2 py-0.5 rounded">DC-DC</span>
+          </div>
+          <h4 class="font-bold text-slate-900 dark:text-white text-xs">Buck-Boost Converter Ratio</h4>
+          <div class="p-2.5 bg-slate-50 dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 font-mono text-[11px] text-slate-700 dark:text-slate-300">
+            V_o = -[D / (1 - D)] · V_s<br>
+            D = T_on / T
+          </div>
+          <p class="text-[10px] text-slate-500">Produces inverted output; acts as buck for D &lt; 0.5 and boost for D &gt; 0.5.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. UNIFIED CROSS-EXAM TRACER -->
+    <section id="view-crossExam" class="hidden space-y-6">
+      <div>
+        <h2 class="text-xl font-bold text-slate-900 dark:text-white">Unified Electrical Engineering Matrix</h2>
+        <p class="text-xs text-slate-500 dark:text-slate-400">Cross-examination coverage comparison to leverage preparation overlap across all 4 exams.</p>
+      </div>
+
+      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden p-4 shadow-sm">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-100 dark:bg-slate-800/80 uppercase font-semibold text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700">
+              <tr>
+                <th class="px-4 py-3">Core Electrical Subject</th>
+                <th class="px-4 py-3 text-center">ESE Coverage</th>
+                <th class="px-4 py-3 text-center">GATE Coverage</th>
+                <th class="px-4 py-3 text-center">SSC JE Coverage</th>
+                <th class="px-4 py-3 text-center">RRB JE Coverage</th>
+                <th class="px-4 py-3 text-right">Mastery State</th>
+              </tr>
+            </thead>
+            <tbody id="cross-matrix-body" class="divide-y divide-slate-200 dark:divide-slate-800">
+              <!-- Injected via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODALS -->
+
+  <!-- 1. TEST RESULT ENTRY MODAL WITH AUTO-ACCURACY & MARKS CALCULATOR -->
+  <div id="modal-test-entry" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center">
+        <div>
+          <h3 id="modal-test-title" class="font-bold text-base text-slate-900 dark:text-white">Log Test Result</h3>
+          <p class="text-[11px] text-slate-500">Auto-computes accuracy, unattempted questions & marks</p>
+        </div>
+        <button onclick="closeTestEntryModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-500 dark:text-slate-400 mb-1">Test Title</label>
+          <div id="modal-test-name-display" class="font-bold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-950 p-2.5 rounded-lg"></div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 bg-slate-50 dark:bg-slate-950 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
+          <div>
+            <span class="text-slate-500 block">Total Questions</span>
+            <span id="modal-test-total-ques-display" class="font-bold text-slate-800 dark:text-slate-200 text-sm">--</span>
+          </div>
+          <div>
+            <span class="text-slate-500 block">Maximum Marks</span>
+            <span id="modal-test-total-marks-display" class="font-bold text-slate-800 dark:text-slate-200 text-sm">--</span>
+          </div>
+        </div>
+
+        <!-- Core Correct / Incorrect Inputs -->
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-emerald-600 dark:text-emerald-400 font-bold mb-1">
+              <i class="fa-solid fa-check mr-1"></i> Correct Questions
+            </label>
+            <input type="number" min="0" id="input-modal-test-correct" oninput="calculateTestMetrics()" placeholder="e.g. 14" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2.5 font-bold text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500"/>
+          </div>
+          <div>
+            <label class="block text-rose-600 dark:text-rose-400 font-bold mb-1">
+              <i class="fa-solid fa-xmark mr-1"></i> Incorrect Questions
+            </label>
+            <input type="number" min="0" id="input-modal-test-incorrect" oninput="calculateTestMetrics()" placeholder="e.g. 3" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2.5 font-bold text-slate-900 dark:text-white focus:outline-none focus:border-rose-500"/>
+          </div>
+        </div>
+
+        <!-- Auto-Computed Metrics Display -->
+        <div class="grid grid-cols-3 gap-2 text-center bg-indigo-50 dark:bg-indigo-950/30 p-2.5 rounded-xl border border-indigo-200 dark:border-indigo-900/50 font-mono">
+          <div>
+            <span class="text-[10px] text-slate-500 block">Unattempted</span>
+            <span id="display-modal-unattempted" class="font-bold text-slate-800 dark:text-slate-200">0</span>
+          </div>
+          <div>
+            <span class="text-[10px] text-slate-500 block">Accuracy</span>
+            <span id="display-modal-accuracy" class="font-bold text-indigo-600 dark:text-indigo-400">0%</span>
+          </div>
+          <div>
+            <span class="text-[10px] text-slate-500 block">Est. Score</span>
+            <span id="display-modal-score" class="font-bold text-emerald-600 dark:text-emerald-400">0 M</span>
+          </div>
+        </div>
+
+        <!-- Final Score & Status (Adjustable) -->
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-slate-500 dark:text-slate-400 mb-1">Final Score Recorded</label>
+            <input type="number" step="0.01" id="input-modal-test-score" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2.5 font-bold"/>
+          </div>
+          <div>
+            <label class="block text-slate-500 dark:text-slate-400 mb-1">Analysis Status</label>
+            <select id="input-modal-test-status" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2.5">
+              <option value="ATTEMPTED">Attempted (Pending Analysis)</option>
+              <option value="ANALYZED">Attempted & Analyzed</option>
+              <option value="PENDING">Reset to Pending</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center pt-2">
+        <button id="btn-modal-add-mistake" onclick="openMistakeFromTest()" class="text-xs text-rose-500 font-semibold hover:underline">
+          <i class="fa-solid fa-plus mr-1"></i> Log Mistakes for this Test
+        </button>
+        <div class="flex gap-2">
+          <button onclick="closeTestEntryModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-semibold">Cancel</button>
+          <button onclick="saveTestEntry()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold shadow">Save Result</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. RECORD MISTAKE MODAL -->
+  <div id="modal-mistake" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center">
+        <h3 class="font-bold text-base text-slate-900 dark:text-white">Record Mistake in Notebook</h3>
+        <button onclick="closeMistakeModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-500 dark:text-slate-400 mb-1">Subject / Source</label>
+          <input type="text" id="input-mistake-subject" placeholder="e.g. Electrical Machines" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2.5"/>
+        </div>
+        <div>
+          <label class="block text-slate-500 dark:text-slate-400 mb-1">Topic / Question Reference</label>
+          <input type="text" id="input-mistake-topic" placeholder="e.g. Q.18 - Op-Amp Sallen-Key Cutoff Frequency" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2.5 focus:outline-none focus:border-rose-500"/>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-slate-500 dark:text-slate-400 mb-1">Error Nature</label>
+            <select id="input-mistake-type" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2.5">
+              <option value="Conceptual">Conceptual Flaw</option>
+              <option value="Calculation">Calculation / Silly Mistake</option>
+              <option value="Formula">Formula Forgot</option>
+              <option value="TimePressure">Time Pressure / Rushed</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-slate-500 dark:text-slate-400 mb-1">Status</label>
+            <select id="input-mistake-status" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2.5">
+              <option value="Pending">Analysis Pending</option>
+              <option value="Analyzed">Analyzed & Understood</option>
+              <option value="Mastered">Mastered & Re-tested</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block text-slate-500 dark:text-slate-400 mb-1">Key Takeaway / Remedy Concept</label>
+          <textarea id="input-mistake-takeaway" placeholder="What was the misconception? What formula prevents this error?" class="w-full h-20 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2.5 focus:outline-none focus:border-rose-500 resize-none"></textarea>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeMistakeModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-semibold">Cancel</button>
+        <button onclick="saveMistake()" class="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-semibold shadow">Save to Log</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. PHONE SYNC & DATA TRANSFER MODAL -->
+  <div id="modal-sync" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-mobile-screen text-emerald-500 text-lg"></i>
+          <div>
+            <h3 class="font-bold text-sm text-slate-900 dark:text-white">Phone Sync & Cloud Access</h3>
+            <p class="text-[11px] text-slate-500">Access and update your prep on your mobile device</p>
+          </div>
+        </div>
+        <button onclick="closeSyncModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="space-y-4 text-xs">
+        <!-- Direct Sync String -->
+        <div>
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Method 1: One-Click Sync Code (Transfer to Mobile)</label>
+          <p class="text-slate-500 mb-2">Copy this compact code, send it to yourself on WhatsApp/Notes, and paste it on your phone's tracker.</p>
+          <div class="flex gap-2">
+            <input type="text" id="sync-code-output" readonly class="flex-1 bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 font-mono text-[10px] text-slate-500 select-all"/>
+            <button onclick="copySyncCode()" class="px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold">Copy</button>
+          </div>
+        </div>
+
+        <!-- Import Sync String -->
+        <div class="border-t border-slate-200 dark:border-slate-800 pt-3">
+          <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Load Sync Code (Paste from other device)</label>
+          <div class="flex gap-2">
+            <input type="text" id="sync-code-input" placeholder="Paste Sync Code here..." class="flex-1 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg px-3 py-2 font-mono text-[11px]"/>
+            <button onclick="applySyncCode()" class="px-3 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-bold">Apply</button>
+          </div>
+        </div>
+
+        <!-- GitHub Pages Hosting Guide -->
+        <div class="border-t border-slate-200 dark:border-slate-800 pt-3 bg-slate-50 dark:bg-slate-950 p-3 rounded-xl">
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mb-1">Method 2: Permanent Live Access (Free via GitHub Pages)</h4>
+          <ol class="list-decimal list-inside space-y-1 text-slate-600 dark:text-slate-400 text-[11px]">
+            <li>Create a free GitHub account and make a new public repository (e.g. `ee-tracker`).</li>
+            <li>Upload this `index.html` file into the repository.</li>
+            <li>Go to <strong>Settings &gt; Pages</strong> and enable <strong>Deploy from branch (main)</strong>.</li>
+            <li>Your site will be live at <code class="text-indigo-500">https://yourusername.github.io/ee-tracker/</code> to open anywhere!</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="flex justify-end pt-2">
+        <button onclick="closeSyncModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-semibold">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. GATE TCS-PATTERN VIRTUAL CALCULATOR MODAL -->
+  <div id="modal-calculator" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-2xl max-w-sm w-full p-4 space-y-3 shadow-2xl">
+      <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-2">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-calculator text-indigo-500"></i>
+          <span class="font-bold text-xs text-slate-900 dark:text-white uppercase tracking-wider">GATE Virtual Calc</span>
+        </div>
+        <button onclick="closeCalcModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-lg p-3 text-right">
+        <div id="calc-expression" class="text-[11px] text-slate-400 h-4 overflow-hidden font-mono"></div>
+        <div id="calc-display" class="text-2xl font-black font-mono text-slate-900 dark:text-white overflow-hidden">0</div>
+      </div>
+
+      <div class="grid grid-cols-4 gap-1.5 text-xs font-bold font-mono">
+        <button onclick="calcClear()" class="p-2 bg-rose-500/10 text-rose-500 rounded hover:bg-rose-500/20">C</button>
+        <button onclick="calcKey('(')" class="p-2 bg-slate-200 dark:bg-slate-800 rounded">(</button>
+        <button onclick="calcKey(')')" class="p-2 bg-slate-200 dark:bg-slate-800 rounded">)</button>
+        <button onclick="calcKey('/')" class="p-2 bg-indigo-500/10 text-indigo-500 rounded">/</button>
+
+        <button onclick="calcFunc('sin')" class="p-2 bg-slate-200 dark:bg-slate-800 rounded">sin</button>
+        <button onclick="calcFunc('cos')" class="p-2 bg-slate-200 dark:bg-slate-800 rounded">cos</button>
+        <button onclick="calcFunc('tan')" class="p-2 bg-slate-200 dark:bg-slate-800 rounded">tan</button>
+        <button onclick="calcKey('*')" class="p-2 bg-indigo-500/10 text-indigo-500 rounded">*</button>
+
+        <button onclick="calcFunc('ln')" class="p-2 bg-slate-200 dark:bg-slate-800 rounded">ln</button>
+        <button onclick="calcFunc('log')" class="p-2 bg-slate-200 dark:bg-slate-800 rounded">log</button>
+        <button onclick="calcFunc('sqrt')" class="p-2 bg-slate-200 dark:bg-slate-800 rounded">√</button>
+        <button onclick="calcKey('-')" class="p-2 bg-indigo-500/10 text-indigo-500 rounded">-</button>
+
+        <button onclick="calcKey('7')" class="p-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded">7</button>
+        <button onclick="calcKey('8')" class="p-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded">8</button>
+        <button onclick="calcKey('9')" class="p-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded">9</button>
+        <button onclick="calcKey('+')" class="p-2 bg-indigo-500/10 text-indigo-500 rounded">+</button>
+
+        <button onclick="calcKey('4')" class="p-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded">4</button>
+        <button onclick="calcKey('5')" class="p-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded">5</button>
+        <button onclick="calcKey('6')" class="p-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded">6</button>
+        <button onclick="calcFunc('sq')" class="p-2 bg-slate-200 dark:bg-slate-800 rounded">x²</button>
+
+        <button onclick="calcKey('1')" class="p-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded">1</button>
+        <button onclick="calcKey('2')" class="p-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded">2</button>
+        <button onclick="calcKey('3')" class="p-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded">3</button>
+        <button onclick="calcFunc('inv')" class="p-2 bg-slate-200 dark:bg-slate-800 rounded">1/x</button>
+
+        <button onclick="calcKey('0')" class="p-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded">0</button>
+        <button onclick="calcKey('.')" class="p-2 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded">.</button>
+        <button onclick="calcFunc('pi')" class="p-2 bg-slate-200 dark:bg-slate-800 rounded">π</button>
+        <button onclick="calcEqual()" class="p-2 bg-indigo-600 text-white rounded hover:bg-indigo-500">=</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT ENGINE -->
+  <script>
+    // SYLLABUS SCHEMAS WITH COMPLETE TOPICS & PARETO RATINGS
+    const SYLLABUS_SCHEMAS = {
+      ESE: {
+        title: "ESE 2027 (UPSC Engineering Services EE)",
+        desc: "Exhaustive Stage-I Preliminary (Paper-I GS & Paper-II EE) + Stage-II Mains Conventional Papers.",
+        subjects: [
+          {
+            id: "E_GS",
+            name: "Paper-I: GS & Engineering Aptitude",
+            yield: "GS",
+            topics: [
+              "Current Issues of National & International Importance",
+              "Engineering Aptitude (Logical Reasoning & Analytical Ability)",
+              "Engineering Mathematics & Numerical Analysis",
+              "General Principles of Design, Drawing & Importance of Safety",
+              "Standards & Quality Practices (Production, Construction, Maintenance)",
+              "Basics of Energy & Environment (Conservation, Degradation, Climate Change)",
+              "Basics of Project Management (PERT/CPM, Costing, Lifecycles)",
+              "Basics of Material Science and Engineering",
+              "ICT Tools & Applications (Networking, e-Governance, Education)",
+              "Ethics and Values in Engineering Profession"
+            ]
+          },
+          {
+            id: "E_MATH",
+            name: "Engineering Mathematics (Discipline)",
+            yield: "HIGH",
+            topics: [
+              "Matrix Theory, Eigenvalues & Eigenvectors, Linear Equations",
+              "Numerical Methods for Non-Linear & Differential Equations",
+              "Integral Calculus, Partial Derivatives, Maxima & Minima",
+              "Line, Surface & Volume Integrals, Vector Calculus",
+              "Fourier Series, Linear & Partial Differential Equations",
+              "Complex Variables, Taylor & Laurent Series, Residue Theorem",
+              "Probability, Distributions, Sampling Theorem, Regression"
+            ]
+          },
+          {
+            id: "E_MAT",
+            name: "Electrical Materials",
+            yield: "CORE",
+            topics: [
+              "Crystal Structures & Defects, Ceramic Materials",
+              "Insulating Materials & Dielectric Properties",
+              "Magnetic Materials (Diamagnetic, Paramagnetic, Ferromagnetic, Ferrites)",
+              "Solid State Physics, Conductors & Resistivity",
+              "Photo-conductivity, Superconductors & Nano-materials"
+            ]
+          },
+          {
+            id: "E_CKT",
+            name: "Electric Circuits and Fields",
+            yield: "HIGH",
+            topics: [
+              "Circuit Elements, Ideal Sources, KCL & KVL, Node & Mesh",
+              "Network Theorems (Thevenin, Norton, Superposition, MPT)",
+              "Transient Response of DC and AC Networks",
+              "Sinusoidal Steady State Analysis & Resonance",
+              "Two-Port Networks & Three-Phase Circuits",
+              "Magnetically Coupled Circuits & Ideal Transformers",
+              "Gauss Theorem, Biot-Savart, Ampere's Law & Maxwell's Equations"
+            ]
+          },
+          {
+            id: "E_MST",
+            name: "Electrical and Electronic Measurements",
+            yield: "HIGH",
+            topics: [
+              "Measurement Principles, Accuracy, Precision, Standards & Errors",
+              "Bridges & Potentiometers (DC & AC)",
+              "Moving Coil (PMMC), Moving Iron & Dynamometer Meters",
+              "Measurement of Power, Energy, Power Factor & Energy Meters",
+              "Instrument Transformers (Current & Potential Transformers)",
+              "Digital Voltmeters, Multimeters, Q-Meters & Oscilloscopes (CRO/DSO)",
+              "Sensors, Transducers & Data Acquisition Systems (DAQ)"
+            ]
+          },
+          {
+            id: "E_CMP",
+            name: "Computer Fundamentals",
+            yield: "CORE",
+            topics: [
+              "Number Systems & Boolean Algebra Arithmetic Functions",
+              "Basic Computer Architecture, Central Processing Unit (CPU)",
+              "I/O and Memory Organisation & Hierarchy",
+              "Peripheral Devices, Data Representation & Programming",
+              "Operating System Basics, Processes, Virtual Memory & File Systems",
+              "Networking Basics & Layering Concepts",
+              "Elements of Programming Languages (C Language Fundamentals)"
+            ]
+          },
+          {
+            id: "E_BEE",
+            name: "Basic Electronics Engineering",
+            yield: "CORE",
+            topics: [
+              "Semiconductor Diodes & Characteristics (PN, Zener, Rectifiers)",
+              "Bipolar Junction Transistors (BJT) Characteristics & Biasing",
+              "Field Effect Transistors (JFET & MOSFET) Fundamentals",
+              "Transistor Amplifier Configurations, Equivalent Circuits & Frequency Response",
+              "Oscillators & Feedback Amplifiers"
+            ]
+          },
+          {
+            id: "E_ADE",
+            name: "Analog and Digital Electronics",
+            yield: "HIGH",
+            topics: [
+              "Operational Amplifiers Characteristics & Linear/Non-linear Circuits",
+              "Active Filters (Butterworth, Sallen-Key) & Wave Shapers",
+              "Combinational Logic Circuits (Mux, Demux, Decoders, Adders)",
+              "Sequential Logic Circuits (Latches, Flip-Flops, Counters, Registers)",
+              "A/D and D/A Converters & Sample-and-Hold Circuits",
+              "Microprocessor Basics (8085/8086 Interfaces & Memory Mapping)",
+              "Linear Integrated Circuits & 555 Timers",
+              "Analog Communication (AM, FM, Modulators, Demodulators, SNR)",
+              "Digital Communication (Sampling, Quantizing, PCM, DPCM, Multiplexing)",
+              "Power Line Carrier Communication (PLCC) Systems"
+            ]
+          },
+          {
+            id: "E_SIG",
+            name: "Systems and Signal Processing",
+            yield: "CORE",
+            topics: [
+              "Continuous & Discrete-Time Signals, Shifting & Scaling",
+              "Linear Time-Invariant (LTI) & Causal Systems",
+              "Fourier Series & Fourier Transform Representations",
+              "Laplace Transform, Z-Transform & Sampling Theorem",
+              "Discrete Fourier Transform (DFT), FFT & Linear Convolution",
+              "Digital Filters Design (FIR, IIR, Bilinear Transformation)"
+            ]
+          },
+          {
+            id: "E_CTL",
+            name: "Control Systems",
+            yield: "HIGH",
+            topics: [
+              "Feedback Principles, Transfer Functions, Block Diagrams & SFG",
+              "Transient & Steady-State Error Analysis of LTI Systems",
+              "Routh-Hurwitz Stability Criterion & Nyquist Stability",
+              "Bode Plots & Root Locus Techniques",
+              "Lag, Lead & Lag-Lead Compensators & PID Controllers",
+              "State Space Model, State Transition Matrix & Controllability/Observability"
+            ]
+          },
+          {
+            id: "E_MCH",
+            name: "Electrical Machines",
+            yield: "HIGH",
+            topics: [
+              "Single-Phase Transformers (Equivalent Circuit, Phasor, Tests, Losses)",
+              "Three-Phase Transformers (Vector Groups & Parallel Operation)",
+              "Auto-transformers & Electromechanical Energy Conversion",
+              "DC Machines (Armature Reaction, Characteristics, Commutation, Speed Control)",
+              "Three-Phase Induction Motors (Starting, Braking, Torque-Speed Curves)",
+              "Single-Phase Induction Motors & Fractional kW Motors",
+              "Synchronous Machines (Salient & Cylindrical, Regulation, Parallel Operation)",
+              "Special Machines (Servo & Stepper Motors)"
+            ]
+          },
+          {
+            id: "E_PWR",
+            name: "Power Systems",
+            yield: "HIGH",
+            topics: [
+              "Power Generation Concepts (Thermal, Hydro, Gas) & Economics",
+              "Transmission Line Modeling, Parameters, Performance & Cables",
+              "Corona, Ferranti Effect, Insulators & Power Factor Correction",
+              "Symmetrical Components & Fault Analysis (LG, LL, LLG, 3-Phase)",
+              "Protection Relays (Overcurrent, Differential, Distance) & Circuit Breakers",
+              "Distribution Systems, Bus Admittance Matrix & Load Flow (GS, NR)",
+              "Power System Stability (Swing Curves, Equal Area Criterion)",
+              "HVDC Transmission, FACTS Concepts & Smart Grids"
+            ]
+          },
+          {
+            id: "E_PEL",
+            name: "Power Electronics and Drives",
+            yield: "HIGH",
+            topics: [
+              "Power Semiconductor Devices (Diodes, Thyristors, MOSFETs, IGBTs, GTOs)",
+              "Firing & Triggering Circuits for Thyristors",
+              "Phase Controlled Rectifiers (Single-Phase & 3-Phase Bridge Converters)",
+              "DC-DC Switched Mode Converters (Buck, Boost, Buck-Boost, Choppers)",
+              "Inverters (Single-Phase & 3-Phase VSI, CSI, PWM Techniques)",
+              "Resonant Converters, High Frequency Inductors & Power Supplies",
+              "Adjustable Speed DC and AC Electric Drives"
+            ]
+          }
+        ]
+      },
+      GATE: {
+        title: "GATE 2027 Electrical Engineering (EE)",
+        desc: "IIT Organizing Pattern: Rigorous numerical analysis across 10 official technical sections.",
+        subjects: [
+          {
+            id: "G_MATH",
+            name: "Section 1: Engineering Mathematics",
+            yield: "HIGH",
+            topics: [
+              "Linear Algebra: Matrix Algebra, Systems of Linear Equations, Eigenvalues/Vectors",
+              "Calculus: Mean Value, Multiple Integrals, Fourier Series, Vector Identities, Stokes, Gauss, Green Theorems",
+              "Differential Equations: Higher Order Linear, Cauchy-Euler, Partial Differential Equations",
+              "Complex Variables: Analytic Functions, Cauchy Integral, Taylor/Laurent Series, Residue Theorem",
+              "Probability & Statistics: Sampling Theorems, Conditional Probability, Distributions, Regression"
+            ]
+          },
+          {
+            id: "G_CKT",
+            name: "Section 2: Electric Circuits",
+            yield: "HIGH",
+            topics: [
+              "Network Elements (R, L, C, M), Dependent Sources, KCL, KVL, Node & Mesh",
+              "Network Theorems (Thevenin, Norton, Superposition, MPT, Star-Delta)",
+              "Transient Response of DC and AC Networks",
+              "Sinusoidal Steady-State Analysis, Resonance, Two-Port Networks",
+              "Balanced Three-Phase Circuits & Complex Power / Power Factor in AC"
+            ]
+          },
+          {
+            id: "G_EMF",
+            name: "Section 3: Electromagnetic Fields",
+            yield: "CORE",
+            topics: [
+              "Coulomb's Law, Electric Field Intensity & Flux Density, Gauss's Law, Divergence",
+              "Electric Field & Potential of Charge Distributions, Dielectrics & Capacitance",
+              "Biot-Savart's Law, Ampere's Law, Curl, Faraday's Law, Lorentz Force",
+              "Inductance, MMF, Reluctance, Magnetic Circuits & Mutual Inductance"
+            ]
+          },
+          {
+            id: "G_SIG",
+            name: "Section 4: Signals and Systems",
+            yield: "CORE",
+            topics: [
+              "Continuous & Discrete Time Signals Representation, Shifting & Scaling",
+              "Linear Time-Invariant (LTI) & Causal Systems",
+              "Fourier Series & Fourier Transform Applications for CT and DT Signals",
+              "Laplace Transform, Z-Transform & Sampling Theorem",
+              "RMS Value & Average Value Calculation for Periodic Waveforms"
+            ]
+          },
+          {
+            id: "G_MCH",
+            name: "Section 5: Electrical Machines",
+            yield: "HIGH",
+            topics: [
+              "Single-Phase Transformer: Equivalent Circuit, Phasor Diagram, Tests, Regulation, Efficiency",
+              "Three-Phase Transformers: Connections, Vector Groups, Parallel Operation & Auto-transformers",
+              "Electromechanical Energy Conversion Principles",
+              "DC Machines: Operating Modes, Characteristics, Speed Control of DC Motors",
+              "Three-Phase Induction Machines: Principle, Torque-Speed, Tests, Starting & Speed Control",
+              "Single-Phase Induction Motors Principle of Operation",
+              "Synchronous Machines: Cylindrical & Salient Pole, Regulation, Parallel Operation, Starting & Losses"
+            ]
+          },
+          {
+            id: "G_PWR",
+            name: "Section 6: Power Systems",
+            yield: "HIGH",
+            topics: [
+              "Electrical Power Generation, AC & DC Transmission Concepts",
+              "Models & Performance of Transmission Lines and Cables",
+              "Economic Load Dispatch (With & Without Transmission Losses)",
+              "Series & Shunt Compensation, Insulators & Distribution Systems",
+              "Per-Unit Quantities, Bus Admittance Matrix & Load Flow (Gauss-Seidel, Newton-Raphson)",
+              "Voltage & Frequency Control, Power Factor Correction",
+              "Symmetrical Components & Fault Analysis (Symmetrical & Unsymmetrical)",
+              "Relay Protection (Over-current, Differential, Directional, Distance) & Circuit Breakers",
+              "System Stability Concepts & Equal Area Criterion"
+            ]
+          },
+          {
+            id: "G_CTL",
+            name: "Section 7: Control Systems",
+            yield: "HIGH",
+            topics: [
+              "Mathematical Modelling, Feedback Principle, Transfer Function, Block Diagrams & SFG",
+              "Transient & Steady-State Analysis of LTI Systems",
+              "Stability Analysis: Routh-Hurwitz and Nyquist Criteria",
+              "Bode Plots & Root Loci",
+              "Lag, Lead and Lead-Lag Compensators, P, PI and PID Controllers",
+              "State Space Model & Solution of State Equations of LTI Systems"
+            ]
+          },
+          {
+            id: "G_MST",
+            name: "Section 8: Electrical and Electronic Measurements",
+            yield: "CORE",
+            topics: [
+              "Bridges and Potentiometers",
+              "Measurement of Voltage, Current, Power, Energy and Power Factor",
+              "Instrument Transformers (CT & PT)",
+              "Digital Voltmeters and Multimeters",
+              "Phase, Time and Frequency Measurement, Oscilloscopes & Error Analysis"
+            ]
+          },
+          {
+            id: "G_ADE",
+            name: "Section 9: Analog and Digital Electronics",
+            yield: "CORE",
+            topics: [
+              "Simple Diode Circuits: Clipping, Clamping, Rectifiers",
+              "Amplifiers: Biasing, Equivalent Circuit and Frequency Response",
+              "Oscillators and Feedback Amplifiers",
+              "Operational Amplifiers: Characteristics and Applications, Active Filters",
+              "VCOs and Timers, Combinatorial and Sequential Logic Circuits",
+              "Multiplexers, Demultiplexers, Schmitt Triggers, Sample & Hold, ADCs & DACs"
+            ]
+          },
+          {
+            id: "G_PEL",
+            name: "Section 10: Power Electronics",
+            yield: "HIGH",
+            topics: [
+              "Static V-I Characteristics & Firing/Gating of Thyristor, MOSFET, IGBT",
+              "DC to DC Conversion: Buck, Boost and Buck-Boost Converters",
+              "Single & Three-Phase Uncontrolled Rectifiers & Voltage/Current Commutated Converters",
+              "Bidirectional AC to DC Voltage Source Converters & Harmonics",
+              "Power Factor & Distortion Factor of AC to DC Converters",
+              "Single-Phase and Three-Phase Inverters & Sinusoidal PWM"
+            ]
+          }
+        ]
+      },
+      SSC_JE: {
+        title: "SSC Junior Engineer 2026 (Electrical)",
+        desc: "Paper-I (CBE Objective) + Paper-II (Technical Depth CBE).",
+        subjects: [
+          {
+            id: "S_NT",
+            name: "General Intelligence, Reasoning & GA",
+            yield: "GS",
+            topics: ["Analogies, Series, Blood Relations & Spatial Analysis", "General Awareness: History, Polity, Geography, Economy", "General Science: Physics, Chemistry & Biology"]
+          },
+          {
+            id: "S_BEE",
+            name: "Basic Electrical Concepts & Magnetic Circuits",
+            yield: "HIGH",
+            topics: ["Concepts of Resistance, Inductance, Capacitance & Ohm's Law", "KCL, KVL & Network Theorems", "Magnetic Flux, Reluctance, MMF, Magnetic Circuits & Inductance"]
+          },
+          {
+            id: "S_ACF",
+            name: "AC Fundamentals",
+            yield: "HIGH",
+            topics: ["RMS, Average Value & Form Factor of AC Waves", "Series & Parallel RLC Circuits, Resonance", "Balanced Three-Phase Systems (Star-Delta) & Power Calculation"]
+          },
+          {
+            id: "S_MST",
+            name: "Measurements and Measuring Instruments",
+            yield: "HIGH",
+            topics: ["PMMC & Moving Iron Meters", "Measurement of Power & Single Phase Energy Meters", "Megger & Earth Testing, Instrument Transformers (CT & PT)"]
+          },
+          {
+            id: "S_MCH",
+            name: "Electrical Machines",
+            yield: "HIGH",
+            topics: ["DC Generators & Motors (Speed Control & Characteristics)", "Single-Phase & Three-Phase Transformers", "Three-Phase Induction Motors & Synchronous Machines"]
+          },
+          {
+            id: "S_GTD",
+            name: "Generation, Transmission & Distribution",
+            yield: "HIGH",
+            topics: ["Power Stations & Tariffs", "Transmission Line Types, Cables, Corona & Ferranti Effect", "Circuit Breakers & Protection Relays"]
+          },
+          {
+            id: "S_EST",
+            name: "Estimation, Costing & Utilization",
+            yield: "CORE",
+            topics: ["Illumination Schemes & Laws", "Electric Heating, Welding & Electroplating", "Electric Traction & Earthing Practices (IE Rules)"]
+          },
+          {
+            id: "S_ELE",
+            name: "Basic Electronics & Power Devices",
+            yield: "CORE",
+            topics: ["PN Junction Diodes, Transistors (BJT & FET)", "Thyristors & DC-DC Converters"]
+          }
+        ]
+      },
+      RRB_JE: {
+        title: "RRB Junior Engineer 2026 (Electrical)",
+        desc: "CBT-1 (Non-Tech Screening) + CBT-2 (Technical Specialization).",
+        subjects: [
+          {
+            id: "R_CBT1",
+            name: "CBT-1 Core Subjects",
+            yield: "GS",
+            topics: ["Mathematics (Arithmetic, Algebra, Geometry, Stats)", "General Intelligence & Reasoning", "General Science (Physics, Chemistry, Life Science)", "General Awareness & Current Affairs"]
+          },
+          {
+            id: "R_CKT",
+            name: "Circuit Laws, AC Circuits & Magnetism",
+            yield: "HIGH",
+            topics: ["Basic Concepts, Resistance, Ohm's Law, KCL & KVL", "Magnetic Circuits, Permeability & Hysteresis", "AC Circuits, Power Factor & Resonance"]
+          },
+          {
+            id: "R_MST",
+            name: "Electrical & Electronic Measurements",
+            yield: "HIGH",
+            topics: ["Ammeters, Voltmeters, Wattmeters & Energy Meters", "Resistance Measurement & Digital Instruments", "Oscilloscopes & Transducers"]
+          },
+          {
+            id: "R_MCH",
+            name: "Electrical Machines & Synchronous Units",
+            yield: "HIGH",
+            topics: ["DC Machines Principles & Operation", "Transformers (Single & 3-Phase)", "Induction Motors (Torque-Speed Characteristics)", "Alternators & Synchronous Motors"]
+          },
+          {
+            id: "R_GTD",
+            name: "Transmission, Distribution & Protection",
+            yield: "HIGH",
+            topics: ["Load Factor, Diversity Factor & Substation Equipment", "Cables, Overhead Lines & Switchgear", "Circuit Breakers & Relays"]
+          },
+          {
+            id: "R_UTL",
+            name: "Utilization of Electrical Energy",
+            yield: "CORE",
+            topics: ["Illumination, Electric Heating & Welding", "Electric Traction Systems & Safety Rules"]
+          },
+          {
+            id: "R_ELE",
+            name: "Electronics, Computers & Environment",
+            yield: "CORE",
+            topics: ["Semiconductor Diodes & Op-Amps", "Computer Architecture & Networking Basics", "Environmental Pollution & Control"]
+          }
+        ]
+      }
+    };
+
+    // MADE EASY TEST SCHEDULES
+    const MADE_EASY_GATE_TESTS = [
+      { id: 1, type: "Topicwise", name: "Electric Circuits (Part-1): Elements, KCL/KVL, Theorems, AC Power", ques: 17, marks: 25, time: "45 min" },
+      { id: 2, type: "Topicwise", name: "Electric Circuits (Part-2): Transients, Resonance, 2-Port, 3-Phase", ques: 17, marks: 25, time: "45 min" },
+      { id: 3, type: "Topicwise", name: "Control Systems (Part-1): Transfer Function, SFG, Routh, Root Locus", ques: 17, marks: 25, time: "45 min" },
+      { id: 4, type: "Topicwise", name: "Control Systems (Part-2): Nyquist, Bode, Compensators, PID, State Space", ques: 17, marks: 25, time: "45 min" },
+      { id: 5, type: "Topicwise", name: "Electrical Machines (Part-1): DC Machines, Synchronous Machines, Energy Conversion", ques: 17, marks: 25, time: "45 min" },
+      { id: 6, type: "Topicwise", name: "Electrical Machines (Part-2): 1-Ph & 3-Ph Transformers, Induction Motors", ques: 17, marks: 25, time: "45 min" },
+      { id: 7, type: "Topicwise", name: "Power Systems (Part-1): Generation, Trans Lines & Cables, Protection", ques: 17, marks: 25, time: "45 min" },
+      { id: 8, type: "Topicwise", name: "Power Systems (Part-2): Per Unit, Y-Bus, Load Flow, Fault Analysis, Stability", ques: 17, marks: 25, time: "45 min" },
+      { id: 9, type: "Topicwise", name: "Engineering Mathematics (Part-1): Linear Algebra, Calculus, Regression", ques: 17, marks: 25, time: "45 min" },
+      { id: 10, type: "Topicwise", name: "Engineering Mathematics (Part-2): Differential Eqns, Complex Variables, Probability", ques: 17, marks: 25, time: "45 min" },
+      { id: 11, type: "Topicwise", name: "General Aptitude (Part-1): Numerical Ability, Computation & Data Interpretation", ques: 17, marks: 25, time: "45 min" },
+      { id: 12, type: "Topicwise", name: "General Aptitude (Part-2): Verbal Ability, Grammar, Deductions & Spatial", ques: 17, marks: 25, time: "45 min" },
+      { id: 13, type: "Topicwise", name: "Signals & Systems (Part-1): CT/DT Signals, Shifting, LTI Systems, Fourier Series", ques: 17, marks: 25, time: "45 min" },
+      { id: 14, type: "Topicwise", name: "Signals & Systems (Part-2): Sampling Theorem, Laplace & Z-Transform", ques: 17, marks: 25, time: "45 min" },
+      { id: 15, type: "Topicwise", name: "Power Electronics (Part-1): Thyristors, Rectifiers, Harmonics, Power Factor", ques: 17, marks: 25, time: "45 min" },
+      { id: 16, type: "Topicwise", name: "Power Electronics (Part-2): DC-DC Buck/Boost/Buck-Boost, Inverters & SPWM", ques: 17, marks: 25, time: "45 min" },
+      { id: 17, type: "Topicwise", name: "Measurements (Part-1): Voltage, Current, Power, Energy, Power Factor & Errors", ques: 17, marks: 25, time: "45 min" },
+      { id: 18, type: "Topicwise", name: "Measurements (Part-2): Bridges, Potentiometers, CT/PT, Digital Meters, CRO", ques: 17, marks: 25, time: "45 min" },
+      { id: 19, type: "Topicwise", name: "Digital Electronics (Part-1): Combinational Circuits, Multiplexers, Demux", ques: 17, marks: 25, time: "45 min" },
+      { id: 20, type: "Topicwise", name: "Digital Electronics (Part-2): Sample & Hold, ADCs/DACs, Sequential Circuits", ques: 17, marks: 25, time: "45 min" },
+      { id: 21, type: "Topicwise", name: "Analog Electronics (Part-1): Diodes, Clippers, Clampers, Amplifiers Biasing", ques: 17, marks: 25, time: "45 min" },
+      { id: 22, type: "Topicwise", name: "Analog Electronics (Part-2): Oscillators, Op-Amps, Active Filters, Schmitt Trigger", ques: 17, marks: 25, time: "45 min" },
+      { id: 23, type: "Topicwise", name: "Electromagnetic Fields (Part-1): Electrostatics, Gauss Law, Potentials & Capacitance", ques: 17, marks: 25, time: "45 min" },
+      { id: 24, type: "Topicwise", name: "Electromagnetic Fields (Part-2): Magnetostatics, Biot-Savart, Ampere, Maxwell", ques: 17, marks: 25, time: "45 min" },
+      { id: 25, type: "Subject", name: "Electric Circuits Full Subject Test", ques: 33, marks: 50, time: "90 min" },
+      { id: 26, type: "Subject", name: "Control Systems Full Subject Test", ques: 33, marks: 50, time: "90 min" },
+      { id: 27, type: "Subject", name: "Electrical Machines Full Subject Test", ques: 33, marks: 50, time: "90 min" },
+      { id: 28, type: "Subject", name: "Power Systems Full Subject Test", ques: 33, marks: 50, time: "90 min" },
+      { id: 29, type: "Subject", name: "Engineering Mathematics Full Subject Test", ques: 33, marks: 50, time: "90 min" },
+      { id: 30, type: "Subject", name: "General Aptitude Full Subject Test", ques: 33, marks: 50, time: "90 min" },
+      { id: 31, type: "Subject", name: "Signals & Systems Full Subject Test", ques: 33, marks: 50, time: "90 min" },
+      { id: 32, type: "Subject", name: "Power Electronics Full Subject Test", ques: 33, marks: 50, time: "90 min" },
+      { id: 33, type: "Subject", name: "Measurements Full Subject Test", ques: 33, marks: 50, time: "90 min" },
+      { id: 34, type: "Subject", name: "Digital Electronics Full Subject Test", ques: 33, marks: 50, time: "90 min" },
+      { id: 35, type: "Subject", name: "Analog Electronics Full Subject Test", ques: 33, marks: 50, time: "90 min" },
+      { id: 36, type: "Subject", name: "Electromagnetic Fields Full Subject Test", ques: 33, marks: 50, time: "90 min" },
+      { id: 37, type: "Full Length", name: "Full Syllabus Test-1 (Basic Level)", ques: 65, marks: 100, time: "180 min" },
+      { id: 38, type: "Full Length", name: "Full Syllabus Test-2 (Basic Level)", ques: 65, marks: 100, time: "180 min" },
+      { id: 39, type: "Full Length", name: "Full Syllabus Test-3 (Basic Level)", ques: 65, marks: 100, time: "180 min" },
+      { id: 40, type: "Full Length", name: "Full Syllabus Test-4 (Basic Level)", ques: 65, marks: 100, time: "180 min" },
+      { id: 41, type: "Full Length", name: "Full Syllabus Test-5 (Advance Level)", ques: 65, marks: 100, time: "180 min" },
+      { id: 42, type: "Full Length", name: "Full Syllabus Test-6 (Advance Level)", ques: 65, marks: 100, time: "180 min" },
+      { id: 43, type: "Full Length", name: "Full Syllabus Test-7 (Advance Level)", ques: 65, marks: 100, time: "180 min" },
+      { id: 44, type: "Full Length", name: "Full Syllabus Test-8 (Advance Level)", ques: 65, marks: 100, time: "180 min" },
+      { id: 45, type: "Mock", name: "GATE Official Mock Test 1", ques: 65, marks: 100, time: "180 min" },
+      { id: 46, type: "Mock", name: "GATE Official Mock Test 2", ques: 65, marks: 100, time: "180 min" },
+      { id: 47, type: "Mock", name: "GATE Official Mock Test 3", ques: 65, marks: 100, time: "180 min" },
+      { id: 48, type: "Mock", name: "GATE Official Mock Test 4", ques: 65, marks: 100, time: "180 min" },
+    ];
+
+    const MADE_EASY_ESE_TESTS = [
+      { id: 1, type: "Subject", name: "Subject Test-1: Electric Circuits & Electromagnetic Fields", ques: 38, marks: 76, time: "45 min" },
+      { id: 2, type: "GS Aptitude", name: "Subject Test-2: Engineering Aptitude (Paper-I)", ques: 25, marks: 50, time: "30 min" },
+      { id: 3, type: "Subject", name: "Subject Test-3: Control Systems", ques: 38, marks: 76, time: "45 min" },
+      { id: 4, type: "GS Aptitude", name: "Subject Test-4: Engineering Mathematics & Numerical Analysis", ques: 25, marks: 50, time: "30 min" },
+      { id: 5, type: "Subject", name: "Subject Test-5: Electrical Material", ques: 38, marks: 76, time: "45 min" },
+      { id: 6, type: "GS Aptitude", name: "Subject Test-6: Design, Drawing & Safety Principles", ques: 25, marks: 50, time: "30 min" },
+      { id: 7, type: "Subject", name: "Subject Test-7: Electrical Machines", ques: 38, marks: 76, time: "45 min" },
+      { id: 8, type: "GS Aptitude", name: "Subject Test-8: Basics of Energy and Environment", ques: 25, marks: 50, time: "30 min" },
+      { id: 9, type: "Subject", name: "Subject Test-9: Computer Fundamentals", ques: 38, marks: 76, time: "45 min" },
+      { id: 10, type: "GS Aptitude", name: "Subject Test-10: Basics of Project Management", ques: 25, marks: 50, time: "30 min" },
+      { id: 11, type: "Subject", name: "Subject Test-11: Power Systems", ques: 38, marks: 76, time: "45 min" },
+      { id: 12, type: "GS Aptitude", name: "Subject Test-12: Basics of Material Science & Engg", ques: 25, marks: 50, time: "30 min" },
+      { id: 13, type: "Subject", name: "Subject Test-13: Basic Electronics Engineering", ques: 38, marks: 76, time: "45 min" },
+      { id: 14, type: "GS Aptitude", name: "Subject Test-14: Information & Communication Tech (ICT)", ques: 25, marks: 50, time: "30 min" },
+      { id: 15, type: "Subject", name: "Subject Test-15: Analog & Digital Electronics (with Microprocessor & Comm)", ques: 38, marks: 76, time: "45 min" },
+      { id: 16, type: "GS Aptitude", name: "Subject Test-16: Ethics & Values in Engineering Profession", ques: 25, marks: 50, time: "30 min" },
+      { id: 17, type: "Subject", name: "Subject Test-17: Power Electronics & Drives", ques: 38, marks: 76, time: "45 min" },
+      { id: 18, type: "GS Aptitude", name: "Subject Test-18: Standards and Quality Practices", ques: 25, marks: 50, time: "30 min" },
+      { id: 19, type: "Subject", name: "Subject Test-19: Electrical & Electronic Measurements", ques: 38, marks: 76, time: "45 min" },
+      { id: 20, type: "GS Aptitude", name: "Subject Test-20: Current Issues: National & International", ques: 25, marks: 50, time: "30 min" },
+      { id: 21, type: "Subject", name: "Subject Test-21: Systems & Signal Processing", ques: 38, marks: 76, time: "45 min" },
+      { id: 22, type: "Subject", name: "Subject Test-22: Engineering Mathematics (Paper-I Technical)", ques: 38, marks: 76, time: "45 min" },
+      { id: 23, type: "Full Length", name: "Full Syllabus Test-1: General Studies & Engg Aptitude", ques: 100, marks: 200, time: "2 hours" },
+      { id: 24, type: "Full Length", name: "Full Syllabus Test-2: Engineering Discipline (EE)", ques: 150, marks: 300, time: "3 hours" },
+      { id: 25, type: "Full Length", name: "Full Syllabus Test-3: General Studies & Engg Aptitude", ques: 100, marks: 200, time: "2 hours" },
+      { id: 26, type: "Full Length", name: "Full Syllabus Test-4: Engineering Discipline (EE)", ques: 150, marks: 300, time: "3 hours" },
+      { id: 27, type: "Full Length", name: "Full Syllabus Test-5: General Studies & Engg Aptitude", ques: 100, marks: 200, time: "2 hours" },
+      { id: 28, type: "Full Length", name: "Full Syllabus Test-6: Engineering Discipline (EE)", ques: 150, marks: 300, time: "3 hours" },
+      { id: 29, type: "Full Length", name: "Full Syllabus Test-7: General Studies & Engg Aptitude", ques: 100, marks: 200, time: "2 hours" },
+      { id: 30, type: "Full Length", name: "Full Syllabus Test-8: Engineering Discipline (EE)", ques: 150, marks: 300, time: "3 hours" },
+      { id: 31, type: "Mock", name: "Full Syllabus Test-9: GS & Engg Aptitude (Mock 1)", ques: 100, marks: 200, time: "2 hours" },
+      { id: 32, type: "Mock", name: "Full Syllabus Test-10: Engineering Discipline (Mock 1)", ques: 150, marks: 300, time: "3 hours" },
+      { id: 33, type: "Mock", name: "Full Syllabus Test-11: GS & Engg Aptitude (Mock 2)", ques: 100, marks: 200, time: "2 hours" },
+      { id: 34, type: "Mock", name: "Full Syllabus Test-12: Engineering Discipline (Mock 2)", ques: 150, marks: 300, time: "3 hours" },
+    ];
+
+    const CORE_EE_SUBJECTS = [
+      { name: "Electric Circuits / Networks", key: "CKT" },
+      { name: "Electrical Machines (DC, Trf, IM, Sync)", key: "MCH" },
+      { name: "Power Systems (Gen, Trans, Dist, Switchgear)", key: "PWR" },
+      { name: "Control Systems", key: "CTL" },
+      { name: "Power Electronics & Drives", key: "PEL" },
+      { name: "Measurements & Instrumentation", key: "MST" },
+      { name: "Analog & Digital Electronics", key: "ADE" },
+      { name: "Electromagnetic Fields & Materials", key: "EMF" },
+      { name: "Engineering Mathematics / Aptitude", key: "MATH" }
+    ];
+
+    // APPLICATION STATE WITH EXPLICIT PERSISTENCE KEY
+    const STORAGE_KEY = "POWERPREP_EE_PERSIST_V4";
+    let state = {
+      theme: 'dark',
+      pacingMode: 'marathon',
+      activeExam: "ESE",
+      activeModule: "dashboard",
+      syllabusProgress: {},
+      testsData: {},
+      customTests: [],
+      mistakes: [],
+      planner: {},
+    };
+
+    let chartSyllabus = null;
+    let chartTests = null;
+    let chartMistakes = null;
+    let activeModalTestId = null;
+    let currentTestObject = null;
+
+    let pacerInterval = null;
+    let pacerSeconds = 180;
+
+    // INITIALIZATION
+    function init() {
+      loadState();
+      applyTheme(state.theme);
+      applyPacingMode(state.pacingMode);
+      renderExamPills();
+      updateCountdowns();
+      setInterval(updateCountdowns, 60000);
+      renderActiveExamView();
+      setPlannerToday();
+      updateSaveIndicator("Saved");
+    }
+
+    function updateSaveIndicator(text) {
+      const ind = document.getElementById('save-status-indicator');
+      if (ind) {
+        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        ind.innerHTML = `<i class="fa-solid fa-circle text-[6px]"></i> ${text} (${time})`;
+      }
+    }
+
+    // THEME SWITCHER
+    function toggleTheme() {
+      const next = state.theme === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      state.theme = next;
+      saveState();
+      renderCharts();
+    }
+
+    function applyTheme(theme) {
+      const html = document.documentElement;
+      const icon = document.getElementById('theme-icon');
+      if (theme === 'dark') {
+        html.classList.add('dark');
+        icon.className = 'fa-solid fa-sun text-amber-400';
+      } else {
+        html.classList.remove('dark');
+        icon.className = 'fa-solid fa-moon text-slate-700';
+      }
+    }
+
+    // PACING MODE TOGGLE
+    function togglePacingMode() {
+      const next = state.pacingMode === 'marathon' ? 'sprint' : 'marathon';
+      applyPacingMode(next);
+      state.pacingMode = next;
+      saveState();
+    }
+
+    function applyPacingMode(mode) {
+      const btn = document.getElementById('pacing-toggle-btn');
+      const icon = document.getElementById('pacing-icon');
+      const label = document.getElementById('pacing-label');
+      const badge = document.getElementById('pacer-mode-badge');
+      const timer = document.getElementById('pacer-timer');
+      const sub = document.getElementById('pacer-subtext');
+
+      if (mode === 'sprint') {
+        btn.className = "px-2.5 py-1.5 rounded-xl border border-amber-500/40 bg-amber-500/10 text-amber-500 font-bold text-xs flex items-center gap-1.5 shadow-sm";
+        icon.className = "fa-solid fa-bolt-lightning text-amber-500";
+        label.innerText = "Sprint Mode (JE)";
+        badge.innerText = "Sprint Pace (36s/Q)";
+        badge.className = "px-2 py-0.5 rounded text-[10px] font-black bg-amber-500/10 text-amber-500 border border-amber-500/20";
+        pacerSeconds = 36;
+        timer.innerText = "00:36";
+        sub.innerText = "Target speed for SSC JE & RRB JE (200 Qs / 120 Mins)";
+      } else {
+        btn.className = "px-2.5 py-1.5 rounded-xl border border-indigo-500/40 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 font-bold text-xs flex items-center gap-1.5 shadow-sm";
+        icon.className = "fa-solid fa-gauge-high text-indigo-500";
+        label.innerText = "Marathon Mode";
+        badge.innerText = "Marathon (180s/Q)";
+        badge.className = "px-2 py-0.5 rounded text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20";
+        pacerSeconds = 180;
+        timer.innerText = "03:00";
+        sub.innerText = "Simulated time per GATE Numerical question";
+      }
+    }
+
+    // COUNTDOWN CALCULATOR
+    function updateCountdowns() {
+      const now = new Date();
+      const deadlines = {
+        RRB_JE: new Date('2026-10-30T09:00:00'),
+        SSC_JE: new Date('2026-11-02T09:00:00'),
+        ESE: new Date('2027-01-31T09:00:00'),
+        GATE: new Date('2027-02-08T09:00:00')
+      };
+
+      for (let key in deadlines) {
+        const diff = deadlines[key] - now;
+        const el = document.getElementById(`timer-${key}`);
+        const card = document.getElementById(`countdown-card-${key}`);
+        if (!el || !card) continue;
+
+        if (diff <= 0) {
+          el.innerText = "Exam Active";
+        } else {
+          const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+          el.innerText = `${days}d ${hours}h left`;
+        }
+
+        if (key === state.activeExam) {
+          card.classList.add('ring-2', 'ring-indigo-500', 'bg-indigo-500/5');
+        } else {
+          card.classList.remove('ring-2', 'ring-indigo-500', 'bg-indigo-500/5');
+        }
+      }
+    }
+
+    // EXAM SWITCHER
+    function switchExam(examKey) {
+      state.activeExam = examKey;
+      saveState();
+      renderExamPills();
+      updateCountdowns();
+      renderActiveExamView();
+    }
+
+    function renderExamPills() {
+      const exams = ["ESE", "GATE", "SSC_JE", "RRB_JE"];
+      exams.forEach(key => {
+        const btn = document.getElementById(`exam-btn-${key}`);
+        if (btn) {
+          if (key === state.activeExam) {
+            btn.className = "exam-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-indigo-600 text-white shadow";
+          } else {
+            btn.className = "exam-tab-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-slate-200";
+          }
+        }
+      });
+      const mobileSelect = document.getElementById('mobile-exam-select');
+      if (mobileSelect) mobileSelect.value = state.activeExam;
+    }
+
+    // MODULE SWITCHER
+    function switchModule(modKey) {
+      state.activeModule = modKey;
+      const modules = ['dashboard', 'syllabus', 'testseries', 'mistakes', 'schedule', 'vault', 'crossExam'];
+      modules.forEach(m => {
+        const view = document.getElementById(`view-${m}`);
+        const btn = document.getElementById(`mod-${m}`);
+        if (!view || !btn) return;
+        if (m === modKey) {
+          view.classList.remove('hidden');
+          btn.className = "mod-tab-btn px-3 py-1.5 rounded-lg text-xs font-bold flex items-center space-x-2 whitespace-nowrap bg-indigo-600 text-white shadow";
+        } else {
+          view.classList.add('hidden');
+          btn.className = "mod-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center space-x-2 whitespace-nowrap text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800/60";
+        }
+      });
+
+      renderActiveExamView();
+    }
+
+    // VIEW RENDERER
+    function renderActiveExamView() {
+      const examSchema = SYLLABUS_SCHEMAS[state.activeExam];
+      document.getElementById('dash-exam-title').innerText = examSchema.title;
+      document.getElementById('dash-exam-desc').innerText = examSchema.desc;
+
+      updateDashboardStats();
+      detectBlindspots();
+      renderCharts();
+      renderSyllabusTree();
+      renderTestSeries();
+      renderMistakes();
+      populateSubjectDropdowns();
+      renderCrossExamMatrix();
+    }
+
+    // WEIGHTED GRANULAR SYLLABUS CALCULATION (FIX FOR 0% ISSUE)
+    function calculateExamSyllabusScore(exam) {
+      const schema = SYLLABUS_SCHEMAS[exam];
+      let totalTopicScore = 0;
+      let totalPossible = 0;
+
+      schema.subjects.forEach(sub => {
+        sub.topics.forEach((_, idx) => {
+          totalPossible += 100;
+          const p = state.syllabusProgress[`${exam}_${sub.id}_${idx}`] || {};
+          let topicScore = 0;
+          if (p.theory) topicScore += 40;
+          if (p.pyq) topicScore += 40;
+          if (p.r1) topicScore += 6.66;
+          if (p.r2) topicScore += 6.66;
+          if (p.r3) topicScore += 6.68;
+          totalTopicScore += topicScore;
+        });
+      });
+
+      return totalPossible > 0 ? Math.round((totalTopicScore / totalPossible) * 100) : 0;
+    }
+
+    function calculateSubjectScore(exam, sub) {
+      let subScore = 0;
+      let subPossible = sub.topics.length * 100;
+
+      sub.topics.forEach((_, idx) => {
+        const p = state.syllabusProgress[`${exam}_${sub.id}_${idx}`] || {};
+        if (p.theory) subScore += 40;
+        if (p.pyq) subScore += 40;
+        if (p.r1) subScore += 6.66;
+        if (p.r2) subScore += 6.66;
+        if (p.r3) subScore += 6.68;
+      });
+
+      return subPossible > 0 ? Math.round((subScore / subPossible) * 100) : 0;
+    }
+
+    // DASHBOARD STATS
+    function updateDashboardStats() {
+      const exam = state.activeExam;
+      const schema = SYLLABUS_SCHEMAS[exam];
+
+      const syllabusPct = calculateExamSyllabusScore(exam);
+      document.getElementById('stat-overall-syllabus').innerText = `${syllabusPct}%`;
+
+      const testList = getActiveExamTestsList();
+      let attemptedTests = 0;
+      testList.forEach(t => {
+        const d = state.testsData[`${exam}_${t.id}`] || {};
+        if (d.status === 'ATTEMPTED' || d.status === 'ANALYZED') attemptedTests++;
+      });
+      document.getElementById('stat-tests-written').innerText = `${attemptedTests} / ${testList.length}`;
+
+      // Subject Deep Tracer Matrix
+      const matrixContainer = document.getElementById('subject-matrix-container');
+      matrixContainer.innerHTML = '';
+
+      schema.subjects.forEach(sub => {
+        const subPct = calculateSubjectScore(exam, sub);
+        let subDone = 0, subR1 = 0, subR2 = 0, subR3 = 0;
+        sub.topics.forEach((_, idx) => {
+          const p = state.syllabusProgress[`${exam}_${sub.id}_${idx}`] || {};
+          if (p.theory && p.pyq) subDone++;
+          if (p.r1) subR1++;
+          if (p.r2) subR2++;
+          if (p.r3) subR3++;
+        });
+
+        let yieldBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-200 dark:bg-slate-800 text-slate-500">${sub.yield || 'CORE'}</span>`;
+        if (sub.yield === 'HIGH') yieldBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-black bg-rose-500/10 text-rose-500 border border-rose-500/20">80/20 HIGH YIELD</span>`;
+        if (sub.yield === 'GS') yieldBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">SCORING GS</span>`;
+
+        const row = document.createElement('div');
+        row.className = "bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 p-3 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs";
+        row.innerHTML = `
+          <div class="flex-1 min-w-[200px]">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="font-bold text-slate-800 dark:text-slate-200">${sub.name}</span>
+              ${yieldBadge}
+            </div>
+            <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden">
+              <div class="bg-indigo-600 h-full rounded-full transition-all duration-500" style="width: ${subPct}%"></div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 text-slate-500 flex-wrap">
+            <span class="text-indigo-600 dark:text-indigo-400 font-bold">${subPct}%</span>
+            <span class="bg-white dark:bg-slate-900 px-2 py-1 rounded border border-slate-200 dark:border-slate-800"><i class="fa-solid fa-check text-emerald-500 mr-1"></i>${subDone}/${sub.topics.length} Mastered</span>
+            <span class="bg-white dark:bg-slate-900 px-2 py-1 rounded border border-slate-200 dark:border-slate-800"><i class="fa-solid fa-repeat text-cyan-500 mr-1"></i>${subR1}|${subR2}|${subR3}</span>
+          </div>
+        `;
+        matrixContainer.appendChild(row);
+      });
+    }
+
+    function detectBlindspots() {
+      const exam = state.activeExam;
+      const mistakes = state.mistakes.filter(m => m.exam === exam && m.status === 'Pending');
+      const banner = document.getElementById('blindspot-banner');
+      const text = document.getElementById('blindspot-text');
+      const badge = document.getElementById('stat-blindspots-count');
+
+      const freq = {};
+      mistakes.forEach(m => {
+        freq[m.subject] = (freq[m.subject] || 0) + 1;
+      });
+
+      const recurring = Object.keys(freq).filter(sub => freq[sub] >= 2);
+      badge.innerText = recurring.length;
+
+      if (recurring.length > 0) {
+        banner.classList.remove('hidden');
+        text.innerText = `Recurring errors detected in: ${recurring.join(', ')}. Review before taking your next test.`;
+      } else {
+        banner.classList.add('hidden');
+      }
+    }
+
+    function renderCharts() {
+      const isDark = document.documentElement.classList.contains('dark');
+      const exam = state.activeExam;
+      const syllabusPct = calculateExamSyllabusScore(exam);
+
+      document.getElementById('chart-syllabus-label').innerHTML = `
+        <span class="text-2xl font-black text-slate-800 dark:text-white">${syllabusPct}%</span>
+        <span class="block text-[10px] text-slate-400">Complete</span>
+      `;
+
+      if (chartSyllabus) chartSyllabus.destroy();
+      const ctxSyl = document.getElementById('chart-syllabus').getContext('2d');
+      chartSyllabus = new Chart(ctxSyl, {
+        type: 'doughnut',
+        data: {
+          labels: ['Completed', 'Remaining'],
+          datasets: [{
+            data: [syllabusPct, 100 - syllabusPct],
+            backgroundColor: ['#6366f1', isDark ? '#1e293b' : '#e2e8f0'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '76%',
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      // 2. Tests Chart
+      const tests = getActiveExamTestsList();
+      let attempted = 0, analyzed = 0, pending = 0;
+      tests.forEach(t => {
+        const d = state.testsData[`${exam}_${t.id}`] || {};
+        if (d.status === 'ANALYZED') analyzed++;
+        else if (d.status === 'ATTEMPTED') attempted++;
+        else pending++;
+      });
+      document.getElementById('chart-tests-label').innerHTML = `
+        <span class="text-2xl font-black text-slate-800 dark:text-white">${analyzed + attempted}</span>
+        <span class="block text-[10px] text-slate-400">Written</span>
+      `;
+
+      if (chartTests) chartTests.destroy();
+      const ctxTest = document.getElementById('chart-tests').getContext('2d');
+      chartTests = new Chart(ctxTest, {
+        type: 'doughnut',
+        data: {
+          labels: ['Analyzed', 'Unanalyzed', 'Pending'],
+          datasets: [{
+            data: [analyzed, attempted, pending],
+            backgroundColor: ['#10b981', '#f59e0b', isDark ? '#1e293b' : '#e2e8f0'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '76%',
+          plugins: { legend: { display: false } }
+        }
+      });
+
+      // 3. Mistakes Chart
+      const examMistakes = state.mistakes.filter(m => m.exam === exam);
+      const conceptual = examMistakes.filter(m => m.type === 'Conceptual').length;
+      const calculation = examMistakes.filter(m => m.type === 'Calculation').length;
+      const formula = examMistakes.filter(m => m.type === 'Formula').length;
+      const timeErr = examMistakes.filter(m => m.type === 'TimePressure').length;
+      const totalMistakes = examMistakes.length;
+
+      document.getElementById('chart-mistakes-label').innerHTML = `
+        <span class="text-2xl font-black text-slate-800 dark:text-white">${totalMistakes}</span>
+        <span class="block text-[10px] text-slate-400">Errors</span>
+      `;
+
+      if (chartMistakes) chartMistakes.destroy();
+      const ctxMis = document.getElementById('chart-mistakes').getContext('2d');
+      chartMistakes = new Chart(ctxMis, {
+        type: 'pie',
+        data: {
+          labels: ['Conceptual', 'Calculation', 'Formula', 'Time Pressure'],
+          datasets: [{
+            data: totalMistakes ? [conceptual, calculation, formula, timeErr] : [0, 0, 0, 1],
+            backgroundColor: totalMistakes ? ['#f43f5e', '#f59e0b', '#a855f7', '#0284c7'] : [isDark ? '#1e293b' : '#e2e8f0'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+
+    // 2. SYLLABUS TREE RENDERER
+    function renderSyllabusTree() {
+      const exam = state.activeExam;
+      const schema = SYLLABUS_SCHEMAS[exam];
+      const filterSub = document.getElementById('syllabus-filter-subject').value;
+      const filterYield = document.getElementById('syllabus-filter-yield').value;
+      const container = document.getElementById('syllabus-tree-container');
+      container.innerHTML = '';
+
+      schema.subjects.forEach(sub => {
+        if (filterSub !== 'ALL' && filterSub !== sub.id) return;
+        if (filterYield !== 'ALL' && sub.yield !== filterYield) return;
+
+        const subPct = calculateSubjectScore(exam, sub);
+        const card = document.createElement('div');
+        card.className = "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm";
+        
+        let topicsHtml = sub.topics.map((t, idx) => {
+          const prog = state.syllabusProgress[`${exam}_${sub.id}_${idx}`] || { theory: false, pyq: false, r1: false, r2: false, r3: false };
+          return `
+            <div class="p-3 bg-slate-50/60 dark:bg-slate-950/40 hover:bg-slate-100 dark:hover:bg-slate-950/80 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs border-b border-slate-200 dark:border-slate-800/60 last:border-b-0">
+              <span class="text-slate-700 dark:text-slate-300 font-medium flex-1">${t}</span>
+              <div class="flex items-center gap-2 flex-wrap">
+                <button onclick="scheduleSpacedReview('${escapeQuotes(t)}')" title="Auto-schedule 1-3-7-21 Spaced Reviews" class="p-1 px-1.5 rounded bg-slate-200 dark:bg-slate-800 hover:bg-indigo-500 hover:text-white text-slate-500 text-[10px] font-bold">
+                  <i class="fa-solid fa-clock-rotate-left mr-0.5"></i> Spaced
+                </button>
+                <label class="cursor-pointer inline-flex items-center gap-1.5 px-2 py-1 rounded bg-white dark:bg-slate-900 border ${prog.theory ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10' : 'border-slate-200 dark:border-slate-800 text-slate-400'}">
+                  <input type="checkbox" onchange="toggleSyllabusProgress('${exam}', '${sub.id}', ${idx}, 'theory', this.checked)" ${prog.theory ? 'checked' : ''} class="w-3.5 h-3.5 text-indigo-600 rounded"/>
+                  <span>Theory (40%)</span>
+                </label>
+                <label class="cursor-pointer inline-flex items-center gap-1.5 px-2 py-1 rounded bg-white dark:bg-slate-900 border ${prog.pyq ? 'border-emerald-500 text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10' : 'border-slate-200 dark:border-slate-800 text-slate-400'}">
+                  <input type="checkbox" onchange="toggleSyllabusProgress('${exam}', '${sub.id}', ${idx}, 'pyq', this.checked)" ${prog.pyq ? 'checked' : ''} class="w-3.5 h-3.5 text-emerald-600 rounded"/>
+                  <span>PYQs (40%)</span>
+                </label>
+                <label class="cursor-pointer inline-flex items-center gap-1 px-2 py-1 rounded bg-white dark:bg-slate-900 border ${prog.r1 ? 'border-cyan-500 text-cyan-600 dark:text-cyan-300 bg-cyan-50 dark:bg-cyan-500/10' : 'border-slate-200 dark:border-slate-800 text-slate-400'}">
+                  <input type="checkbox" onchange="toggleSyllabusProgress('${exam}', '${sub.id}', ${idx}, 'r1', this.checked)" ${prog.r1 ? 'checked' : ''} class="w-3.5 h-3.5 text-cyan-600 rounded"/>
+                  <span>R1</span>
+                </label>
+                <label class="cursor-pointer inline-flex items-center gap-1 px-2 py-1 rounded bg-white dark:bg-slate-900 border ${prog.r2 ? 'border-sky-500 text-sky-600 dark:text-sky-300 bg-sky-50 dark:bg-sky-500/10' : 'border-slate-200 dark:border-slate-800 text-slate-400'}">
+                  <input type="checkbox" onchange="toggleSyllabusProgress('${exam}', '${sub.id}', ${idx}, 'r2', this.checked)" ${prog.r2 ? 'checked' : ''} class="w-3.5 h-3.5 text-sky-600 rounded"/>
+                  <span>R2</span>
+                </label>
+                <label class="cursor-pointer inline-flex items-center gap-1 px-2 py-1 rounded bg-white dark:bg-slate-900 border ${prog.r3 ? 'border-purple-500 text-purple-600 dark:text-purple-300 bg-purple-50 dark:bg-purple-500/10' : 'border-slate-200 dark:border-slate-800 text-slate-400'}">
+                  <input type="checkbox" onchange="toggleSyllabusProgress('${exam}', '${sub.id}', ${idx}, 'r3', this.checked)" ${prog.r3 ? 'checked' : ''} class="w-3.5 h-3.5 text-purple-600 rounded"/>
+                  <span>R3</span>
+                </label>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        card.innerHTML = `
+          <div class="p-4 bg-slate-100/80 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center cursor-pointer" onclick="this.nextElementSibling.classList.toggle('hidden')">
+            <div>
+              <h3 class="font-bold text-sm text-slate-900 dark:text-white">${sub.name}</h3>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">${sub.topics.length} official subtopics</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-2 py-0.5 rounded">${subPct}%</span>
+              <i class="fa-solid fa-chevron-down text-slate-400 text-xs"></i>
+            </div>
+          </div>
+          <div class="divide-y divide-slate-200 dark:divide-slate-800">
+            ${topicsHtml}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function toggleSyllabusProgress(exam, subId, topicIdx, field, isChecked) {
+      const key = `${exam}_${subId}_${topicIdx}`;
+      if (!state.syllabusProgress[key]) {
+        state.syllabusProgress[key] = { theory: false, pyq: false, r1: false, r2: false, r3: false };
+      }
+      state.syllabusProgress[key][field] = isChecked;
+      saveState();
+      updateDashboardStats();
+      renderCharts();
+    }
+
+    function scheduleSpacedReview(topicTitle) {
+      const intervals = [1, 3, 7, 21];
+      const today = new Date();
+
+      intervals.forEach(days => {
+        const future = new Date(today);
+        future.setDate(future.getDate() + days);
+        const dateKey = future.toISOString().split('T')[0];
+
+        if (!state.planner[dateKey]) {
+          state.planner[dateKey] = { tasks: [], reflection: '' };
+        }
+
+        state.planner[dateKey].tasks.push({
+          text: `Spaced Recall (Day +${days}): ${topicTitle}`,
+          tag: 'Revision',
+          done: false
+        });
+      });
+
+      saveState();
+      alert(`Automated Spaced Review scheduled for Days +1, +3, +7, and +21 in your Daily Planner!`);
+    }
+
+    // 3. MADE EASY TEST SERIES WITH ACCURACY & SCORE AUTO-CALCULATION
+    function getActiveExamTestsList() {
+      if (state.activeExam === 'GATE') return MADE_EASY_GATE_TESTS;
+      if (state.activeExam === 'ESE') return MADE_EASY_ESE_TESTS;
+      return state.customTests.filter(t => t.exam === state.activeExam);
+    }
+
+    function renderTestSeries() {
+      const tbody = document.getElementById('test-table-body');
+      const filterStatus = document.getElementById('test-filter-status').value;
+      tbody.innerHTML = '';
+
+      const testList = getActiveExamTestsList();
+      const exam = state.activeExam;
+
+      testList.forEach(t => {
+        const testState = state.testsData[`${exam}_${t.id}`] || { score: null, accuracy: null, status: 'PENDING' };
+        
+        if (filterStatus === 'PENDING' && testState.status !== 'PENDING') return;
+        if (filterStatus === 'ATTEMPTED' && testState.status !== 'ATTEMPTED') return;
+        if (filterStatus === 'ANALYZED' && testState.status !== 'ANALYZED') return;
+
+        let statusBadge = '';
+        if (testState.status === 'ANALYZED') {
+          statusBadge = '<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"><i class="fa-solid fa-check mr-1"></i>Analyzed</span>';
+        } else if (testState.status === 'ATTEMPTED') {
+          statusBadge = '<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-500/10 text-amber-500 border border-amber-500/20"><i class="fa-solid fa-hourglass-half mr-1"></i>Unanalyzed</span>';
+        } else {
+          statusBadge = '<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-200 dark:bg-slate-800 text-slate-500"><i class="fa-solid fa-circle mr-1 text-[8px]"></i>Pending</span>';
+        }
+
+        const scoreDisplay = testState.score !== null ? `${testState.score} / ${t.marks}` : '-';
+        const accDisplay = testState.accuracy !== null ? `${testState.accuracy}%` : '-';
+
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-100 dark:hover:bg-slate-800/40 transition-colors";
+        tr.innerHTML = `
+          <td class="px-4 py-3 font-mono font-bold text-slate-500">${t.id}</td>
+          <td class="px-4 py-3">
+            <div class="font-bold text-slate-800 dark:text-slate-200">${t.name}</div>
+            <div class="text-[10px] text-slate-500">Duration: ${t.time}</div>
+          </td>
+          <td class="px-4 py-3"><span class="px-2 py-0.5 rounded text-[10px] bg-slate-200 dark:bg-slate-800 font-semibold">${t.type}</span></td>
+          <td class="px-4 py-3 text-center font-medium">${t.marks} M (${t.ques} Q)</td>
+          <td class="px-4 py-3 text-center font-bold text-indigo-600 dark:text-indigo-400">${scoreDisplay}</td>
+          <td class="px-4 py-3 text-center font-medium">${accDisplay}</td>
+          <td class="px-4 py-3 text-center">${statusBadge}</td>
+          <td class="px-4 py-3 text-right">
+            <button onclick="openTestEntryModal(${t.id})" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded text-xs font-semibold shadow">
+              Log Result
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openTestEntryModal(testId) {
+      activeModalTestId = testId;
+      const exam = state.activeExam;
+      const testList = getActiveExamTestsList();
+      currentTestObject = testList.find(t => t.id === testId);
+
+      const existing = state.testsData[`${exam}_${testId}`] || { correct: '', incorrect: '', score: '', accuracy: '', status: 'ATTEMPTED' };
+
+      document.getElementById('modal-test-name-display').innerText = `Test #${testId}: ${currentTestObject.name}`;
+      document.getElementById('modal-test-total-ques-display').innerText = `${currentTestObject.ques} Questions`;
+      document.getElementById('modal-test-total-marks-display').innerText = `${currentTestObject.marks} Marks`;
+
+      document.getElementById('input-modal-test-correct').value = existing.correct !== undefined ? existing.correct : '';
+      document.getElementById('input-modal-test-incorrect').value = existing.incorrect !== undefined ? existing.incorrect : '';
+      document.getElementById('input-modal-test-score').value = existing.score !== null ? existing.score : '';
+      document.getElementById('input-modal-test-status').value = existing.status || 'ATTEMPTED';
+
+      calculateTestMetrics();
+      document.getElementById('modal-test-entry').classList.remove('hidden');
+    }
+
+    // AUTOMATIC ACCURACY, UNATTEMPTED & SCORE CALCULATION
+    function calculateTestMetrics() {
+      if (!currentTestObject) return;
+
+      const totalQ = currentTestObject.ques;
+      const totalM = currentTestObject.marks;
+      const correct = parseInt(document.getElementById('input-modal-test-correct').value) || 0;
+      const incorrect = parseInt(document.getElementById('input-modal-test-incorrect').value) || 0;
+
+      const attempted = correct + incorrect;
+      const unattempted = Math.max(0, totalQ - attempted);
+      document.getElementById('display-modal-unattempted').innerText = unattempted;
+
+      // Accuracy: Correct / (Correct + Incorrect)
+      const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+      document.getElementById('display-modal-accuracy').innerText = `${accuracy}%`;
+
+      // Marks calculation
+      // Standard negative marking: 1/3 penalty per question
+      const marksPerQ = totalM / totalQ;
+      const penaltyPerQ = (1 / 3) * marksPerQ;
+      let calculatedScore = (correct * marksPerQ) - (incorrect * penaltyPerQ);
+      if (calculatedScore < 0) calculatedScore = 0;
+      calculatedScore = parseFloat(calculatedScore.toFixed(2));
+
+      document.getElementById('display-modal-score').innerText = `${calculatedScore} M`;
+
+      // Set input field if user has entered correct/incorrect
+      if (attempted > 0) {
+        document.getElementById('input-modal-test-score').value = calculatedScore;
+      }
+    }
+
+    function closeTestEntryModal() {
+      document.getElementById('modal-test-entry').classList.add('hidden');
+      activeModalTestId = null;
+      currentTestObject = null;
+    }
+
+    function saveTestEntry() {
+      if (activeModalTestId === null || !currentTestObject) return;
+      const exam = state.activeExam;
+      const correct = parseInt(document.getElementById('input-modal-test-correct').value) || 0;
+      const incorrect = parseInt(document.getElementById('input-modal-test-incorrect').value) || 0;
+      const score = parseFloat(document.getElementById('input-modal-test-score').value);
+      const status = document.getElementById('input-modal-test-status').value;
+
+      const attempted = correct + incorrect;
+      const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+
+      state.testsData[`${exam}_${activeModalTestId}`] = {
+        correct: correct,
+        incorrect: incorrect,
+        score: isNaN(score) ? 0 : score,
+        accuracy: accuracy,
+        status: status
+      };
+
+      saveState();
+      closeTestEntryModal();
+      renderTestSeries();
+      updateDashboardStats();
+      detectBlindspots();
+      renderCharts();
+    }
+
+    function openMistakeFromTest() {
+      const exam = state.activeExam;
+      const testList = getActiveExamTestsList();
+      const currentTest = testList.find(t => t.id === activeModalTestId);
+      closeTestEntryModal();
+
+      document.getElementById('input-mistake-subject').value = currentTest ? currentTest.name : 'MADE EASY Test';
+      openMistakeModal();
+    }
+
+    // 4. MISTAKES NOTEBOOK
+    function renderMistakes() {
+      const grid = document.getElementById('mistakes-grid');
+      const empty = document.getElementById('mistakes-empty-state');
+      const filterType = document.getElementById('mistake-filter-type').value;
+      const filterStatus = document.getElementById('mistake-filter-status').value;
+      grid.innerHTML = '';
+
+      let list = state.mistakes.filter(m => m.exam === state.activeExam);
+      if (filterType !== 'ALL') list = list.filter(m => m.type === filterType);
+      if (filterStatus !== 'ALL') list = list.filter(m => m.status === filterStatus);
+
+      if (list.length === 0) {
+        empty.classList.remove('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+
+      list.forEach(m => {
+        const card = document.createElement('div');
+        card.className = "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 flex flex-col justify-between space-y-3 shadow-sm";
+        
+        let typeBadge = "";
+        if (m.type === 'Conceptual') typeBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-rose-500/10 text-rose-500 border border-rose-500/20">Conceptual</span>';
+        else if (m.type === 'Calculation') typeBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-500/10 text-amber-500 border border-amber-500/20">Calculation Error</span>';
+        else if (m.type === 'Formula') typeBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-purple-500/10 text-purple-500 border border-purple-500/20">Formula Forgot</span>';
+        else typeBadge = '<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-sky-500/10 text-sky-500 border border-sky-500/20">Time Pressure</span>';
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between text-xs text-slate-500 mb-1.5">
+              <span class="truncate max-w-[150px] font-medium">${m.subject}</span>
+              ${typeBadge}
+            </div>
+            <h4 class="font-bold text-slate-900 dark:text-white text-xs leading-snug">${m.topic}</h4>
+            <div class="mt-2 p-2.5 bg-slate-50 dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 text-[11px] text-slate-700 dark:text-slate-300">
+              <strong class="text-slate-500 block mb-0.5">Remedy Note:</strong>
+              ${m.takeaway || 'No conceptual note attached.'}
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-800 text-xs">
+            <select onchange="updateMistakeStatus(${m.id}, this.value)" class="bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-[11px] rounded px-2 py-1">
+              <option value="Pending" ${m.status === 'Pending' ? 'selected' : ''}>Pending</option>
+              <option value="Analyzed" ${m.status === 'Analyzed' ? 'selected' : ''}>Analyzed</option>
+              <option value="Mastered" ${m.status === 'Mastered' ? 'selected' : ''}>Mastered</option>
+            </select>
+            <button onclick="deleteMistake(${m.id})" class="text-slate-400 hover:text-rose-500"><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function openMistakeModal() {
+      document.getElementById('modal-mistake').classList.remove('hidden');
+    }
+
+    function closeMistakeModal() {
+      document.getElementById('modal-mistake').classList.add('hidden');
+      document.getElementById('input-mistake-topic').value = '';
+      document.getElementById('input-mistake-takeaway').value = '';
+    }
+
+    function saveMistake() {
+      const subject = document.getElementById('input-mistake-subject').value.trim() || 'Electrical Engineering';
+      const topic = document.getElementById('input-mistake-topic').value.trim();
+      const type = document.getElementById('input-mistake-type').value;
+      const status = document.getElementById('input-mistake-status').value;
+      const takeaway = document.getElementById('input-mistake-takeaway').value.trim();
+
+      if (!topic) {
+        alert("Please enter the specific question or formula topic.");
+        return;
+      }
+
+      state.mistakes.push({
+        id: Date.now(),
+        exam: state.activeExam,
+        subject,
+        topic,
+        type,
+        status,
+        takeaway,
+        date: new Date().toISOString().split('T')[0]
+      });
+
+      saveState();
+      closeMistakeModal();
+      renderMistakes();
+      updateDashboardStats();
+      detectBlindspots();
+      renderCharts();
+    }
+
+    function updateMistakeStatus(id, newStatus) {
+      const item = state.mistakes.find(m => m.id === id);
+      if (item) {
+        item.status = newStatus;
+        saveState();
+        updateDashboardStats();
+        detectBlindspots();
+        renderCharts();
+      }
+    }
+
+    function deleteMistake(id) {
+      if (confirm("Delete this mistake from your notebook?")) {
+        state.mistakes = state.mistakes.filter(m => m.id !== id);
+        saveState();
+        renderMistakes();
+        updateDashboardStats();
+        detectBlindspots();
+        renderCharts();
+      }
+    }
+
+    // 5. DAILY PLANNER & SPEED PACER
+    function setPlannerToday() {
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('planner-date').value = today;
+      loadDaySchedule();
+    }
+
+    function loadDaySchedule() {
+      const date = document.getElementById('planner-date').value;
+      const dayData = state.planner[date] || { tasks: [], reflection: '' };
+      document.getElementById('daily-reflection-text').value = dayData.reflection || '';
+      renderDailyTasks(dayData.tasks);
+    }
+
+    function renderDailyTasks(tasks = []) {
+      const container = document.getElementById('daily-tasks-list');
+      container.innerHTML = '';
+
+      if (tasks.length === 0) {
+        container.innerHTML = `<p class="text-xs text-slate-500 italic py-4 text-center">No targets planned for this date. Enter targets above!</p>`;
+        document.getElementById('daily-completion-badge').innerText = `0% Done`;
+        return;
+      }
+
+      let doneCount = 0;
+      tasks.forEach((t, index) => {
+        if (t.done) doneCount++;
+        const item = document.createElement('div');
+        item.className = "flex items-center justify-between p-2.5 bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 rounded-lg text-xs";
+        
+        let tagColor = 'bg-slate-200 text-slate-700 dark:bg-slate-800 dark:text-slate-300';
+        if (t.tag === 'Theory') tagColor = 'bg-indigo-500/10 text-indigo-500 border border-indigo-500/20';
+        if (t.tag === 'PYQs') tagColor = 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20';
+        if (t.tag === 'Test') tagColor = 'bg-purple-500/10 text-purple-500 border border-purple-500/20';
+        if (t.tag === 'Revision') tagColor = 'bg-cyan-500/10 text-cyan-500 border border-cyan-500/20';
+        if (t.tag === 'Drill') tagColor = 'bg-amber-500/10 text-amber-500 border border-amber-500/20';
+
+        item.innerHTML = `
+          <div class="flex items-center gap-2.5 flex-1 min-w-0">
+            <input type="checkbox" onchange="toggleDailyTask(${index}, this.checked)" ${t.done ? 'checked' : ''} class="w-4 h-4 rounded text-emerald-600"/>
+            <span class="${t.done ? 'line-through text-slate-400' : 'text-slate-800 dark:text-slate-200'} truncate font-medium">${t.text}</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded text-[10px] font-semibold ${tagColor}">${t.tag}</span>
+            <button onclick="removeDailyTask(${index})" class="text-slate-400 hover:text-rose-500"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+
+      const pct = Math.round((doneCount / tasks.length) * 100);
+      document.getElementById('daily-completion-badge').innerText = `${pct}% Done`;
+    }
+
+    function addDailyTask() {
+      const text = document.getElementById('new-daily-target').value.trim();
+      const tag = document.getElementById('new-daily-tag').value;
+      const date = document.getElementById('planner-date').value;
+
+      if (!text) return;
+
+      if (!state.planner[date]) {
+        state.planner[date] = { tasks: [], reflection: '' };
+      }
+
+      state.planner[date].tasks.push({ text, tag, done: false });
+      saveState();
+      document.getElementById('new-daily-target').value = '';
+      renderDailyTasks(state.planner[date].tasks);
+    }
+
+    function toggleDailyTask(index, isDone) {
+      const date = document.getElementById('planner-date').value;
+      if (state.planner[date] && state.planner[date].tasks[index]) {
+        state.planner[date].tasks[index].done = isDone;
+        saveState();
+        renderDailyTasks(state.planner[date].tasks);
+      }
+    }
+
+    function removeDailyTask(index) {
+      const date = document.getElementById('planner-date').value;
+      if (state.planner[date]) {
+        state.planner[date].tasks.splice(index, 1);
+        saveState();
+        renderDailyTasks(state.planner[date].tasks);
+      }
+    }
+
+    function saveDailyReflection() {
+      const date = document.getElementById('planner-date').value;
+      if (!state.planner[date]) {
+        state.planner[date] = { tasks: [], reflection: '' };
+      }
+      state.planner[date].reflection = document.getElementById('daily-reflection-text').value;
+      saveState();
+    }
+
+    function startPacerTimer() {
+      if (pacerInterval) return;
+      pacerInterval = setInterval(() => {
+        if (pacerSeconds > 0) {
+          pacerSeconds--;
+          formatPacerDisplay();
+        } else {
+          clearInterval(pacerInterval);
+          pacerInterval = null;
+          alert("Time's up for this question! Move to next question.");
+          resetPacerTimer();
+        }
+      }, 1000);
+    }
+
+    function pausePacerTimer() {
+      clearInterval(pacerInterval);
+      pacerInterval = null;
+    }
+
+    function resetPacerTimer() {
+      pausePacerTimer();
+      pacerSeconds = state.pacingMode === 'sprint' ? 36 : 180;
+      formatPacerDisplay();
+    }
+
+    function formatPacerDisplay() {
+      const m = Math.floor(pacerSeconds / 60);
+      const s = pacerSeconds % 60;
+      document.getElementById('pacer-timer').innerText = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    // 6. GATE TCS-STYLE VIRTUAL CALCULATOR ENGINE
+    let calcCurrent = '0';
+    let calcExpr = '';
+
+    function openCalcModal() {
+      document.getElementById('modal-calculator').classList.remove('hidden');
+    }
+
+    function closeCalcModal() {
+      document.getElementById('modal-calculator').classList.add('hidden');
+    }
+
+    function calcKey(key) {
+      if (calcCurrent === '0' && !isNaN(key)) {
+        calcCurrent = key;
+      } else {
+        calcCurrent += key;
+      }
+      updateCalcDisplay();
+    }
+
+    function calcClear() {
+      calcCurrent = '0';
+      calcExpr = '';
+      updateCalcDisplay();
+    }
+
+    function calcFunc(fn) {
+      const val = parseFloat(calcCurrent);
+      if (isNaN(val)) return;
+
+      if (fn === 'sin') calcCurrent = String(Math.sin(val * Math.PI / 180).toFixed(6));
+      else if (fn === 'cos') calcCurrent = String(Math.cos(val * Math.PI / 180).toFixed(6));
+      else if (fn === 'tan') calcCurrent = String(Math.tan(val * Math.PI / 180).toFixed(6));
+      else if (fn === 'ln') calcCurrent = String(Math.log(val).toFixed(6));
+      else if (fn === 'log') calcCurrent = String(Math.log10(val).toFixed(6));
+      else if (fn === 'sqrt') calcCurrent = String(Math.sqrt(val).toFixed(6));
+      else if (fn === 'sq') calcCurrent = String(Math.pow(val, 2).toFixed(6));
+      else if (fn === 'inv') calcCurrent = String((1 / val).toFixed(6));
+      else if (fn === 'pi') calcCurrent = String(Math.PI.toFixed(6));
+
+      updateCalcDisplay();
+    }
+
+    function calcEqual() {
+      try {
+        calcExpr = calcCurrent;
+        const clean = calcCurrent.replace(/[^0-9+\-*/().]/g, '');
+        calcCurrent = String(Function(`'use strict'; return (${clean})`)());
+      } catch (e) {
+        calcCurrent = 'Error';
+      }
+      updateCalcDisplay();
+    }
+
+    function updateCalcDisplay() {
+      document.getElementById('calc-display').innerText = calcCurrent;
+      document.getElementById('calc-expression').innerText = calcExpr;
+    }
+
+    // 7. UNIFIED CROSS-EXAM MATRIX
+    function renderCrossExamMatrix() {
+      const tbody = document.getElementById('cross-matrix-body');
+      tbody.innerHTML = '';
+
+      CORE_EE_SUBJECTS.forEach(core => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-100 dark:hover:bg-slate-800/40 transition-colors";
+
+        const esProgress = getSubjectProgressForExam('ESE', core.name);
+        const gateProgress = getSubjectProgressForExam('GATE', core.name);
+        const sscProgress = getSubjectProgressForExam('SSC_JE', core.name);
+        const rrbProgress = getSubjectProgressForExam('RRB_JE', core.name);
+
+        const avgMastery = Math.round((esProgress + gateProgress + sscProgress + rrbProgress) / 4);
+
+        tr.innerHTML = `
+          <td class="px-4 py-3.5 font-bold text-slate-800 dark:text-slate-200">${core.name}</td>
+          <td class="px-4 py-3.5 text-center">${renderBadge(esProgress)}</td>
+          <td class="px-4 py-3.5 text-center">${renderBadge(gateProgress)}</td>
+          <td class="px-4 py-3.5 text-center">${renderBadge(sscProgress)}</td>
+          <td class="px-4 py-3.5 text-center">${renderBadge(rrbProgress)}</td>
+          <td class="px-4 py-3.5 text-right font-bold ${avgMastery >= 75 ? 'text-emerald-500' : (avgMastery >= 40 ? 'text-amber-500' : 'text-indigo-500')}">
+            ${avgMastery}% Mastery
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderBadge(pct) {
+      if (pct === 0) return `<span class="px-2 py-0.5 rounded text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-400 font-mono">0%</span>`;
+      if (pct < 50) return `<span class="px-2 py-0.5 rounded text-[10px] bg-indigo-500/10 text-indigo-500 border border-indigo-500/20 font-mono font-bold">${pct}%</span>`;
+      if (pct < 85) return `<span class="px-2 py-0.5 rounded text-[10px] bg-cyan-500/10 text-cyan-500 border border-cyan-500/20 font-mono font-bold">${pct}%</span>`;
+      return `<span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 font-mono font-bold">${pct}%</span>`;
+    }
+
+    function getSubjectProgressForExam(exam, coreSubjectName) {
+      const schema = SYLLABUS_SCHEMAS[exam];
+      const keyword = coreSubjectName.split(' ')[0].toLowerCase();
+      const matched = schema.subjects.find(s => s.name.toLowerCase().includes(keyword));
+      if (!matched) return 0;
+      return calculateSubjectScore(exam, matched);
+    }
+
+    function populateSubjectDropdowns() {
+      const exam = state.activeExam;
+      const schema = SYLLABUS_SCHEMAS[exam];
+
+      const sylSelect = document.getElementById('syllabus-filter-subject');
+      sylSelect.innerHTML = `<option value="ALL">All Subjects (${schema.subjects.length})</option>`;
+      schema.subjects.forEach(s => {
+        sylSelect.innerHTML += `<option value="${s.id}">${s.name}</option>`;
+      });
+    }
+
+    // PHONE SYNC ENGINE (DIRECT CODE & CLOUD EXPORT)
+    function openSyncModal() {
+      const jsonStr = JSON.stringify(state);
+      // Compact base64 representation of state
+      const encoded = btoa(unescape(encodeURIComponent(jsonStr)));
+      document.getElementById('sync-code-output').value = encoded;
+      document.getElementById('modal-sync').classList.remove('hidden');
+    }
+
+    function closeSyncModal() {
+      document.getElementById('modal-sync').classList.add('hidden');
+    }
+
+    function copySyncCode() {
+      const copyText = document.getElementById("sync-code-output");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(copyText.value);
+      alert("Sync code copied to clipboard! Send to your phone and paste in 'Load Sync Code'.");
+    }
+
+    function applySyncCode() {
+      const raw = document.getElementById('sync-code-input').value.trim();
+      if (!raw) return;
+      try {
+        const decoded = decodeURIComponent(escape(atob(raw)));
+        const parsed = JSON.parse(decoded);
+        if (parsed && parsed.syllabusProgress) {
+          state = parsed;
+          saveState();
+          init();
+          closeSyncModal();
+          alert("All progress synced successfully on this device!");
+        } else {
+          alert("Invalid sync code format.");
+        }
+      } catch (e) {
+        alert("Error reading sync code. Ensure it was copied completely.");
+      }
+    }
+
+    // ROBUST STATE PERSISTENCE ENGINE
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        updateSaveIndicator("Saved");
+      } catch (e) {
+        console.error("Local storage save error", e);
+        updateSaveIndicator("Storage Error");
+      }
+    }
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          state = { ...state, ...parsed };
+        }
+      } catch (e) {
+        console.error("Error loading state", e);
+      }
+    }
+
+    function exportData() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `PowerPrep_EE_Backup_${new Date().toISOString().split('T')[0]}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    function importData(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (imported && imported.syllabusProgress) {
+            state = imported;
+            saveState();
+            init();
+            alert("All your syllabus, tests, and mistakes data imported successfully!");
+          } else {
+            alert("Invalid backup file structure.");
+          }
+        } catch (err) {
+          alert("Error reading backup file.");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function escapeQuotes(str) {
+      return str.replace(/'/g, "\\'");
+    }
+
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
