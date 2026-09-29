@@ -48,7 +48,7 @@
           <div>
             <div class="flex items-center gap-2">
               <h1 class="font-black text-base sm:text-lg text-slate-900 dark:text-white leading-tight">PowerPrep EE</h1>
-              <span class="px-1.5 py-0.5 rounded text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">AI-ULTRA</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">5-REV ENGINE</span>
             </div>
             <div class="flex items-center gap-2">
               <span id="save-status-indicator" class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
@@ -107,7 +107,7 @@
         <i class="fa-solid fa-chart-pie"></i><span>Integrated Dashboard</span>
       </button>
       <button onclick="switchModule('syllabus')" id="mod-syllabus" class="mod-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center space-x-2 whitespace-nowrap">
-        <i class="fa-solid fa-book-open"></i><span>Syllabus & Revisions</span>
+        <i class="fa-solid fa-book-open"></i><span>Syllabus & 5x Revisions</span>
       </button>
       <button onclick="switchModule('testseries')" id="mod-testseries" class="mod-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center space-x-2 whitespace-nowrap">
         <i class="fa-solid fa-pen-ruler"></i><span>MADE EASY Test Series</span>
@@ -124,7 +124,7 @@
     </div>
   </header>
 
-  <!-- COUNTDOWNS -->
+  <!-- LIVE COUNTDOWN TICKERS -->
   <div class="bg-slate-200/70 dark:bg-slate-900 border-b border-slate-300 dark:border-slate-800 py-2.5">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
@@ -159,7 +159,7 @@
             Active Examination Focus
           </div>
           <h2 id="dash-exam-title" class="text-2xl font-black text-slate-900 dark:text-white">ESE 2027</h2>
-          <p id="dash-exam-desc" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">UPSC Preliminary Stage-I (GS + EE) & Mains Stage-II Conventional Papers.</p>
+          <p id="dash-exam-desc" class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">UPSC Preliminary Stage-I (GS + EE) & Mains Stage-II Conventional Papers[cite: 3].</p>
         </div>
         <div class="flex items-center gap-3 w-full md:w-auto">
           <div class="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 px-4 py-2.5 rounded-xl text-center flex-1 md:flex-initial shadow-sm">
@@ -181,7 +181,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm flex flex-col items-center">
           <div class="w-full flex justify-between items-center mb-2">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">Syllabus Completion</h3>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">Syllabus & 5-Rev Progress</h3>
             <i class="fa-solid fa-book-bookmark text-indigo-500"></i>
           </div>
           <div class="relative w-44 h-44 flex items-center justify-center">
@@ -191,7 +191,7 @@
               <span class="block text-[10px] text-slate-400">Covered</span>
             </div>
           </div>
-          <p class="text-[11px] text-slate-500 mt-2 text-center">Theory (40%) + PYQs (40%) + Revisions (20%)</p>
+          <p class="text-[11px] text-slate-500 mt-2 text-center">Theory (30%) + PYQs (30%) + 5x Revisions (40%)</p>
         </div>
 
         <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm flex flex-col items-center">
@@ -206,7 +206,7 @@
               <span class="block text-[10px] text-slate-400">Written</span>
             </div>
           </div>
-          <p class="text-[11px] text-slate-500 mt-2 text-center">Analyzed vs Unanalyzed vs Pending</p>
+          <p class="text-[11px] text-slate-500 mt-2 text-center">Attempted, Analyzed & 10-Day Revisited</p>
         </div>
 
         <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm flex flex-col items-center">
@@ -232,18 +232,18 @@
             <i class="fa-solid fa-list-check text-indigo-500"></i>
             <span>Subject-by-Subject Deep Tracer</span>
           </h3>
-          <span class="text-xs text-slate-400">Instant updates synced to your cloud database</span>
+          <span class="text-xs text-slate-400">Theory, PYQs, and 5-round Spaced Repetition status</span>
         </div>
         <div id="subject-matrix-container" class="space-y-3"></div>
       </div>
     </section>
 
-    <!-- 2. SYLLABUS & SPACED REVISION TRACKER -->
+    <!-- 2. SYLLABUS & 5x REVISION TRACKER -->
     <section id="view-syllabus" class="hidden space-y-6">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 class="text-xl font-bold text-slate-900 dark:text-white">Syllabus Completion & Spaced Revisions</h2>
-          <p class="text-xs text-slate-500 dark:text-slate-400">Granular subtopics across Paper-1 (GS & Aptitude) and Paper-2 (Discipline).</p>
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white">Syllabus Completion & 5-Round Spaced Revisions</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Checking Theory stamps the completion date & time, auto-calculating deadlines for PYQs (+2d), R1 (+4d), R2 (+11d), R3 (+25d), R4 (+55d), and R5 (+100d / Dec 31)[cite: 3].</p>
         </div>
         <div class="flex items-center gap-2 flex-wrap">
           <select id="syllabus-filter-yield" onchange="renderSyllabusTree()" class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs rounded-lg px-3 py-1.5 font-semibold">
@@ -266,14 +266,15 @@
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h2 class="text-xl font-bold text-slate-900 dark:text-white">MADE EASY Online Test Series (OTS) Schedule</h2>
-          <p class="text-xs text-slate-500 dark:text-slate-400">Calibrated schedules for GATE EE (48 Tests) & ESE Prelims (34 Tests). Enter Correct/Incorrect questions for auto-marks and accuracy.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Calibrated schedules for GATE EE (48 Tests) & ESE Prelims (34 Tests)[cite: 4, 5]. Auto-calculates Attempt Date, 48-Hour Analysis Deadline, and 10-Day Mistake Revisit Reminders.</p>
         </div>
         <div class="flex items-center gap-2 flex-wrap">
           <select id="test-filter-status" onchange="renderTestSeries()" class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs rounded-lg px-3 py-1.5 font-medium">
             <option value="ALL">All Tests</option>
             <option value="PENDING">Pending Tests</option>
             <option value="ATTEMPTED">Attempted Tests</option>
-            <option value="ANALYZED">Mistakes Analyzed</option>
+            <option value="REVISIT_DUE">10-Day Revisit Due ⚠️</option>
+            <option value="REVISITED">Revisited & Closed ✅</option>
           </select>
         </div>
       </div>
@@ -284,12 +285,13 @@
             <thead class="bg-slate-100 dark:bg-slate-800/80 uppercase font-semibold text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700/60">
               <tr>
                 <th class="px-4 py-3">#</th>
-                <th class="px-4 py-3">Test Title & Topics Covered</th>
+                <th class="px-4 py-3">Test Title & Attempt Timeline</th>
                 <th class="px-4 py-3">Format</th>
                 <th class="px-4 py-3 text-center">Marks / Qs</th>
                 <th class="px-4 py-3 text-center">Score (Auto)</th>
                 <th class="px-4 py-3 text-center">Accuracy %</th>
                 <th class="px-4 py-3 text-center">Analysis Status</th>
+                <th class="px-4 py-3 text-center">10-Day Mistake Revisit</th>
                 <th class="px-4 py-3 text-right">Actions</th>
               </tr>
             </thead>
@@ -334,7 +336,7 @@
     </section>
 
     <!-- 5. SCHEDULE A DAY & GEMINI AI STRATEGIST -->
-    <section id="view-schedule" class="space-y-6">
+    <section id="view-schedule" class="hidden space-y-6">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
@@ -349,7 +351,7 @@
         </div>
       </div>
 
-      <!-- GEMINI AI STRATEGIST CARD -->
+      <!-- GEMINI AI CARD -->
       <div class="bg-gradient-to-br from-indigo-950/40 via-purple-950/20 to-slate-900 border border-indigo-500/30 rounded-2xl p-5 shadow-lg space-y-4">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
@@ -395,7 +397,7 @@
         </div>
       </div>
 
-      <!-- Manual Plan Checklist & Reflection -->
+      <!-- Checklist & Reflection -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 space-y-4 shadow-sm">
           <div class="flex items-center justify-between">
@@ -434,7 +436,7 @@
     <section id="view-crossExam" class="hidden space-y-6">
       <div>
         <h2 class="text-xl font-bold text-slate-900 dark:text-white">Unified Electrical Engineering Matrix</h2>
-        <p class="text-xs text-slate-500 dark:text-slate-400">Cross-examination coverage comparison to leverage preparation overlap across all 4 exams.</p>
+        <p class="text-xs text-slate-500 dark:text-slate-400">Cross-examination coverage comparison to leverage preparation overlap across all 4 exams[cite: 1, 2, 3].</p>
       </div>
 
       <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden p-4 shadow-sm">
@@ -494,8 +496,8 @@
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center">
         <div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white">Log Test Result</h3>
-          <p class="text-[11px] text-slate-500">Auto-computes accuracy, unattempted questions & score</p>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white">Log Test Result & Schedule Review</h3>
+          <p class="text-[11px] text-slate-500">Auto-computes marks, accuracy, analysis deadline & 10-day review date</p>
         </div>
         <button onclick="closeTestEntryModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white"><i class="fa-solid fa-xmark"></i></button>
       </div>
@@ -504,6 +506,18 @@
         <div>
           <label class="block text-slate-500 dark:text-slate-400 mb-1">Test Title</label>
           <div id="modal-test-name-display" class="font-bold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-950 p-2.5 rounded-lg"></div>
+        </div>
+
+        <!-- Date Written Input -->
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-slate-500 dark:text-slate-400 mb-1">Date Written</label>
+            <input type="date" id="input-modal-test-date" onchange="calculateTestDates()" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2 font-bold text-slate-900 dark:text-white"/>
+          </div>
+          <div>
+            <label class="block text-slate-500 dark:text-slate-400 mb-1">Analysis Deadline (+48h)</label>
+            <div id="modal-test-analyze-deadline" class="p-2 bg-slate-100 dark:bg-slate-950 rounded-lg font-bold text-indigo-500">--</div>
+          </div>
         </div>
 
         <div class="grid grid-cols-2 gap-2 bg-slate-50 dark:bg-slate-950 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
@@ -517,6 +531,7 @@
           </div>
         </div>
 
+        <!-- Questions Correct / Incorrect -->
         <div class="grid grid-cols-2 gap-2">
           <div>
             <label class="block text-emerald-600 dark:text-emerald-400 font-bold mb-1">
@@ -550,16 +565,28 @@
         <div class="grid grid-cols-2 gap-2">
           <div>
             <label class="block text-slate-500 dark:text-slate-400 mb-1">Final Score</label>
-            <input type="number" step="0.01" id="input-modal-test-score" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2.5 font-bold"/>
+            <input type="number" step="0.01" id="input-modal-test-score" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2 font-bold"/>
           </div>
           <div>
             <label class="block text-slate-500 dark:text-slate-400 mb-1">Analysis Status</label>
-            <select id="input-modal-test-status" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2.5">
+            <select id="input-modal-test-status" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2">
               <option value="ATTEMPTED">Attempted (Pending Analysis)</option>
               <option value="ANALYZED">Attempted & Analyzed</option>
               <option value="PENDING">Reset to Pending</option>
             </select>
           </div>
+        </div>
+
+        <!-- 10-Day Revisit Box -->
+        <div class="p-2.5 bg-indigo-500/10 border border-indigo-500/20 rounded-xl space-y-1.5">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-indigo-400">10-Day Mistake Revisit Target</span>
+            <span id="modal-test-revisit-date" class="font-mono font-bold text-indigo-300">--</span>
+          </div>
+          <label class="inline-flex items-center gap-2 cursor-pointer pt-1">
+            <input type="checkbox" id="input-modal-test-revisited" class="w-4 h-4 rounded text-indigo-600"/>
+            <span class="text-slate-300">Mistakes re-solved & reviewed after 10 days</span>
+          </label>
         </div>
       </div>
 
@@ -624,561 +651,230 @@
 
   <!-- SCRIPT ENGINE -->
   <script>
+    // PRE-CONFIGURED FIREBASE REALTIME DATABASE ENDPOINT
     const DB_ENDPOINT = "https://prep-tracker-3b08c-default-rtdb.firebaseio.com/users/amar-prep.json";
+    const STORAGE_KEY = "POWERPREP_EE_PERSIST_5REV_V1";
+
+    const SHARED_PAPER_1 = [
+      {
+        id: "GS_ED",
+        name: "Paper-I: Engineering Drawing, Design & Safety (ED)",
+        yield: "GS",
+        topics: [
+          "Conic Sections: Ellipse, Parabola, Hyperbola (Eccentricity, Tangents & Normals)[cite: 3]",
+          "Engineering Curves: Involutes, Cycloids, Epicycloid, Hypocycloid, Spirals & Helix[cite: 3]",
+          "Scales: Plain, Diagonal, Vernier, Comparative, Scale of Chords[cite: 3]",
+          "Orthographic Projections: 1st & 3rd Angle Projections Principles[cite: 3]",
+          "Projections of Points, Lines & Inclined Planes (True lengths, traces, inclinations)[cite: 3]",
+          "Projections of Solids (Prisms, Pyramids, Cylinders, Cones)[cite: 3]",
+          "Section of Solids & Development of Lateral Surfaces (Parallel & Radial Line)[cite: 3]",
+          "Isometric Projections & Perspective Projections[cite: 3]",
+          "Fasteners & Machine Elements (Bolts, Nuts, Riveted Joints, Welded Symbols)[cite: 3]",
+          "Engineering Design Process, Ergonomics & Factor of Safety (FOS)[cite: 3]",
+          "Industrial Safety, Hazard Identification (HAZOP), PPE & OSHA/Factory Act Norms[cite: 3]"
+        ]
+      },
+      {
+        id: "GS_PM",
+        name: "Paper-I: Basics of Project Management",
+        yield: "GS",
+        topics: [
+          "Project Life Cycle Phases, Initiation & Feasibility Studies (Technical, Economic)[cite: 3]",
+          "Work Breakdown Structure (WBS) & Organization Breakdown (OBS)[cite: 3]",
+          "Project Scheduling: Bar Charts, Milestone Charts & Line of Balance[cite: 3]",
+          "Critical Path Method (CPM): Forward/Backward Pass, Total, Free & Independent Floats[cite: 3]",
+          "PERT: 3-Time Estimates, Beta Distribution, Standard Deviation & Probability of Completion[cite: 3]",
+          "Time-Cost Trade-Off, Network Crashing & Cost Optimization[cite: 3]",
+          "Project Costing, Appraisal & Capital Budgeting (NPV, IRR, Payback, BCR)[cite: 3]",
+          "Earned Value Management (EVM): PV, EV, AC, Cost & Schedule Variances (CV, SV, CPI, SPI)[cite: 3]",
+          "Tendering Process, Types of Contracts (Turnkey, EPC, Item Rate) & Contract Management[cite: 3]",
+          "Project Risk Management, Qualitative/Quantitative Assessment, Audit & Termination[cite: 3]"
+        ]
+      },
+      {
+        id: "GS_SQ",
+        name: "Paper-I: Standards and Quality Practices",
+        yield: "GS",
+        topics: [
+          "Quality Definitions, Dimensions of Quality & Cost of Quality (COQ: Prevention, Appraisal, Failure)[cite: 3]",
+          "Quality Philosophies: Deming (14 Points & PDCA Cycle), Juran Trilogy, Crosby, Taguchi[cite: 3]",
+          "Seven QC Tools (Pareto Diagram, Fishbone/Ishikawa, Check Sheet, Histogram, Scatter Plot, Stratification, Control Charts)[cite: 3]",
+          "Statistical Process Control (SPC): Control charts for variables (X-bar, R) & attributes (p, np, c, u)[cite: 3]",
+          "Process Capability Analysis (Cp, Cpk) & Six Sigma Framework (DMAIC, DMADV)[cite: 3]",
+          "Total Quality Management (TQM), Kaizen (Continuous Improvement), 5S & Poka-Yoke[cite: 3]",
+          "National & International Standards: BIS, ISO 9001 (Quality), ISO 14001 (Environment), ISO 45001 (Safety)[cite: 3]",
+          "Quality Auditing, Benchmarking, TQM in Engineering Services & Reliability Analysis[cite: 3]"
+        ]
+      },
+      {
+        id: "GS_EE",
+        name: "Paper-I: Basics of Energy and Environment",
+        yield: "GS",
+        topics: [
+          "Ecology, Ecosystem Dynamics, Food Chains, Trophic Levels & Biodiversity Hotspots[cite: 3]",
+          "Conventional Energy: Coal, Petroleum, Natural Gas & Thermal Power Generation[cite: 3]",
+          "Renewable Energy: Solar (PV & Thermal), Wind, Biomass, Geothermal & Tidal[cite: 3]",
+          "Air Pollution: Primary & Secondary Pollutants, Acid Rain, Photochemical Smog, Ozone Depletion, AQI[cite: 3]",
+          "Water Pollution: Water Quality Parameters (BOD, COD, DO Sag Curve) & Wastewater Treatment[cite: 3]",
+          "Solid, Hazardous, Biomedical & E-Waste Management Rules & Disposal Techniques[cite: 3]",
+          "Climate Change: Greenhouse Gases, Global Warming Potential, UNFCCC, Paris Agreement, COP Summits[cite: 3]",
+          "Environmental Impact Assessment (EIA): Screening, Scoping, Public Hearing, EMP[cite: 3]",
+          "Environmental Legislation in India: EPA 1986, Air & Water Acts, National Green Tribunal (NGT)[cite: 3]"
+        ]
+      },
+      {
+        id: "GS_MS",
+        name: "Paper-I: Basics of Material Science & Engineering",
+        yield: "GS",
+        topics: [
+          "Crystal Structures (BCC, FCC, HCP, Atomic Packing Factor) & Miller Indices[cite: 3]",
+          "Crystal Imperfections: Point (Vacancies, Frenkel, Schottky), Line (Dislocations), Surface & Grain Boundaries[cite: 3]",
+          "Phase Diagrams, Gibbs Phase Rule, Binary Systems & Lever Rule[cite: 3]",
+          "Iron-Carbon (Fe-Fe3C) Equilibrium Phase Diagram, Invariant Reactions & Microstructures[cite: 3]",
+          "Heat Treatment Processes: Annealing, Normalizing, Quenching, Tempering, TTT & CCT Diagrams[cite: 3]",
+          "Engineering Steels, Cast Irons & Non-Ferrous Alloys (Al, Cu, Ti, Nickel Alloys)[cite: 3]",
+          "Ceramics, Refractories, Glasses & Dielectric Properties[cite: 3]",
+          "Polymers, Thermoplastics, Thermosetting, Elastomers & Polymerization[cite: 3]",
+          "Composite Materials (FRP, MMC, CMC) & Rule of Mixtures[cite: 3]",
+          "Mechanical Testing: Stress-Strain Curve, Hardness (Brinell, Rockwell, Vickers), Impact, Fatigue & Creep[cite: 3]",
+          "Corrosion: Galvanic, Pitting, Stress Corrosion & Cathodic/Anodic Protection[cite: 3]"
+        ]
+      },
+      {
+        id: "GS_ICT",
+        name: "Paper-I: Information & Communication Tech (ICT)",
+        yield: "GS",
+        topics: [
+          "Computer Architecture, CPU, Cache, Memory Hierarchy, Virtual Memory & I/O Peripherals[cite: 3]",
+          "Operating Systems Fundamentals: Processes, Threads, CPU Scheduling, Memory Paging, Deadlocks[cite: 3]",
+          "Computer Networks: OSI 7-Layer Model, TCP/IP Protocol Suite, Network Topologies[cite: 3]",
+          "IP Addressing (IPv4 vs IPv6), Subnetting, Routing Protocols, DNS, HTTP, FTP[cite: 3]",
+          "Wireless & Mobile Technologies: Cellular Generations (2G to 5G), Wi-Fi, Bluetooth, Satellite Basics[cite: 3]",
+          "Cyber Security: Malware, Phishing, Firewalls, Cryptography (Symmetric vs Asymmetric, RSA), IT Act[cite: 3]",
+          "Cloud Computing (IaaS, PaaS, SaaS) & Internet of Things (IoT) Architectures[cite: 3]",
+          "E-Governance in India: Digital India, UPI, DigiLocker, UMANG, GeM Portal, National Optical Fiber[cite: 3]",
+          "Technology-Based Education: SWAYAM, NPTEL, Virtual Labs & MOOCs[cite: 3]",
+          "Emerging Technologies: Artificial Intelligence, Machine Learning & Big Data Fundamentals[cite: 3]"
+        ]
+      },
+      {
+        id: "GS_ETH",
+        name: "Paper-I: Ethics and Values in Engineering",
+        yield: "GS",
+        topics: [
+          "Foundations of Morality, Personal vs Professional Ethics, Integrity in Engineering[cite: 3]",
+          "Engineering Codes of Ethics: Institution of Engineers (India), IEEE, ASME[cite: 3]",
+          "Ethical Theories: Utilitarianism, Kantian Duty Ethics, Rights Ethics, Virtue Ethics[cite: 3]",
+          "Responsibility for Safety, Risk-Benefit Analysis, Engineering Failures & Disasters[cite: 3]",
+          "Historic Disaster Case Studies: Bhopal Gas Tragedy, Chernobyl, Challenger, Columbia[cite: 3]",
+          "Intellectual Property Rights (IPR), Patents, Copyrights, Trade Secrets & Confidentiality[cite: 3]",
+          "Conflicts of Interest, Bribery, Gifts vs Kickbacks[cite: 3]",
+          "Whistleblowing: Moral Justification, Procedures, Risks & Whistleblower Protection[cite: 3]",
+          "Environmental Ethics, Sustainable Development & Corporate Social Responsibility (CSR)[cite: 3]"
+        ]
+      },
+      {
+        id: "GS_APT",
+        name: "Paper-I: Engineering Aptitude & Reasoning",
+        yield: "GS",
+        topics: [
+          "Number Series, Letter Series, Coding-Decoding & Analogies[cite: 3]",
+          "Blood Relations, Direction Sense Test, Order and Ranking[cite: 3]",
+          "Seating Arrangements, Floor Puzzles & Complex Grouping[cite: 3]",
+          "Syllogisms, Statement & Assumptions, Statement & Conclusions[cite: 3]",
+          "Venn Diagrams & Logical Set Classifications[cite: 3]",
+          "Quantitative Aptitude: Ratios, Percentages, Profit & Loss, Simple & Compound Interest[cite: 3]",
+          "Time & Work, Pipes & Cisterns, Time-Speed-Distance[cite: 3]",
+          "Permutations, Combinations & Probability Fundamentals[cite: 3]",
+          "Data Interpretation: Bar Charts, Pie Charts, Tables, Line Graphs[cite: 3]"
+        ]
+      },
+      {
+        id: "GS_CUR",
+        name: "Paper-I: Current Issues (National & International)",
+        yield: "GS",
+        topics: [
+          "National Infrastructure Projects (Bharatmala, Sagarmala, Dedicated Freight Corridors)[cite: 3]",
+          "Energy Sector Developments: National Solar Mission, Green Hydrogen, EV Adoption[cite: 3]",
+          "Space & Defense Milestones: ISRO Missions, Indigenous Defense Technology[cite: 3]",
+          "Economic Indicators, Union Budget, Economic Survey Highlights & GST Reforms[cite: 3]",
+          "International Summits & Treaties (G20, BRICS, COP Climate Accords, WTO)[cite: 3]"
+        ]
+      },
+      {
+        id: "GS_MTH",
+        name: "Paper-I: Engineering Mathematics & Numerical Analysis",
+        yield: "HIGH",
+        topics: [
+          "Linear Algebra: Matrix Operations, Rank, Systems of Linear Equations, Eigenvalues/Vectors[cite: 3]",
+          "Calculus: Limits, Continuity, Partial Derivatives, Maxima & Minima, Multiple Integrals[cite: 3]",
+          "Differential Equations: First Order ODEs, Linear ODEs with Constant Coefficients[cite: 3]",
+          "Probability & Statistics: Random Variables, Distributions, Correlation & Regression[cite: 3]",
+          "Numerical Methods: Root Finding (Newton-Raphson), Numerical Integration, Numerical ODEs[cite: 3]"
+        ]
+      }
+    ];
 
     const SYLLABUS_SCHEMAS = {
       ESE: {
-        title: "ESE 2027 (UPSC Engineering Services EE)",
-        desc: "Exhaustive Stage-I Preliminary (Paper-I GS & Paper-II EE) + Stage-II Mains Conventional Papers.",
+        title: "ESE 2027 (Electrical Engineering)",
+        desc: "UPSC Stage-I (Paper-I GS + Paper-II EE) & Stage-II Conventional Technical[cite: 3].",
+        hasSpaced5: true,
         subjects: [
-          // PAPER-1: GENERAL STUDIES & APTITUDE
-          {
-            id: "E_GS_ED",
-            name: "Paper-I: Engineering Drawing, Design & Safety (ED)",
-            yield: "GS",
-            topics: [
-              "Conic Sections: Ellipse, Parabola, Hyperbola (Eccentricity, Tangents & Normals)",
-              "Engineering Curves: Involutes, Cycloids, Epicycloid, Hypocycloid, Spirals & Helix",
-              "Scales: Plain, Diagonal, Vernier, Comparative, Scale of Chords",
-              "Orthographic Projections: 1st & 3rd Angle Projections Principles",
-              "Projections of Points, Lines & Inclined Planes (True lengths, traces, inclinations)",
-              "Projections of Solids (Prisms, Pyramids, Cylinders, Cones)",
-              "Section of Solids & Development of Lateral Surfaces (Parallel & Radial Line)",
-              "Isometric Projections & Perspective Projections",
-              "Fasteners & Machine Elements (Bolts, Nuts, Riveted Joints, Welded Symbols)",
-              "Engineering Design Process, Ergonomics & Factor of Safety (FOS)",
-              "Industrial Safety, Hazard Identification (HAZOP), PPE & OSHA/Factory Act Norms"
-            ]
-          },
-          {
-            id: "E_GS_PM",
-            name: "Paper-I: Basics of Project Management",
-            yield: "GS",
-            topics: [
-              "Project Life Cycle Phases, Initiation & Feasibility Studies (Technical, Economic)",
-              "Work Breakdown Structure (WBS) & Organization Breakdown (OBS)",
-              "Project Scheduling: Bar Charts, Milestone Charts & Line of Balance",
-              "Critical Path Method (CPM): Forward/Backward Pass, Total, Free & Independent Floats",
-              "PERT: 3-Time Estimates, Beta Distribution, Standard Deviation & Probability of Completion",
-              "Time-Cost Trade-Off, Network Crashing & Cost Optimization",
-              "Project Costing, Appraisal & Capital Budgeting (NPV, IRR, Payback, BCR)",
-              "Earned Value Management (EVM): PV, EV, AC, Cost & Schedule Variances (CV, SV, CPI, SPI)",
-              "Tendering Process, Types of Contracts (Turnkey, EPC, Item Rate) & Contract Management",
-              "Project Risk Management, Qualitative/Quantitative Assessment, Audit & Termination"
-            ]
-          },
-          {
-            id: "E_GS_SQ",
-            name: "Paper-I: Standards and Quality Practices",
-            yield: "GS",
-            topics: [
-              "Quality Definitions, Dimensions of Quality & Cost of Quality (COQ: Prevention, Appraisal, Failure)",
-              "Quality Philosophies: Deming (14 Points & PDCA Cycle), Juran Trilogy, Crosby (Zero Defects), Taguchi",
-              "Seven QC Tools (Pareto Diagram, Fishbone/Ishikawa, Check Sheet, Histogram, Scatter Plot, Stratification, Control Charts)",
-              "Statistical Process Control (SPC): Control charts for variables (X-bar, R) & attributes (p, np, c, u)",
-              "Process Capability Analysis (Cp, Cpk) & Six Sigma Framework (DMAIC, DMADV)",
-              "Total Quality Management (TQM), Kaizen (Continuous Improvement), 5S & Poka-Yoke (Mistake Proofing)",
-              "National & International Standards: BIS, ISO 9001 (Quality), ISO 14001 (Environment), ISO 45001 (Safety)",
-              "Quality Auditing, Benchmarking, TQM in Engineering Services & Reliability Analysis"
-            ]
-          },
-          {
-            id: "E_GS_EE",
-            name: "Paper-I: Basics of Energy and Environment",
-            yield: "GS",
-            topics: [
-              "Ecology, Ecosystem Dynamics, Food Chains, Trophic Levels & Biodiversity Hotspots",
-              "Conventional Energy: Coal, Petroleum, Natural Gas & Thermal Power Generation",
-              "Renewable Energy: Solar (PV & Concentrated Solar), Wind, Biomass, Geothermal & Tidal",
-              "Nuclear Fuel Cycle, Reactor Types & Nuclear Energy Conservation",
-              "Air Pollution: Primary & Secondary Pollutants, Acid Rain, Photochemical Smog, Ozone Depletion, AQI",
-              "Water Pollution: Water Quality Parameters (BOD, COD, DO Sag Curve) & Wastewater Treatment",
-              "Solid, Hazardous, Biomedical & E-Waste Management Rules & Disposal Techniques",
-              "Climate Change: Greenhouse Gases, Global Warming Potential, UNFCCC, Paris Agreement, COP Summits",
-              "Environmental Impact Assessment (EIA): Screening, Scoping, Public Hearing, EMP",
-              "Environmental Legislation in India: EPA 1986, Air & Water Acts, National Green Tribunal (NGT)"
-            ]
-          },
-          {
-            id: "E_GS_MS",
-            name: "Paper-I: Basics of Material Science & Engineering",
-            yield: "GS",
-            topics: [
-              "Crystal Structures (BCC, FCC, HCP, Atomic Packing Factor) & Miller Indices",
-              "Crystal Imperfections: Point (Vacancies, Frenkel, Schottky), Line (Dislocations), Surface & Grain Boundaries",
-              "Phase Diagrams, Gibbs Phase Rule, Binary Systems & Lever Rule",
-              "Iron-Carbon (Fe-Fe3C) Equilibrium Phase Diagram, Invariant Reactions & Microstructures",
-              "Heat Treatment Processes: Annealing, Normalizing, Quenching, Tempering, TTT & CCT Diagrams",
-              "Engineering Steels, Cast Irons & Non-Ferrous Alloys (Al, Cu, Ti, Nickel Alloys)",
-              "Ceramics, Refractories, Glasses & Dielectric Properties",
-              "Polymers, Thermoplastics, Thermosetting, Elastomers & Polymerization",
-              "Composite Materials (FRP, MMC, CMC) & Rule of Mixtures",
-              "Mechanical Testing: Stress-Strain Curve, Hardness (Brinell, Rockwell, Vickers), Charpy/Izod Impact, Fatigue & Creep",
-              "Corrosion: Galvanic, Pitting, Stress Corrosion & Cathodic/Anodic Protection"
-            ]
-          },
-          {
-            id: "E_GS_ICT",
-            name: "Paper-I: Information & Communication Tech (ICT)",
-            yield: "GS",
-            topics: [
-              "Computer Architecture, CPU, Cache, Memory Hierarchy, Virtual Memory & I/O Peripherals",
-              "Operating Systems Fundamentals: Processes, Threads, CPU Scheduling, Memory Paging, Deadlocks",
-              "Computer Networks: OSI 7-Layer Model, TCP/IP Protocol Suite, Network Topologies",
-              "IP Addressing (IPv4 vs IPv6), Subnetting, Routing Protocols, DNS, HTTP, FTP",
-              "Wireless & Mobile Technologies: Cellular Generations (2G to 5G), Wi-Fi, Bluetooth, Satellite Basics",
-              "Cyber Security: Malware, Phishing, Firewalls, Cryptography (Symmetric vs Asymmetric, RSA), IT Act",
-              "Cloud Computing (IaaS, PaaS, SaaS) & Internet of Things (IoT) Architectures",
-              "E-Governance in India: Digital India, UPI, DigiLocker, UMANG, GeM Portal, National Optical Fiber",
-              "Technology-Based Education: SWAYAM, NPTEL, Virtual Labs & MOOCs",
-              "Emerging Technologies: Artificial Intelligence, Machine Learning & Big Data Fundamentals"
-            ]
-          },
-          {
-            id: "E_GS_ETH",
-            name: "Paper-I: Ethics and Values in Engineering",
-            yield: "GS",
-            topics: [
-              "Foundations of Morality, Personal vs Professional Ethics, Integrity in Engineering",
-              "Engineering Codes of Ethics: Institution of Engineers (India), IEEE, ASME",
-              "Ethical Theories: Utilitarianism, Kantian Duty Ethics, Rights Ethics, Virtue Ethics",
-              "Responsibility for Safety, Risk-Benefit Analysis, Engineering Failures & Disasters",
-              "Historic Disaster Case Studies: Bhopal Gas Tragedy, Chernobyl, Challenger, Columbia",
-              "Intellectual Property Rights (IPR), Patents, Copyrights, Trade Secrets & Confidentiality",
-              "Conflicts of Interest, Bribery, Gifts vs Kickbacks",
-              "Whistleblowing: Moral Justification, Procedures, Risks & Whistleblower Protection",
-              "Environmental Ethics, Sustainable Development & Corporate Social Responsibility (CSR)"
-            ]
-          },
-          {
-            id: "E_GS_APT",
-            name: "Paper-I: Engineering Aptitude & Reasoning",
-            yield: "GS",
-            topics: [
-              "Number Series, Letter Series, Coding-Decoding & Analogies",
-              "Blood Relations, Direction Sense Test, Order and Ranking",
-              "Seating Arrangements, Floor Puzzles & Complex Grouping",
-              "Syllogisms, Statement & Assumptions, Statement & Conclusions",
-              "Venn Diagrams & Logical Set Classifications",
-              "Quantitative Aptitude: Ratios, Percentages, Profit & Loss, Simple & Compound Interest",
-              "Time & Work, Pipes & Cisterns, Time-Speed-Distance",
-              "Permutations, Combinations & Probability Fundamentals",
-              "Data Interpretation: Bar Charts, Pie Charts, Tables, Line Graphs"
-            ]
-          },
-          {
-            id: "E_GS_CUR",
-            name: "Paper-I: Current Issues (National & International)",
-            yield: "GS",
-            topics: [
-              "National Infrastructure Projects (Bharatmala, Sagarmala, Dedicated Freight Corridors)",
-              "Energy Sector Developments: National Solar Mission, Green Hydrogen, EV Adoption",
-              "Space & Defense Milestones: ISRO Missions, Indigenous Defense Technology",
-              "Economic Indicators, Union Budget, Economic Survey Highlights & GST Reforms",
-              "International Summits & Treaties (G20, BRICS, COP Climate Accords, WTO)"
-            ]
-          },
-          {
-            id: "E_GS_MTH",
-            name: "Paper-I: Engineering Mathematics & Numerical Analysis",
-            yield: "HIGH",
-            topics: [
-              "Linear Algebra: Matrix Operations, Rank, Systems of Linear Equations, Eigenvalues/Vectors",
-              "Calculus: Limits, Continuity, Partial Derivatives, Maxima & Minima, Multiple Integrals",
-              "Differential Equations: First Order ODEs, Linear ODEs with Constant Coefficients",
-              "Probability & Statistics: Random Variables, Distributions, Correlation & Regression",
-              "Numerical Methods: Root Finding (Newton-Raphson), Numerical Integration (Trapezoidal, Simpson's), Numerical ODEs"
-            ]
-          },
-
-          // PAPER-2: CORE TECHNICAL DISCIPLINE
-          {
-            id: "E_CKT",
-            name: "Paper-II: Electric Circuits and Fields",
-            yield: "HIGH",
-            topics: [
-              "Circuit Elements, Ideal Sources, KCL & KVL, Node & Mesh Analysis",
-              "Network Theorems: Thevenin, Norton, Superposition, Maximum Power Transfer",
-              "Transient Response of DC and AC Networks (RL, RC, RLC)",
-              "Sinusoidal Steady State Analysis & Series/Parallel Resonance",
-              "Two-Port Network Parameters (Z, Y, ABCD, h) & Three-Phase Balanced/Unbalanced",
-              "Magnetically Coupled Circuits & Ideal Transformers",
-              "Gauss Theorem, Biot-Savart, Ampere's Law & Maxwell's Equations"
-            ]
-          },
-          {
-            id: "E_MAT",
-            name: "Paper-II: Electrical Materials (Core Technical)",
-            yield: "CORE",
-            topics: [
-              "Crystal Structures & Defects in Conductors, Ceramic Materials",
-              "Insulating Materials & Dielectric Properties (Polarization, Dielectric Loss)",
-              "Magnetic Materials (Diamagnetic, Paramagnetic, Ferromagnetic, Ferrites, Domain Theory)",
-              "Solid State Physics, Conductors & Resistivity Mechanisms",
-              "Photo-conductivity, Superconductors & Nano-materials Applications"
-            ]
-          },
-          {
-            id: "E_MST",
-            name: "Paper-II: Electrical and Electronic Measurements",
-            yield: "HIGH",
-            topics: [
-              "Measurement Principles, Accuracy, Precision, Standards & Error Analysis",
-              "Bridges: Wheatstone, Kelvin Double, Maxwell, Schering, Wien Bridge",
-              "Moving Coil (PMMC), Moving Iron & Dynamometer Type Meters",
-              "Measurement of Power (Two-Wattmeter Method), Energy & Energy Meter Calibration",
-              "Instrument Transformers: Current Transformers (CT) & Potential Transformers (PT)",
-              "Digital Voltmeters, Multimeters, Q-Meters & Oscilloscopes (CRO/DSO)",
-              "Sensors, Transducers (RTD, Thermocouple, LVDT, Strain Gauge) & DAQ Systems"
-            ]
-          },
-          {
-            id: "E_CMP",
-            name: "Paper-II: Computer Fundamentals",
-            yield: "CORE",
-            topics: [
-              "Number Systems, Logic Gates, Boolean Algebra Arithmetic Functions",
-              "Basic Computer Architecture, Central Processing Unit (CPU) Organization",
-              "I/O and Memory Organisation, Cache Memory & Paging Hierarchy",
-              "Peripheral Devices, Data Representation & C Programming Basics",
-              "Operating System Basics, Processes, Virtual Memory & File Systems",
-              "Networking Basics & Layering Concepts"
-            ]
-          },
-          {
-            id: "E_BEE",
-            name: "Paper-II: Basic Electronics Engineering",
-            yield: "CORE",
-            topics: [
-              "Semiconductor Diodes & Applications (PN, Zener, Rectifiers, Clippers, Clampers)",
-              "Bipolar Junction Transistors (BJT): Biasing, Thermal Stability, CE/CB/CC Modes",
-              "Field Effect Transistors (JFET & MOSFET): Characteristics, Biasing & Small Signal Models",
-              "Transistor Amplifier Configurations, Equivalent Circuits & Frequency Response",
-              "Oscillators (Hartley, Colpitts, Phase Shift) & Feedback Amplifiers"
-            ]
-          },
-          {
-            id: "E_ADE",
-            name: "Paper-II: Analog & Digital Electronics (with Microprocessor & Comm)",
-            yield: "HIGH",
-            topics: [
-              "Operational Amplifiers: Ideal Characteristics, Inverting, Non-Inverting, Mathematical Circuits",
-              "Active Filters: Sallen-Key, Butterworth Filters, 555 Timers & Wave Shapers",
-              "Combinational Logic: Multiplexers, Demultiplexers, Decoders, Encoders, Adders",
-              "Sequential Logic: Latches, Flip-Flops, Counters, Shift Registers & Finite State Machines",
-              "A/D and D/A Converters (Flash, Successive Approximation, Dual Slope, R-2R)",
-              "Microprocessor 8085/8086: Architecture, Instruction Sets, Memory & I/O Interfacing",
-              "Analog Communication: AM, FM, Modulation Index, Transmitters & Receivers",
-              "Digital Communication: Sampling, Quantizing, PCM, DPCM, Multiplexing (TDM/FDM)",
-              "Power Line Carrier Communication (PLCC) Systems"
-            ]
-          },
-          {
-            id: "E_SIG",
-            name: "Paper-II: Systems and Signal Processing",
-            yield: "CORE",
-            topics: [
-              "Continuous & Discrete-Time Signals, Shifting & Scaling Properties",
-              "Linear Time-Invariant (LTI) Systems, Convolution & Causality/Stability",
-              "Fourier Series & Fourier Transform Representations",
-              "Laplace Transform, Z-Transform & Sampling Theorem Applications",
-              "Discrete Fourier Transform (DFT), FFT Algorithms & Linear Convolution",
-              "Digital Filter Design: FIR, IIR Filters & Bilinear Transformation"
-            ]
-          },
-          {
-            id: "E_CTL",
-            name: "Paper-II: Control Systems",
-            yield: "HIGH",
-            topics: [
-              "Feedback Principles, Transfer Functions, Block Diagrams & Signal Flow Graphs (SFG)",
-              "Transient & Steady-State Error Analysis of LTI Systems",
-              "Routh-Hurwitz Stability Criterion & Nyquist Stability Criterion",
-              "Bode Plots: Gain Margin, Phase Margin & Root Locus Techniques",
-              "Lag, Lead & Lag-Lead Compensators & PID Controllers",
-              "State Space Modeling, State Transition Matrix & Controllability/Observability"
-            ]
-          },
-          {
-            id: "E_MCH",
-            name: "Paper-II: Electrical Machines",
-            yield: "HIGH",
-            topics: [
-              "Single-Phase Transformers: Equivalent Circuit, Phasor Diagram, OC/SC Tests, Losses & Efficiency",
-              "Three-Phase Transformers: Connections, Vector Groups, Parallel Operation & Auto-Transformers",
-              "Electromechanical Energy Conversion Principles",
-              "DC Machines: Armature Reaction, Characteristics, Commutation, Speed Control of DC Motors",
-              "Three-Phase Induction Motors: Principle, Starting Methods, Braking, Torque-Speed Curves",
-              "Single-Phase Induction Motors & Fractional Horsepower Motors",
-              "Synchronous Machines: Salient & Cylindrical Pole, Regulation Methods, Parallel Operation",
-              "Special Machines: Servo Motors & Stepper Motors"
-            ]
-          },
-          {
-            id: "E_PWR",
-            name: "Paper-II: Power Systems",
-            yield: "HIGH",
-            topics: [
-              "Power Generation Concepts (Thermal, Hydro, Gas, Nuclear) & Economics of Generation",
-              "Transmission Line Modeling (Short, Medium, Long), Parameters & Underground Cables",
-              "Corona, Ferranti Effect, Insulators & Power Factor Correction",
-              "Symmetrical Components & Fault Analysis (LG, LL, LLG, 3-Phase Symmetrical)",
-              "Protection Relays (Overcurrent, Differential, Distance) & Circuit Breakers",
-              "Distribution Systems, Bus Admittance Matrix & Load Flow (Gauss-Seidel, Newton-Raphson)",
-              "Power System Stability: Swing Equation, Equal Area Criterion",
-              "HVDC Transmission, FACTS Devices & Smart Grid Fundamentals"
-            ]
-          },
-          {
-            id: "E_PEL",
-            name: "Paper-II: Power Electronics and Drives",
-            yield: "HIGH",
-            topics: [
-              "Power Semiconductor Devices: Diodes, Thyristors (SCR), MOSFETs, IGBTs, GTOs",
-              "Triggering & Commutation Circuits for Thyristors",
-              "Phase Controlled Rectifiers: Single-Phase & Three-Phase Half/Full Bridge Converters",
-              "DC-DC Switched Mode Converters: Buck, Boost, Buck-Boost & Choppers",
-              "Inverters: Single-Phase & Three-Phase VSI, CSI, Sinusoidal PWM Techniques",
-              "Resonant Converters, High Frequency Inductors & Power Supplies",
-              "Adjustable Speed DC and AC Electric Drives & Industrial Applications"
-            ]
-          }
+          ...SHARED_PAPER_1,
+          { id: "EE_CKT", name: "Paper-II: Electric Circuits and Fields", yield: "HIGH", topics: ["Circuit elements, Ideal sources, KCL & KVL, Node & Mesh[cite: 3]", "Theorems: Thevenin, Norton, Superposition, MPT[cite: 3]", "Transient response of DC and AC networks (RL, RC, RLC)[cite: 3]", "Sinusoidal steady state analysis & Resonance[cite: 3]", "Two-port networks & Balanced 3-phase circuits[cite: 3]", "Magnetically coupled circuits & Ideal transformers[cite: 3]", "Gauss Law, Ampere's Law, Maxwell Equations[cite: 3]"] },
+          { id: "EE_MAT", name: "Paper-II: Electrical Materials", yield: "CORE", topics: ["Crystal structures & defects, Ceramics[cite: 3]", "Insulating materials & dielectrics[cite: 3]", "Magnetic materials, ferrites, ferromagnetic[cite: 3]", "Solid state physics, conductors & superconductors[cite: 3]"] },
+          { id: "EE_MST", name: "Paper-II: Electrical & Electronic Measurements", yield: "HIGH", topics: ["Bridges & Potentiometers (DC/AC)[cite: 3]", "Moving coil, moving iron, dynamometer wattmeters[cite: 3]", "Energy meters calibration & errors[cite: 3]", "Instrument transformers (CT & PT)[cite: 3]", "Digital voltmeters, multimeters & CROs[cite: 3]", "Transducers & Data Acquisition (DAQ)[cite: 3]"] },
+          { id: "EE_CMP", name: "Paper-II: Computer Fundamentals", yield: "CORE", topics: ["Number systems, CPU Architecture[cite: 3]", "Memory hierarchy & Virtual memory[cite: 3]", "Operating systems & basic C programming[cite: 3]"] },
+          { id: "EE_BEE", name: "Paper-II: Basic Electronics Engineering", yield: "CORE", topics: ["Diodes, BJTs, JFETs, MOSFETs characteristics[cite: 3]", "Transistor biasing, small-signal amplifiers[cite: 3]", "Feedback amplifiers & oscillators[cite: 3]"] },
+          { id: "EE_ADE", name: "Paper-II: Analog & Digital Electronics", yield: "HIGH", topics: ["Op-Amps characteristics & linear/nonlinear circuits[cite: 3]", "Active filters & 555 timers[cite: 3]", "Combinational & sequential logic design[cite: 3]", "Microprocessor 8085/8086 interfacing[cite: 3]", "Analog & Digital Communication (AM, FM, PCM)[cite: 3]", "Power line carrier communication (PLCC)[cite: 3]"] },
+          { id: "EE_SIG", name: "Paper-II: Systems & Signal Processing", yield: "CORE", topics: ["Continuous & discrete signals, LTI systems[cite: 3]", "Fourier, Laplace & Z-Transforms[cite: 3]", "DFT, FFT & digital filter design (FIR, IIR)[cite: 3]"] },
+          { id: "EE_CTL", name: "Paper-II: Control Systems", yield: "HIGH", topics: ["Transfer functions, Block diagrams & SFG[cite: 3]", "Time response & steady state error[cite: 3]", "Routh, Nyquist, Bode & Root locus[cite: 3]", "Compensators & State space analysis[cite: 3]"] },
+          { id: "EE_MCH", name: "Paper-II: Electrical Machines", yield: "HIGH", topics: ["Single-phase & 3-phase transformers[cite: 3]", "DC machines armature reaction & speed control[cite: 3]", "3-phase induction motors torque-slip curves[cite: 3]", "Synchronous generators regulation & parallel run[cite: 3]", "Special motors (Servo, Stepper)[cite: 3]"] },
+          { id: "EE_PWR", name: "Paper-II: Power Systems", yield: "HIGH", topics: ["Power generation concepts & line parameters[cite: 3]", "Corona, Ferranti effect & Cables[cite: 3]", "Fault analysis & Symmetrical components[cite: 3]", "Protection relays & circuit breakers[cite: 3]", "Load flow analysis & System stability[cite: 3]", "HVDC, FACTS & smart grids[cite: 3]"] },
+          { id: "EE_PEL", name: "Paper-II: Power Electronics & Drives", yield: "HIGH", topics: ["Power semiconductor switches (SCR, MOSFET, IGBT)[cite: 3]", "Phase controlled rectifiers (1-ph & 3-ph)[cite: 3]", "DC-DC Buck, Boost & Buck-boost converters[cite: 3]", "Inverters (VSI, CSI, SPWM)[cite: 3]", "Adjustable speed AC/DC drives[cite: 3]"] }
         ]
       },
       GATE: {
-        title: "GATE 2027 Electrical Engineering (EE)",
-        desc: "IIT Organizing Pattern: Rigorous numerical analysis across 10 official technical sections.",
+        title: "GATE 2027 (Electrical Engineering)",
+        desc: "Organizing Institute Pattern: 10 Core Numerical Sections[cite: 1].",
+        hasSpaced5: true,
         subjects: [
-          {
-            id: "G_MATH",
-            name: "Section 1: Engineering Mathematics",
-            yield: "HIGH",
-            topics: [
-              "Linear Algebra: Matrix Algebra, Systems of Linear Equations, Eigenvalues/Vectors",
-              "Calculus: Mean Value Theorems, Multiple Integrals, Fourier Series, Vector Identities, Stokes, Gauss, Green Theorems",
-              "Differential Equations: Higher Order Linear, Cauchy-Euler, Partial Differential Equations",
-              "Complex Variables: Analytic Functions, Cauchy Integral, Taylor/Laurent Series, Residue Theorem",
-              "Probability & Statistics: Sampling Theorems, Conditional Probability, Distributions, Regression"
-            ]
-          },
-          {
-            id: "G_CKT",
-            name: "Section 2: Electric Circuits",
-            yield: "HIGH",
-            topics: [
-              "Network Elements (R, L, C, M), Dependent Sources, KCL, KVL, Node & Mesh",
-              "Network Theorems (Thevenin, Norton, Superposition, MPT, Star-Delta)",
-              "Transient Response of DC and AC Networks",
-              "Sinusoidal Steady-State Analysis, Resonance, Two-Port Networks",
-              "Balanced Three-Phase Circuits & Complex Power / Power Factor in AC"
-            ]
-          },
-          {
-            id: "G_EMF",
-            name: "Section 3: Electromagnetic Fields",
-            yield: "CORE",
-            topics: [
-              "Coulomb's Law, Electric Field Intensity & Flux Density, Gauss's Law, Divergence",
-              "Electric Field & Potential of Charge Distributions, Dielectrics & Capacitance",
-              "Biot-Savart's Law, Ampere's Law, Curl, Faraday's Law, Lorentz Force",
-              "Inductance, MMF, Reluctance, Magnetic Circuits & Mutual Inductance"
-            ]
-          },
-          {
-            id: "G_SIG",
-            name: "Section 4: Signals and Systems",
-            yield: "CORE",
-            topics: [
-              "Continuous & Discrete Time Signals Representation, Shifting & Scaling",
-              "Linear Time-Invariant (LTI) & Causal Systems",
-              "Fourier Series & Fourier Transform Applications for CT and DT Signals",
-              "Laplace Transform, Z-Transform & Sampling Theorem",
-              "RMS Value & Average Value Calculation for Periodic Waveforms"
-            ]
-          },
-          {
-            id: "G_MCH",
-            name: "Section 5: Electrical Machines",
-            yield: "HIGH",
-            topics: [
-              "Single-Phase Transformer: Equivalent Circuit, Phasor Diagram, Tests, Regulation, Efficiency",
-              "Three-Phase Transformers: Connections, Vector Groups, Parallel Operation & Auto-transformers",
-              "Electromechanical Energy Conversion Principles",
-              "DC Machines: Operating Modes, Characteristics, Speed Control of DC Motors",
-              "Three-Phase Induction Machines: Principle, Torque-Speed, Tests, Starting & Speed Control",
-              "Single-Phase Induction Motors Principle of Operation",
-              "Synchronous Machines: Cylindrical & Salient Pole, Regulation, Parallel Operation, Starting & Losses"
-            ]
-          },
-          {
-            id: "G_PWR",
-            name: "Section 6: Power Systems",
-            yield: "HIGH",
-            topics: [
-              "Electrical Power Generation, AC & DC Transmission Concepts",
-              "Models & Performance of Transmission Lines and Cables",
-              "Economic Load Dispatch (With & Without Transmission Losses)",
-              "Series & Shunt Compensation, Insulators & Distribution Systems",
-              "Per-Unit Quantities, Bus Admittance Matrix & Load Flow (Gauss-Seidel, Newton-Raphson)",
-              "Voltage & Frequency Control, Power Factor Correction",
-              "Symmetrical Components & Fault Analysis (Symmetrical & Unsymmetrical)",
-              "Relay Protection (Over-current, Differential, Directional, Distance) & Circuit Breakers",
-              "System Stability Concepts & Equal Area Criterion"
-            ]
-          },
-          {
-            id: "G_CTL",
-            name: "Section 7: Control Systems",
-            yield: "HIGH",
-            topics: [
-              "Mathematical Modelling, Feedback Principle, Transfer Function, Block Diagrams & SFG",
-              "Transient & Steady-State Analysis of LTI Systems",
-              "Stability Analysis: Routh-Hurwitz and Nyquist Criteria",
-              "Bode Plots & Root Loci",
-              "Lag, Lead and Lead-Lag Compensators, P, PI and PID Controllers",
-              "State Space Model & Solution of State Equations of LTI Systems"
-            ]
-          },
-          {
-            id: "G_MST",
-            name: "Section 8: Electrical and Electronic Measurements",
-            yield: "CORE",
-            topics: [
-              "Bridges and Potentiometers",
-              "Measurement of Voltage, Current, Power, Energy and Power Factor",
-              "Instrument Transformers (CT & PT)",
-              "Digital Voltmeters and Multimeters",
-              "Phase, Time and Frequency Measurement, Oscilloscopes & Error Analysis"
-            ]
-          },
-          {
-            id: "G_ADE",
-            name: "Section 9: Analog and Digital Electronics",
-            yield: "CORE",
-            topics: [
-              "Simple Diode Circuits: Clipping, Clamping, Rectifiers",
-              "Amplifiers: Biasing, Equivalent Circuit and Frequency Response",
-              "Oscillators and Feedback Amplifiers",
-              "Operational Amplifiers: Characteristics and Applications, Active Filters",
-              "VCOs and Timers, Combinatorial and Sequential Logic Circuits",
-              "Multiplexers, Demultiplexers, Schmitt Triggers, Sample & Hold, ADCs & DACs"
-            ]
-          },
-          {
-            id: "G_PEL",
-            name: "Section 10: Power Electronics",
-            yield: "HIGH",
-            topics: [
-              "Static V-I Characteristics & Firing/Gating of Thyristor, MOSFET, IGBT",
-              "DC to DC Conversion: Buck, Boost and Buck-Boost Converters",
-              "Single & Three-Phase Uncontrolled Rectifiers & Voltage/Current Commutated Converters",
-              "Bidirectional AC to DC Voltage Source Converters & Harmonics",
-              "Power Factor & Distortion Factor of AC to DC Converters",
-              "Single-Phase and Three-Phase Inverters & Sinusoidal PWM"
-            ]
-          }
+          { id: "GE_MATH", name: "Section 1: Engineering Mathematics", yield: "HIGH", topics: ["Linear Algebra: Matrices, Eigenvalues[cite: 1]", "Calculus: Multiple integrals, Vector calculus[cite: 1]", "Differential Equations: Higher order linear, PDEs[cite: 1]", "Complex Variables: Residue theorem, Laurent series[cite: 1]", "Probability & Statistics: Distributions, Regression[cite: 1]"] },
+          { id: "GE_CKT", name: "Section 2: Electric Circuits", yield: "HIGH", topics: ["Circuit elements, KCL/KVL, Node & Mesh[cite: 1]", "Theorems: Thevenin, Norton, MPT, Superposition[cite: 1]", "Transients in DC & AC networks, Resonance[cite: 1]", "Two-port networks & 3-phase complex power[cite: 1]"] },
+          { id: "GE_EMF", name: "Section 3: Electromagnetic Fields", yield: "CORE", topics: ["Coulomb, Gauss, Divergence & Capacitance[cite: 1]", "Biot-Savart, Ampere's Law, Inductance, Reluctance[cite: 1]"] },
+          { id: "GE_SIG", name: "Section 4: Signals and Systems", yield: "CORE", topics: ["LTI systems, Fourier series & transform[cite: 1]", "Laplace transform, Z-transform, Sampling theorem[cite: 1]"] },
+          { id: "GE_MCH", name: "Section 5: Electrical Machines", yield: "HIGH", topics: ["1-Phase & 3-Phase transformers tests & regulation[cite: 1]", "DC machines speed control & characteristics[cite: 1]", "3-Phase Induction motors torque-slip curves[cite: 1]", "Synchronous machines parallel operation[cite: 1]"] },
+          { id: "GE_PWR", name: "Section 6: Power Systems", yield: "HIGH", topics: ["Transmission models, Cables, Economic dispatch[cite: 1]", "Per-unit, Y-bus, Gauss-Seidel & Newton-Raphson[cite: 1]", "Fault analysis, Relays, Circuit breakers[cite: 1]", "System stability & Equal area criterion[cite: 1]"] },
+          { id: "GE_CTL", name: "Section 7: Control Systems", yield: "HIGH", topics: ["Transfer functions, SFG, Time response[cite: 1]", "Routh-Hurwitz, Nyquist criteria, Bode plots[cite: 1]", "Compensators, PID, State space model[cite: 1]"] },
+          { id: "GE_MST", name: "Section 8: Measurements", yield: "CORE", topics: ["Bridges & Potentiometers, CTs/PTs[cite: 1]", "Digital multimeters, Oscilloscopes, Error analysis[cite: 1]"] },
+          { id: "GE_ADE", name: "Section 9: Analog & Digital Electronics", yield: "CORE", topics: ["Diode circuits, BJT/MOSFET amplifiers[cite: 1]", "Op-Amps, Active filters, Schmitt trigger[cite: 1]", "Combinational & Sequential logic, ADCs/DACs[cite: 1]"] },
+          { id: "GE_PEL", name: "Section 10: Power Electronics", yield: "HIGH", topics: ["Thyristor, MOSFET, IGBT characteristics[cite: 1]", "Buck, Boost, Buck-Boost converters[cite: 1]", "Controlled rectifiers & SPWM inverters[cite: 1]"] }
         ]
       },
       SSC_JE: {
-        title: "SSC Junior Engineer 2026 (Electrical)",
-        desc: "Paper-I (CBE Objective) + Paper-II (Technical Depth CBE).",
+        title: "SSC JE 2026 (Electrical)",
+        desc: "Sprint Mode: Fast-paced syllabus for Paper-I & Paper-II[cite: 2].",
+        hasSpaced5: false,
         subjects: [
-          {
-            id: "S_NT",
-            name: "General Intelligence, Reasoning & GA",
-            yield: "GS",
-            topics: ["Analogies, Series, Blood Relations & Spatial Analysis", "General Awareness: History, Polity, Geography, Economy", "General Science: Physics, Chemistry & Biology"]
-          },
-          {
-            id: "S_BEE",
-            name: "Basic Electrical Concepts & Magnetic Circuits",
-            yield: "HIGH",
-            topics: ["Concepts of Resistance, Inductance, Capacitance & Ohm's Law", "KCL, KVL & Network Theorems", "Magnetic Flux, Reluctance, MMF, Magnetic Circuits & Inductance"]
-          },
-          {
-            id: "S_ACF",
-            name: "AC Fundamentals",
-            yield: "HIGH",
-            topics: ["RMS, Average Value & Form Factor of AC Waves", "Series & Parallel RLC Circuits, Resonance", "Balanced Three-Phase Systems (Star-Delta) & Power Calculation"]
-          },
-          {
-            id: "S_MST",
-            name: "Measurements and Measuring Instruments",
-            yield: "HIGH",
-            topics: ["PMMC & Moving Iron Meters", "Measurement of Power & Single Phase Energy Meters", "Megger & Earth Testing, Instrument Transformers (CT & PT)"]
-          },
-          {
-            id: "S_MCH",
-            name: "Electrical Machines",
-            yield: "HIGH",
-            topics: ["DC Generators & Motors (Speed Control & Characteristics)", "Single-Phase & Three-Phase Transformers", "Three-Phase Induction Motors & Synchronous Machines"]
-          },
-          {
-            id: "S_GTD",
-            name: "Generation, Transmission & Distribution",
-            yield: "HIGH",
-            topics: ["Power Stations & Tariffs", "Transmission Line Types, Cables, Corona & Ferranti Effect", "Circuit Breakers & Protection Relays"]
-          },
-          {
-            id: "S_EST",
-            name: "Estimation, Costing & Utilization",
-            yield: "CORE",
-            topics: ["Illumination Schemes & Laws", "Electric Heating, Welding & Electroplating", "Electric Traction & Earthing Practices (IE Rules)"]
-          },
-          {
-            id: "S_ELE",
-            name: "Basic Electronics & Power Devices",
-            yield: "CORE",
-            topics: ["PN Junction Diodes, Transistors (BJT & FET)", "Thyristors & DC-DC Converters"]
-          }
+          { id: "SE_NT", name: "General Intelligence & Reasoning", yield: "GS", topics: ["Analogies, Series, Blood relations[cite: 2]", "General Awareness: History, Polity, Economy, Science[cite: 2]"] },
+          { id: "SE_CKT", name: "Basic Concepts & AC Fundamentals", yield: "HIGH", topics: ["Resistance, Inductance, Capacitance, KCL/KVL[cite: 2]", "Magnetic circuits, Flux, Reluctance[cite: 2]", "RMS, Average values, RLC series/parallel, Resonance[cite: 2]"] },
+          { id: "SE_MST", name: "Electrical Measurements", yield: "HIGH", topics: ["PMMC, Moving Iron, Wattmeters, Energy meters[cite: 2]", "Megger, Earth testing, CTs & PTs[cite: 2]"] },
+          { id: "SE_MCH", name: "Electrical Machines", yield: "HIGH", topics: ["DC Generators & Motors, Speed control[cite: 2]", "Transformers 1-ph and 3-ph, Induction motors[cite: 2]", "Synchronous machines & Fractional motors[cite: 2]"] },
+          { id: "SE_GTD", name: "Generation, Transmission & Distribution", yield: "HIGH", topics: ["Power stations, Transmission lines, Cables[cite: 2]", "Switchgear, Relays, Earthing & IE rules[cite: 2]"] },
+          { id: "SE_EST", name: "Utilization & Basic Electronics", yield: "CORE", topics: ["Illumination, Electric heating & welding[cite: 2]", "Diodes, Transistors (BJT/FET), SCR basics[cite: 2]"] }
         ]
       },
       RRB_JE: {
-        title: "RRB Junior Engineer 2026 (Electrical)",
-        desc: "CBT-1 (Non-Tech Screening) + CBT-2 (Technical Specialization).",
+        title: "RRB JE 2026 (Electrical)",
+        desc: "Sprint Mode: CBT-1 Non-Tech + CBT-2 Technical Specialization.",
+        hasSpaced5: false,
         subjects: [
-          {
-            id: "R_CBT1",
-            name: "CBT-1 Core Subjects",
-            yield: "GS",
-            topics: ["Mathematics (Arithmetic, Algebra, Geometry, Stats)", "General Intelligence & Reasoning", "General Science (Physics, Chemistry, Life Science)", "General Awareness & Current Affairs"]
-          },
-          {
-            id: "R_CKT",
-            name: "Circuit Laws, AC Circuits & Magnetism",
-            yield: "HIGH",
-            topics: ["Basic Concepts, Resistance, Ohm's Law, KCL & KVL", "Magnetic Circuits, Permeability & Hysteresis", "AC Circuits, Power Factor & Resonance"]
-          },
-          {
-            id: "R_MST",
-            name: "Electrical & Electronic Measurements",
-            yield: "HIGH",
-            topics: ["Ammeters, Voltmeters, Wattmeters & Energy Meters", "Resistance Measurement & Digital Instruments", "Oscilloscopes & Transducers"]
-          },
-          {
-            id: "R_MCH",
-            name: "Electrical Machines & Synchronous Units",
-            yield: "HIGH",
-            topics: ["DC Machines Principles & Operation", "Transformers (Single & 3-Phase)", "Induction Motors (Torque-Speed Characteristics)", "Alternators & Synchronous Motors"]
-          },
-          {
-            id: "R_GTD",
-            name: "Transmission, Distribution & Protection",
-            yield: "HIGH",
-            topics: ["Load Factor, Diversity Factor & Substation Equipment", "Cables, Overhead Lines & Switchgear", "Circuit Breakers & Relays"]
-          },
-          {
-            id: "R_UTL",
-            name: "Utilization of Electrical Energy",
-            yield: "CORE",
-            topics: ["Illumination, Electric Heating & Welding", "Electric Traction Systems & Safety Rules"]
-          },
-          {
-            id: "R_ELE",
-            name: "Electronics, Computers & Environment",
-            yield: "CORE",
-            topics: ["Semiconductor Diodes & Op-Amps", "Computer Architecture & Networking Basics", "Environmental Pollution & Control"]
-          }
+          { id: "RE_CBT1", name: "CBT-1 Non-Technical Core", yield: "GS", topics: ["Maths, Reasoning, General Science, Current Affairs"] },
+          { id: "RE_CKT", name: "Circuit Laws & Magnetism", yield: "HIGH", topics: ["Ohm's Law, KCL/KVL, Magnetic circuits, AC power factor"] },
+          { id: "RE_MST", name: "Electrical Measurements", yield: "HIGH", topics: ["Ammeters, Voltmeters, Wattmeters, Energy meters, CRO"] },
+          { id: "RE_MCH", name: "Machines & Synchronous Units", yield: "HIGH", topics: ["DC machines, Transformers, Induction & Synchronous motors"] },
+          { id: "RE_GTD", name: "Transmission, Distribution & Utilization", yield: "HIGH", topics: ["Substations, Cables, Circuit breakers, Illumination, Drives"] }
         ]
       }
     };
@@ -1188,7 +884,7 @@
       { id: 2, type: "Topicwise", name: "Electric Circuits (Part-2): Transients, Resonance, 2-Port, 3-Phase", ques: 17, marks: 25, time: "45 min" },
       { id: 3, type: "Topicwise", name: "Control Systems (Part-1): Transfer Function, SFG, Routh, Root Locus", ques: 17, marks: 25, time: "45 min" },
       { id: 4, type: "Topicwise", name: "Control Systems (Part-2): Nyquist, Bode, Compensators, PID, State Space", ques: 17, marks: 25, time: "45 min" },
-      { id: 5, type: "Topicwise", name: "Electrical Machines (Part-1): DC Machines, Synchronous Machines, Energy Conversion", ques: 17, marks: 25, time: "45 min" },
+      { id: 5, type: "Topicwise", name: "Electrical Machines (Part-1): DC Machines, Synchronous Machines", ques: 17, marks: 25, time: "45 min" },
       { id: 6, type: "Topicwise", name: "Electrical Machines (Part-2): 1-Ph & 3-Ph Transformers, Induction Motors", ques: 17, marks: 25, time: "45 min" },
       { id: 7, type: "Topicwise", name: "Power Systems (Part-1): Generation, Trans Lines & Cables, Protection", ques: 17, marks: 25, time: "45 min" },
       { id: 8, type: "Topicwise", name: "Power Systems (Part-2): Per Unit, Y-Bus, Load Flow, Fault Analysis, Stability", ques: 17, marks: 25, time: "45 min" },
@@ -1200,13 +896,13 @@
       { id: 14, type: "Topicwise", name: "Signals & Systems (Part-2): Sampling Theorem, Laplace & Z-Transform", ques: 17, marks: 25, time: "45 min" },
       { id: 15, type: "Topicwise", name: "Power Electronics (Part-1): Thyristors, Rectifiers, Harmonics, Power Factor", ques: 17, marks: 25, time: "45 min" },
       { id: 16, type: "Topicwise", name: "Power Electronics (Part-2): DC-DC Buck/Boost/Buck-Boost, Inverters & SPWM", ques: 17, marks: 25, time: "45 min" },
-      { id: 17, type: "Topicwise", name: "Measurements (Part-1): Voltage, Current, Power, Energy, Power Factor & Errors", ques: 17, marks: 25, time: "45 min" },
+      { id: 17, type: "Topicwise", name: "Measurements (Part-1): Voltage, Current, Power, Energy, Errors", ques: 17, marks: 25, time: "45 min" },
       { id: 18, type: "Topicwise", name: "Measurements (Part-2): Bridges, Potentiometers, CT/PT, Digital Meters, CRO", ques: 17, marks: 25, time: "45 min" },
       { id: 19, type: "Topicwise", name: "Digital Electronics (Part-1): Combinational Circuits, Multiplexers, Demux", ques: 17, marks: 25, time: "45 min" },
       { id: 20, type: "Topicwise", name: "Digital Electronics (Part-2): Sample & Hold, ADCs/DACs, Sequential Circuits", ques: 17, marks: 25, time: "45 min" },
       { id: 21, type: "Topicwise", name: "Analog Electronics (Part-1): Diodes, Clippers, Clampers, Amplifiers Biasing", ques: 17, marks: 25, time: "45 min" },
       { id: 22, type: "Topicwise", name: "Analog Electronics (Part-2): Oscillators, Op-Amps, Active Filters, Schmitt Trigger", ques: 17, marks: 25, time: "45 min" },
-      { id: 23, type: "Topicwise", name: "Electromagnetic Fields (Part-1): Electrostatics, Gauss Law, Potentials & Capacitance", ques: 17, marks: 25, time: "45 min" },
+      { id: 23, type: "Topicwise", name: "Electromagnetic Fields (Part-1): Electrostatics, Gauss Law, Capacitance", ques: 17, marks: 25, time: "45 min" },
       { id: 24, type: "Topicwise", name: "Electromagnetic Fields (Part-2): Magnetostatics, Biot-Savart, Ampere, Maxwell", ques: 17, marks: 25, time: "45 min" },
       { id: 25, type: "Subject", name: "Electric Circuits Full Subject Test", ques: 33, marks: 50, time: "90 min" },
       { id: 26, type: "Subject", name: "Control Systems Full Subject Test", ques: 33, marks: 50, time: "90 min" },
@@ -1283,7 +979,6 @@
       { name: "Engineering Mathematics / Aptitude", key: "MATH" }
     ];
 
-    const STORAGE_KEY = "POWERPREP_EE_PERSIST_AI_V8";
     let state = {
       theme: 'dark',
       activeExam: "ESE",
@@ -1304,6 +999,26 @@
     let cloudSaveTimer = null;
     let currentAiSuggestedTasks = [];
 
+    // HELPER FUNCTIONS FOR TIMELINE DATES
+    function formatDateTime(isoString) {
+      if (!isoString) return '';
+      const d = new Date(isoString);
+      return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) + ', ' +
+             d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function formatDateShort(dateObj) {
+      if (!dateObj) return '';
+      const d = new Date(dateObj);
+      return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+    }
+
+    function addDaysToDate(dateObj, days) {
+      const result = new Date(dateObj);
+      result.setDate(result.getDate() + days);
+      return result;
+    }
+
     // INITIALIZATION
     function init() {
       loadLocalState();
@@ -1317,31 +1032,31 @@
         keyLabel.innerText = state.geminiKey ? "Gemini Key Active" : "Set API Key";
       }
 
-      syncFromCloud(false);
       renderActiveExamView();
       setPlannerToday();
+      syncFromCloud(false);
     }
 
-    // CLOUD SYNC ENGINE
+    // CLOUD SYNC ENGINE (REST API)
     async function syncFromCloud(showUserAlert) {
       updateSaveIndicator("Connecting to Cloud...", false);
       try {
         const response = await fetch(DB_ENDPOINT);
         if (response.ok) {
           const cloudData = await response.json();
-          if (cloudData && (cloudData.syllabusProgress || cloudData.testsData)) {
+          if (cloudData) {
             state.syllabusProgress = cloudData.syllabusProgress || {};
             state.testsData = cloudData.testsData || {};
-            state.mistakes = cloudData.mistakes || [];
+            state.mistakes = Array.isArray(cloudData.mistakes) ? cloudData.mistakes : Object.values(cloudData.mistakes || {});
             state.planner = cloudData.planner || {};
             if (cloudData.activeExam) state.activeExam = cloudData.activeExam;
 
             saveLocalState();
             renderActiveExamView();
-            updateSaveIndicator("Synced with Cloud ☁️", true);
-            if (showUserAlert) alert("All progress synced from Cloud!");
+            updateSaveIndicator("Live Synced to Cloud ☁️", true);
+            if (showUserAlert) alert("Synced latest progress from Cloud!");
           } else {
-            updateSaveIndicator("Cloud Ready (Empty) ☁️", true);
+            updateSaveIndicator("Cloud Ready ☁️", true);
           }
         }
       } catch (err) {
@@ -1393,6 +1108,9 @@
         const saved = localStorage.getItem(STORAGE_KEY);
         if (saved) {
           state = { ...state, ...JSON.parse(saved) };
+          if (!Array.isArray(state.mistakes)) {
+            state.mistakes = Object.values(state.mistakes || {});
+          }
         }
       } catch (e) {}
     }
@@ -1404,107 +1122,6 @@
         const icon = isCloud ? 'fa-cloud text-emerald-500' : 'fa-circle text-[7px] text-indigo-400';
         ind.innerHTML = `<i class="fa-solid ${icon}"></i> ${text} (${time})`;
       }
-    }
-
-    // GEMINI AI STRATEGIST INTEGRATION
-    function openAiKeyModal() {
-      document.getElementById('input-gemini-key').value = state.geminiKey || "";
-      document.getElementById('modal-ai-key').classList.remove('hidden');
-    }
-
-    function closeAiKeyModal() {
-      document.getElementById('modal-ai-key').classList.add('hidden');
-    }
-
-    function saveAiKey() {
-      state.geminiKey = document.getElementById('input-gemini-key').value.trim();
-      saveState();
-      document.getElementById('ai-key-status-label').innerText = state.geminiKey ? "Gemini Key Active" : "Set API Key";
-      closeAiKeyModal();
-      alert("Gemini API key saved!");
-    }
-
-    async function generateAiDailyPlan() {
-      const hours = document.getElementById('ai-hours-input').value || 6;
-      const focus = document.getElementById('ai-focus-input').value.trim() || "Paper-1 ED Curves & Core EE Topics";
-      const btn = document.getElementById('btn-generate-ai-plan');
-      const suggestionBox = document.getElementById('ai-suggestion-box');
-      const preview = document.getElementById('ai-tasks-preview');
-
-      btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Generating...`;
-
-      if (state.geminiKey) {
-        try {
-          const prompt = `You are an elite coach for ESE and GATE Electrical Engineering.
-Active Exam: ${state.activeExam}.
-Available study time: ${hours} hours today.
-Student's study priorities: "${focus}".
-Generate a realistic, time-slotted study schedule. Include break intervals.
-Return ONLY a valid JSON array of objects without markdown or code fences:
-[{"text": "09:00 AM - 10:30 AM: Study Conic Sections & Involutes in ED", "tag": "Theory"}, {"text": "10:45 AM - 12:30 PM: Solve 25 GATE/ESE PYQs on Machines", "tag": "PYQs"}]
-Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
-
-          const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${state.geminiKey}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              contents: [{ parts: [{ text: prompt }] }]
-            })
-          });
-
-          if (!response.ok) throw new Error("API call error");
-          const data = await response.json();
-          let rawText = data.candidates[0].content.parts[0].text;
-          rawText = rawText.replace(/```json/gi, '').replace(/```/g, '').trim();
-          currentAiSuggestedTasks = JSON.parse(rawText);
-        } catch (err) {
-          console.warn("Falling back to intelligent local generator:", err);
-          currentAiSuggestedTasks = generateFallbackPlan(hours, focus);
-        }
-      } else {
-        currentAiSuggestedTasks = generateFallbackPlan(hours, focus);
-      }
-
-      preview.innerHTML = '';
-      currentAiSuggestedTasks.forEach(task => {
-        const item = document.createElement('div');
-        item.className = "flex items-center justify-between p-2 rounded bg-slate-900 border border-slate-800";
-        item.innerHTML = `
-          <span class="text-slate-200 font-medium">${task.text}</span>
-          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">${task.tag}</span>
-        `;
-        preview.appendChild(item);
-      });
-
-      suggestionBox.classList.remove('hidden');
-      btn.disabled = false;
-      btn.innerHTML = `<i class="fa-solid fa-bolt"></i> Generate Plan`;
-    }
-
-    function generateFallbackPlan(hours, focus) {
-      return [
-        { text: `09:00 AM - 10:45 AM: Deep Focus - ${focus} (Core Concepts & Formulas)`, tag: "Theory" },
-        { text: `11:00 AM - 01:00 PM: Solve 20-25 Previous Year Questions on ${focus}`, tag: "PYQs" },
-        { text: `03:00 PM - 04:30 PM: Take Subject Test / Quiz on ${state.activeExam} pattern`, tag: "Test" },
-        { text: `05:00 PM - 06:00 PM: Mistake Notebook Analysis & Formula Flashcards`, tag: "Revision" }
-      ];
-    }
-
-    function applyAiPlanToDay() {
-      const date = document.getElementById('planner-date').value;
-      if (!state.planner[date]) {
-        state.planner[date] = { tasks: [], reflection: '' };
-      }
-
-      currentAiSuggestedTasks.forEach(t => {
-        state.planner[date].tasks.push({ text: t.text, tag: t.tag, done: false });
-      });
-
-      saveState();
-      loadDaySchedule();
-      document.getElementById('ai-suggestion-box').classList.add('hidden');
-      alert("AI study schedule added to your active checklist!");
     }
 
     // THEME SWITCHER
@@ -1607,6 +1224,8 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
 
     function renderActiveExamView() {
       const examSchema = SYLLABUS_SCHEMAS[state.activeExam];
+      if (!examSchema) return;
+
       document.getElementById('dash-exam-title').innerText = examSchema.title;
       document.getElementById('dash-exam-desc').innerText = examSchema.desc;
 
@@ -1620,22 +1239,36 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
       renderCrossExamMatrix();
     }
 
-    // GRANULAR PROGRESS ENGINE
+    // WEIGHTED SYLLABUS PROGRESS (ADAPTS FOR 5-REVISION VS SPRINT EXAMS)
     function calculateExamSyllabusScore(exam) {
       const schema = SYLLABUS_SCHEMAS[exam];
+      if (!schema) return 0;
       let totalTopicScore = 0;
       let totalPossible = 0;
+      const is5Rev = schema.hasSpaced5;
 
       schema.subjects.forEach(sub => {
         sub.topics.forEach((_, idx) => {
           totalPossible += 100;
           const p = state.syllabusProgress[`${exam}_${sub.id}_${idx}`] || {};
           let topicScore = 0;
-          if (p.theory) topicScore += 40;
-          if (p.pyq) topicScore += 40;
-          if (p.r1) topicScore += 6.66;
-          if (p.r2) topicScore += 6.66;
-          if (p.r3) topicScore += 6.68;
+
+          if (is5Rev) {
+            // ESE & GATE: Theory (30%) + PYQs (30%) + 5 Revisions (8% each = 40%)
+            if (p.theory) topicScore += 30;
+            if (p.pyq) topicScore += 30;
+            if (p.r1) topicScore += 8;
+            if (p.r2) topicScore += 8;
+            if (p.r3) topicScore += 8;
+            if (p.r4) topicScore += 8;
+            if (p.r5) topicScore += 8;
+          } else {
+            // SSC JE & RRB JE Sprint: Theory (40%) + PYQs (40%) + R1 (10%) + R2 (10%)
+            if (p.theory) topicScore += 40;
+            if (p.pyq) topicScore += 40;
+            if (p.r1) topicScore += 10;
+            if (p.r2) topicScore += 10;
+          }
           totalTopicScore += topicScore;
         });
       });
@@ -1644,16 +1277,27 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
     }
 
     function calculateSubjectScore(exam, sub) {
+      const schema = SYLLABUS_SCHEMAS[exam];
+      const is5Rev = schema.hasSpaced5;
       let subScore = 0;
       let subPossible = sub.topics.length * 100;
 
       sub.topics.forEach((_, idx) => {
         const p = state.syllabusProgress[`${exam}_${sub.id}_${idx}`] || {};
-        if (p.theory) subScore += 40;
-        if (p.pyq) subScore += 40;
-        if (p.r1) subScore += 6.66;
-        if (p.r2) subScore += 6.66;
-        if (p.r3) subScore += 6.68;
+        if (is5Rev) {
+          if (p.theory) subScore += 30;
+          if (p.pyq) subScore += 30;
+          if (p.r1) subScore += 8;
+          if (p.r2) subScore += 8;
+          if (p.r3) subScore += 8;
+          if (p.r4) subScore += 8;
+          if (p.r5) subScore += 8;
+        } else {
+          if (p.theory) subScore += 40;
+          if (p.pyq) subScore += 40;
+          if (p.r1) subScore += 10;
+          if (p.r2) subScore += 10;
+        }
       });
 
       return subPossible > 0 ? Math.round((subScore / subPossible) * 100) : 0;
@@ -1662,6 +1306,7 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
     function updateDashboardStats() {
       const exam = state.activeExam;
       const schema = SYLLABUS_SCHEMAS[exam];
+      if (!schema) return;
 
       const syllabusPct = calculateExamSyllabusScore(exam);
       document.getElementById('stat-overall-syllabus').innerText = `${syllabusPct}%`;
@@ -1679,18 +1324,24 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
 
       schema.subjects.forEach(sub => {
         const subPct = calculateSubjectScore(exam, sub);
-        let subDone = 0, subR1 = 0, subR2 = 0, subR3 = 0;
+        let subDone = 0, subR1 = 0, subR2 = 0, subR3 = 0, subR4 = 0, subR5 = 0;
         sub.topics.forEach((_, idx) => {
           const p = state.syllabusProgress[`${exam}_${sub.id}_${idx}`] || {};
           if (p.theory && p.pyq) subDone++;
           if (p.r1) subR1++;
           if (p.r2) subR2++;
           if (p.r3) subR3++;
+          if (p.r4) subR4++;
+          if (p.r5) subR5++;
         });
 
         let yieldBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-200 dark:bg-slate-800 text-slate-500">${sub.yield || 'CORE'}</span>`;
         if (sub.yield === 'HIGH') yieldBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-black bg-rose-500/10 text-rose-500 border border-rose-500/20">80/20 HIGH YIELD</span>`;
         if (sub.yield === 'GS') yieldBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">PAPER-1 GS</span>`;
+
+        const revSummary = schema.hasSpaced5 
+          ? `${subR1}|${subR2}|${subR3}|${subR4}|${subR5}`
+          : `${subR1}|${subR2}`;
 
         const row = document.createElement('div');
         row.className = "bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 p-3 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs";
@@ -1707,7 +1358,7 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
           <div class="flex items-center gap-2 text-slate-500 flex-wrap">
             <span class="text-indigo-600 dark:text-indigo-400 font-bold">${subPct}%</span>
             <span class="bg-white dark:bg-slate-900 px-2 py-1 rounded border border-slate-200 dark:border-slate-800"><i class="fa-solid fa-check text-emerald-500 mr-1"></i>${subDone}/${sub.topics.length}</span>
-            <span class="bg-white dark:bg-slate-900 px-2 py-1 rounded border border-slate-200 dark:border-slate-800"><i class="fa-solid fa-repeat text-cyan-500 mr-1"></i>${subR1}|${subR2}|${subR3}</span>
+            <span class="bg-white dark:bg-slate-900 px-2 py-1 rounded border border-slate-200 dark:border-slate-800" title="Revisions: R1|R2|R3|R4|R5"><i class="fa-solid fa-repeat text-cyan-500 mr-1"></i>${revSummary}</span>
           </div>
         `;
         matrixContainer.appendChild(row);
@@ -1716,7 +1367,8 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
 
     function detectBlindspots() {
       const exam = state.activeExam;
-      const mistakes = state.mistakes.filter(m => m.exam === exam && m.status === 'Pending');
+      const mistakesList = Array.isArray(state.mistakes) ? state.mistakes : Object.values(state.mistakes || {});
+      const mistakes = mistakesList.filter(m => m.exam === exam && m.status === 'Pending');
       const badge = document.getElementById('stat-blindspots-count');
       const freq = {};
       mistakes.forEach(m => { freq[m.subject] = (freq[m.subject] || 0) + 1; });
@@ -1725,34 +1377,41 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
     }
 
     function renderCharts() {
+      if (typeof Chart === 'undefined') return;
       const isDark = document.documentElement.classList.contains('dark');
       const exam = state.activeExam;
       const syllabusPct = calculateExamSyllabusScore(exam);
 
-      document.getElementById('chart-syllabus-label').innerHTML = `
-        <span class="text-2xl font-black text-slate-800 dark:text-white">${syllabusPct}%</span>
-        <span class="block text-[10px] text-slate-400">Complete</span>
-      `;
+      const labelEl = document.getElementById('chart-syllabus-label');
+      if (labelEl) {
+        labelEl.innerHTML = `
+          <span class="text-2xl font-black text-slate-800 dark:text-white">${syllabusPct}%</span>
+          <span class="block text-[10px] text-slate-400">Complete</span>
+        `;
+      }
 
-      if (chartSyllabus) chartSyllabus.destroy();
-      const ctxSyl = document.getElementById('chart-syllabus').getContext('2d');
-      chartSyllabus = new Chart(ctxSyl, {
-        type: 'doughnut',
-        data: {
-          labels: ['Completed', 'Remaining'],
-          datasets: [{
-            data: [syllabusPct, 100 - syllabusPct],
-            backgroundColor: ['#6366f1', isDark ? '#1e293b' : '#e2e8f0'],
-            borderWidth: 0
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          cutout: '76%',
-          plugins: { legend: { display: false } }
-        }
-      });
+      const canvasSyl = document.getElementById('chart-syllabus');
+      if (canvasSyl) {
+        if (chartSyllabus) chartSyllabus.destroy();
+        const ctxSyl = canvasSyl.getContext('2d');
+        chartSyllabus = new Chart(ctxSyl, {
+          type: 'doughnut',
+          data: {
+            labels: ['Completed', 'Remaining'],
+            datasets: [{
+              data: [syllabusPct, Math.max(0, 100 - syllabusPct)],
+              backgroundColor: ['#6366f1', isDark ? '#1e293b' : '#e2e8f0'],
+              borderWidth: 0
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '76%',
+            plugins: { legend: { display: false } }
+          }
+        });
+      }
 
       const tests = getActiveExamTestsList();
       let attempted = 0, analyzed = 0, pending = 0;
@@ -1762,67 +1421,84 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
         else if (d.status === 'ATTEMPTED') attempted++;
         else pending++;
       });
-      document.getElementById('chart-tests-label').innerHTML = `
-        <span class="text-2xl font-black text-slate-800 dark:text-white">${analyzed + attempted}</span>
-        <span class="block text-[10px] text-slate-400">Written</span>
-      `;
 
-      if (chartTests) chartTests.destroy();
-      const ctxTest = document.getElementById('chart-tests').getContext('2d');
-      chartTests = new Chart(ctxTest, {
-        type: 'doughnut',
-        data: {
-          labels: ['Analyzed', 'Unanalyzed', 'Pending'],
-          datasets: [{
-            data: [analyzed, attempted, pending],
-            backgroundColor: ['#10b981', '#f59e0b', isDark ? '#1e293b' : '#e2e8f0'],
-            borderWidth: 0
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          cutout: '76%',
-          plugins: { legend: { display: false } }
-        }
-      });
+      const labelTests = document.getElementById('chart-tests-label');
+      if (labelTests) {
+        labelTests.innerHTML = `
+          <span class="text-2xl font-black text-slate-800 dark:text-white">${analyzed + attempted}</span>
+          <span class="block text-[10px] text-slate-400">Written</span>
+        `;
+      }
 
-      const examMistakes = state.mistakes.filter(m => m.exam === exam);
+      const canvasTests = document.getElementById('chart-tests');
+      if (canvasTests) {
+        if (chartTests) chartTests.destroy();
+        const ctxTest = canvasTests.getContext('2d');
+        chartTests = new Chart(ctxTest, {
+          type: 'doughnut',
+          data: {
+            labels: ['Analyzed', 'Unanalyzed', 'Pending'],
+            datasets: [{
+              data: [analyzed, attempted, pending],
+              backgroundColor: ['#10b981', '#f59e0b', isDark ? '#1e293b' : '#e2e8f0'],
+              borderWidth: 0
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '76%',
+            plugins: { legend: { display: false } }
+          }
+        });
+      }
+
+      const mistakesList = Array.isArray(state.mistakes) ? state.mistakes : Object.values(state.mistakes || {});
+      const examMistakes = mistakesList.filter(m => m.exam === exam);
       const conceptual = examMistakes.filter(m => m.type === 'Conceptual').length;
       const calculation = examMistakes.filter(m => m.type === 'Calculation').length;
       const formula = examMistakes.filter(m => m.type === 'Formula').length;
       const timeErr = examMistakes.filter(m => m.type === 'TimePressure').length;
       const totalMistakes = examMistakes.length;
 
-      document.getElementById('chart-mistakes-label').innerHTML = `
-        <span class="text-2xl font-black text-slate-800 dark:text-white">${totalMistakes}</span>
-        <span class="block text-[10px] text-slate-400">Errors</span>
-      `;
+      const labelMis = document.getElementById('chart-mistakes-label');
+      if (labelMis) {
+        labelMis.innerHTML = `
+          <span class="text-2xl font-black text-slate-800 dark:text-white">${totalMistakes}</span>
+          <span class="block text-[10px] text-slate-400">Errors</span>
+        `;
+      }
 
-      if (chartMistakes) chartMistakes.destroy();
-      const ctxMis = document.getElementById('chart-mistakes').getContext('2d');
-      chartMistakes = new Chart(ctxMis, {
-        type: 'pie',
-        data: {
-          labels: ['Conceptual', 'Calculation', 'Formula', 'Time Pressure'],
-          datasets: [{
-            data: totalMistakes ? [conceptual, calculation, formula, timeErr] : [0, 0, 0, 1],
-            backgroundColor: totalMistakes ? ['#f43f5e', '#f59e0b', '#a855f7', '#0284c7'] : [isDark ? '#1e293b' : '#e2e8f0'],
-            borderWidth: 0
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } }
-        }
-      });
+      const canvasMis = document.getElementById('chart-mistakes');
+      if (canvasMis) {
+        if (chartMistakes) chartMistakes.destroy();
+        const ctxMis = canvasMis.getContext('2d');
+        chartMistakes = new Chart(ctxMis, {
+          type: 'pie',
+          data: {
+            labels: ['Conceptual', 'Calculation', 'Formula', 'Time Pressure'],
+            datasets: [{
+              data: totalMistakes ? [conceptual, calculation, formula, timeErr] : [0, 0, 0, 1],
+              backgroundColor: totalMistakes ? ['#f43f5e', '#f59e0b', '#a855f7', '#0284c7'] : [isDark ? '#1e293b' : '#e2e8f0'],
+              borderWidth: 0
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } }
+          }
+        });
+      }
     }
 
-    // 2. SYLLABUS TREE
+    // 2. SYLLABUS TREE WITH 5 SPACED REVISIONS & TARGET TIMESTAMPS
     function renderSyllabusTree() {
       const exam = state.activeExam;
       const schema = SYLLABUS_SCHEMAS[exam];
+      if (!schema) return;
+
+      const is5Rev = schema.hasSpaced5;
       const filterSub = document.getElementById('syllabus-filter-subject').value;
       const filterYield = document.getElementById('syllabus-filter-yield').value;
       const container = document.getElementById('syllabus-tree-container');
@@ -1837,31 +1513,83 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
         card.className = "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm";
         
         let topicsHtml = sub.topics.map((t, idx) => {
-          const prog = state.syllabusProgress[`${exam}_${sub.id}_${idx}`] || { theory: false, pyq: false, r1: false, r2: false, r3: false };
-          return `
-            <div class="p-3 bg-slate-50/60 dark:bg-slate-950/40 hover:bg-slate-100 dark:hover:bg-slate-950/80 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs border-b border-slate-200 dark:border-slate-800/60 last:border-b-0">
-              <span class="text-slate-700 dark:text-slate-300 font-medium flex-1">${t}</span>
-              <div class="flex items-center gap-2 flex-wrap">
-                <label class="cursor-pointer inline-flex items-center gap-1.5 px-2 py-1 rounded bg-white dark:bg-slate-900 border ${prog.theory ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10' : 'border-slate-200 dark:border-slate-800 text-slate-400'}">
-                  <input type="checkbox" onchange="toggleSyllabusProgress('${exam}', '${sub.id}', ${idx}, 'theory', this.checked)" ${prog.theory ? 'checked' : ''} class="w-3.5 h-3.5 text-indigo-600 rounded"/>
-                  <span>Theory (40%)</span>
+          const prog = state.syllabusProgress[`${exam}_${sub.id}_${idx}`] || {};
+          
+          // Timestamp & deadline calculations
+          let theorySubText = '';
+          if (prog.theory && prog.theoryAt) {
+            theorySubText = `<span class="text-[9px] text-emerald-500 font-bold block">Done: ${formatDateTime(prog.theoryAt)}</span>`;
+          }
+
+          function getRevisionBlock(tag, isDone, doneAt, dueAt) {
+            let subNote = '';
+            if (isDone && doneAt) {
+              subNote = `<span class="text-[8px] text-emerald-500 font-bold block truncate max-w-[70px]">Done: ${formatDateShort(doneAt)}</span>`;
+            } else if (!isDone && dueAt) {
+              const isOverdue = new Date() > new Date(dueAt);
+              const colorClass = isOverdue ? 'text-rose-500 font-black' : 'text-slate-400';
+              subNote = `<span class="text-[8px] ${colorClass} block truncate max-w-[70px]">Due: ${formatDateShort(dueAt)}</span>`;
+            }
+
+            return `
+              <div class="flex flex-col items-center">
+                <label class="cursor-pointer inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-white dark:bg-slate-900 border ${isDone ? 'border-cyan-500 text-cyan-600 dark:text-cyan-300 bg-cyan-50 dark:bg-cyan-500/10' : 'border-slate-200 dark:border-slate-800 text-slate-400'}">
+                  <input type="checkbox" onchange="toggleMilestone('${exam}', '${sub.id}', ${idx}, '${tag}', this.checked)" ${isDone ? 'checked' : ''} class="w-3 h-3 text-cyan-600 rounded"/>
+                  <span class="font-bold text-[11px]">${tag.toUpperCase()}</span>
                 </label>
+                ${subNote}
+              </div>
+            `;
+          }
+
+          let revisionsRender = '';
+          if (is5Rev) {
+            revisionsRender = `
+              ${getRevisionBlock('pyq', prog.pyq, prog.pyqAt, prog.pyqDue)}
+              ${getRevisionBlock('r1', prog.r1, prog.r1At, prog.r1Due)}
+              ${getRevisionBlock('r2', prog.r2, prog.r2At, prog.r2Due)}
+              ${getRevisionBlock('r3', prog.r3, prog.r3At, prog.r3Due)}
+              ${getRevisionBlock('r4', prog.r4, prog.r4At, prog.r4Due)}
+              ${getRevisionBlock('r5', prog.r5, prog.r5At, prog.r5Due)}
+            `;
+          } else {
+            // Sprint mode for SSC JE & RRB JE
+            revisionsRender = `
+              <div class="flex flex-col items-center">
                 <label class="cursor-pointer inline-flex items-center gap-1.5 px-2 py-1 rounded bg-white dark:bg-slate-900 border ${prog.pyq ? 'border-emerald-500 text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10' : 'border-slate-200 dark:border-slate-800 text-slate-400'}">
-                  <input type="checkbox" onchange="toggleSyllabusProgress('${exam}', '${sub.id}', ${idx}, 'pyq', this.checked)" ${prog.pyq ? 'checked' : ''} class="w-3.5 h-3.5 text-emerald-600 rounded"/>
-                  <span>PYQs (40%)</span>
+                  <input type="checkbox" onchange="toggleMilestone('${exam}', '${sub.id}', ${idx}, 'pyq', this.checked)" ${prog.pyq ? 'checked' : ''} class="w-3.5 h-3.5 text-emerald-600 rounded"/>
+                  <span>PYQs</span>
                 </label>
+              </div>
+              <div class="flex flex-col items-center">
                 <label class="cursor-pointer inline-flex items-center gap-1 px-2 py-1 rounded bg-white dark:bg-slate-900 border ${prog.r1 ? 'border-cyan-500 text-cyan-600 dark:text-cyan-300 bg-cyan-50 dark:bg-cyan-500/10' : 'border-slate-200 dark:border-slate-800 text-slate-400'}">
-                  <input type="checkbox" onchange="toggleSyllabusProgress('${exam}', '${sub.id}', ${idx}, 'r1', this.checked)" ${prog.r1 ? 'checked' : ''} class="w-3.5 h-3.5 text-cyan-600 rounded"/>
+                  <input type="checkbox" onchange="toggleMilestone('${exam}', '${sub.id}', ${idx}, 'r1', this.checked)" ${prog.r1 ? 'checked' : ''} class="w-3.5 h-3.5 text-cyan-600 rounded"/>
                   <span>R1</span>
                 </label>
+              </div>
+              <div class="flex flex-col items-center">
                 <label class="cursor-pointer inline-flex items-center gap-1 px-2 py-1 rounded bg-white dark:bg-slate-900 border ${prog.r2 ? 'border-sky-500 text-sky-600 dark:text-sky-300 bg-sky-50 dark:bg-sky-500/10' : 'border-slate-200 dark:border-slate-800 text-slate-400'}">
-                  <input type="checkbox" onchange="toggleSyllabusProgress('${exam}', '${sub.id}', ${idx}, 'r2', this.checked)" ${prog.r2 ? 'checked' : ''} class="w-3.5 h-3.5 text-sky-600 rounded"/>
+                  <input type="checkbox" onchange="toggleMilestone('${exam}', '${sub.id}', ${idx}, 'r2', this.checked)" ${prog.r2 ? 'checked' : ''} class="w-3.5 h-3.5 text-sky-600 rounded"/>
                   <span>R2</span>
                 </label>
-                <label class="cursor-pointer inline-flex items-center gap-1 px-2 py-1 rounded bg-white dark:bg-slate-900 border ${prog.r3 ? 'border-purple-500 text-purple-600 dark:text-purple-300 bg-purple-50 dark:bg-purple-500/10' : 'border-slate-200 dark:border-slate-800 text-slate-400'}">
-                  <input type="checkbox" onchange="toggleSyllabusProgress('${exam}', '${sub.id}', ${idx}, 'r3', this.checked)" ${prog.r3 ? 'checked' : ''} class="w-3.5 h-3.5 text-purple-600 rounded"/>
-                  <span>R3</span>
-                </label>
+              </div>
+            `;
+          }
+
+          return `
+            <div class="p-3 bg-slate-50/60 dark:bg-slate-950/40 hover:bg-slate-100 dark:hover:bg-slate-950/80 transition-colors flex flex-col lg:flex-row lg:items-center justify-between gap-3 text-xs border-b border-slate-200 dark:border-slate-800/60 last:border-b-0">
+              <span class="text-slate-700 dark:text-slate-300 font-medium flex-1">${t}</span>
+              <div class="flex items-start gap-2 flex-wrap">
+                <!-- Theory Box -->
+                <div class="flex flex-col items-center">
+                  <label class="cursor-pointer inline-flex items-center gap-1.5 px-2 py-1 rounded bg-white dark:bg-slate-900 border ${prog.theory ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10' : 'border-slate-200 dark:border-slate-800 text-slate-400'}">
+                    <input type="checkbox" onchange="toggleTheoryCompletion('${exam}', '${sub.id}', ${idx}, this.checked)" ${prog.theory ? 'checked' : ''} class="w-3.5 h-3.5 text-indigo-600 rounded"/>
+                    <span>Theory</span>
+                  </label>
+                  ${theorySubText}
+                </div>
+
+                ${revisionsRender}
               </div>
             </div>
           `;
@@ -1871,7 +1599,7 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
           <div class="p-4 bg-slate-100/80 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center cursor-pointer" onclick="this.nextElementSibling.classList.toggle('hidden')">
             <div>
               <h3 class="font-bold text-sm text-slate-900 dark:text-white">${sub.name}</h3>
-              <p class="text-[11px] text-slate-500 dark:text-slate-400">${sub.topics.length} detailed syllabus subtopics</p>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400">${sub.topics.length} topics • ${is5Rev ? '5-Stage Repetition Enabled' : 'Sprint Mode'}</p>
             </div>
             <div class="flex items-center gap-3">
               <span class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-2 py-0.5 rounded">${subPct}%</span>
@@ -1886,18 +1614,68 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
       });
     }
 
-    function toggleSyllabusProgress(exam, subId, topicIdx, field, isChecked) {
+    // THEORY COMPLETION & AUTOMATIC 5-STAGE DEADLINE ENGINE
+    function toggleTheoryCompletion(exam, subId, topicIdx, isChecked) {
       const key = `${exam}_${subId}_${topicIdx}`;
       if (!state.syllabusProgress[key]) {
-        state.syllabusProgress[key] = { theory: false, pyq: false, r1: false, r2: false, r3: false };
+        state.syllabusProgress[key] = {};
       }
-      state.syllabusProgress[key][field] = isChecked;
+
+      state.syllabusProgress[key].theory = isChecked;
+
+      if (isChecked) {
+        const now = new Date();
+        state.syllabusProgress[key].theoryAt = now.toISOString();
+
+        // Auto-calculate deadlines for PYQs (+2d), R1 (+4d), R2 (+11d), R3 (+25d), R4 (+55d), R5 (+100d capped at Dec 31)
+        const pyqDue = addDaysToDate(now, 2);
+        const r1Due = addDaysToDate(now, 4);
+        const r2Due = addDaysToDate(now, 11);
+        const r3Due = addDaysToDate(now, 25);
+        const r4Due = addDaysToDate(now, 55);
+
+        // Cap R5 at Dec 31, 2026 before ESE & GATE 2027 exams
+        const dec31 = new Date('2026-12-31T23:59:59');
+        let r5Due = addDaysToDate(now, 100);
+        if (r5Due > dec31) r5Due = dec31;
+
+        state.syllabusProgress[key].pyqDue = pyqDue.toISOString();
+        state.syllabusProgress[key].r1Due = r1Due.toISOString();
+        state.syllabusProgress[key].r2Due = r2Due.toISOString();
+        state.syllabusProgress[key].r3Due = r3Due.toISOString();
+        state.syllabusProgress[key].r4Due = r4Due.toISOString();
+        state.syllabusProgress[key].r5Due = r5Due.toISOString();
+      } else {
+        delete state.syllabusProgress[key].theoryAt;
+      }
+
       saveState();
       updateDashboardStats();
       renderCharts();
+      renderSyllabusTree();
     }
 
-    // 3. MADE EASY TEST SERIES
+    // MILESTONE COMPLETION (PYQs, R1-R5)
+    function toggleMilestone(exam, subId, topicIdx, milestone, isChecked) {
+      const key = `${exam}_${subId}_${topicIdx}`;
+      if (!state.syllabusProgress[key]) {
+        state.syllabusProgress[key] = {};
+      }
+
+      state.syllabusProgress[key][milestone] = isChecked;
+      if (isChecked) {
+        state.syllabusProgress[key][`${milestone}At`] = new Date().toISOString();
+      } else {
+        delete state.syllabusProgress[key][`${milestone}At`];
+      }
+
+      saveState();
+      updateDashboardStats();
+      renderCharts();
+      renderSyllabusTree();
+    }
+
+    // 3. MADE EASY TEST SERIES (WITH 10-DAY REVISIT LIFECYCLE)
     function getActiveExamTestsList() {
       if (state.activeExam === 'GATE') return MADE_EASY_GATE_TESTS;
       if (state.activeExam === 'ESE') return MADE_EASY_ESE_TESTS;
@@ -1911,13 +1689,35 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
 
       const testList = getActiveExamTestsList();
       const exam = state.activeExam;
+      const now = new Date();
 
       testList.forEach(t => {
         const testState = state.testsData[`${exam}_${t.id}`] || { score: null, accuracy: null, status: 'PENDING' };
         
+        // Revisit status calculation
+        let revisitBadge = '<span class="text-slate-500 font-mono text-[10px]">-</span>';
+        let isRevisitDue = false;
+
+        if (testState.attemptedAt) {
+          const attemptDate = new Date(testState.attemptedAt);
+          const revisitDeadline = addDaysToDate(attemptDate, 10);
+          const diffDays = Math.ceil((revisitDeadline - now) / (1000 * 60 * 60 * 24));
+
+          if (testState.revisited) {
+            revisitBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">✅ Revisited (${formatDateShort(testState.revisitedAt || testState.attemptedAt)})</span>`;
+          } else if (diffDays <= 0) {
+            isRevisitDue = true;
+            revisitBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-black bg-rose-500/10 text-rose-500 border border-rose-500/30 animate-pulse">⚠️ Revisit Overdue!</span>`;
+          } else {
+            revisitBadge = `<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">Due in ${diffDays}d (${formatDateShort(revisitDeadline)})</span>`;
+          }
+        }
+
+        // Filtering
         if (filterStatus === 'PENDING' && testState.status !== 'PENDING') return;
         if (filterStatus === 'ATTEMPTED' && testState.status !== 'ATTEMPTED') return;
-        if (filterStatus === 'ANALYZED' && testState.status !== 'ANALYZED') return;
+        if (filterStatus === 'REVISIT_DUE' && (!isRevisitDue || testState.revisited)) return;
+        if (filterStatus === 'REVISITED' && !testState.revisited) return;
 
         let statusBadge = '';
         if (testState.status === 'ANALYZED') {
@@ -1931,6 +1731,17 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
         const scoreDisplay = testState.score !== null ? `${testState.score} / ${t.marks}` : '-';
         const accDisplay = testState.accuracy !== null ? `${testState.accuracy}%` : '-';
 
+        let attemptTimelineInfo = '';
+        if (testState.attemptedAt) {
+          const analyzeDeadline = addDaysToDate(new Date(testState.attemptedAt), 2);
+          attemptTimelineInfo = `
+            <div class="text-[10px] text-slate-400 mt-0.5">
+              <span>Attempted: <strong>${formatDateShort(testState.attemptedAt)}</strong></span> • 
+              <span>Analyze by: <strong class="text-indigo-400">${formatDateShort(analyzeDeadline)}</strong></span>
+            </div>
+          `;
+        }
+
         const tr = document.createElement('tr');
         tr.className = "hover:bg-slate-100 dark:hover:bg-slate-800/40 transition-colors";
         tr.innerHTML = `
@@ -1938,20 +1749,40 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
           <td class="px-4 py-3">
             <div class="font-bold text-slate-800 dark:text-slate-200">${t.name}</div>
             <div class="text-[10px] text-slate-500">Duration: ${t.time}</div>
+            ${attemptTimelineInfo}
           </td>
           <td class="px-4 py-3"><span class="px-2 py-0.5 rounded text-[10px] bg-slate-200 dark:bg-slate-800 font-semibold">${t.type}</span></td>
           <td class="px-4 py-3 text-center font-medium">${t.marks} M (${t.ques} Q)</td>
           <td class="px-4 py-3 text-center font-bold text-indigo-600 dark:text-indigo-400">${scoreDisplay}</td>
           <td class="px-4 py-3 text-center font-medium">${accDisplay}</td>
           <td class="px-4 py-3 text-center">${statusBadge}</td>
-          <td class="px-4 py-3 text-right">
+          <td class="px-4 py-3 text-center">${revisitBadge}</td>
+          <td class="px-4 py-3 text-right whitespace-nowrap">
             <button onclick="openTestEntryModal(${t.id})" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded text-xs font-semibold shadow">
               Log Result
             </button>
+            ${testState.attemptedAt ? `
+              <button onclick="toggleQuickRevisit(${t.id})" title="Toggle 10-day mistake review completion" class="ml-1 p-1 px-2 rounded text-xs font-bold ${testState.revisited ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-slate-800 text-slate-400 hover:text-white'}">
+                <i class="fa-solid fa-rotate-left"></i>
+              </button>
+            ` : ''}
           </td>
         `;
         tbody.appendChild(tr);
       });
+    }
+
+    function toggleQuickRevisit(testId) {
+      const exam = state.activeExam;
+      if (!state.testsData[`${exam}_${testId}`]) return;
+      const current = state.testsData[`${exam}_${testId}`].revisited;
+      state.testsData[`${exam}_${testId}`].revisited = !current;
+      if (!current) {
+        state.testsData[`${exam}_${testId}`].revisitedAt = new Date().toISOString();
+      }
+      saveState();
+      renderTestSeries();
+      updateDashboardStats();
     }
 
     function openTestEntryModal(testId) {
@@ -1966,13 +1797,31 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
       document.getElementById('modal-test-total-ques-display').innerText = `${currentTestObject.ques} Questions`;
       document.getElementById('modal-test-total-marks-display').innerText = `${currentTestObject.marks} Marks`;
 
+      // Date written
+      const todayISO = new Date().toISOString().split('T')[0];
+      const attemptDateVal = existing.attemptedAt ? existing.attemptedAt.split('T')[0] : todayISO;
+      document.getElementById('input-modal-test-date').value = attemptDateVal;
+
       document.getElementById('input-modal-test-correct').value = existing.correct !== undefined ? existing.correct : '';
       document.getElementById('input-modal-test-incorrect').value = existing.incorrect !== undefined ? existing.incorrect : '';
       document.getElementById('input-modal-test-score').value = existing.score !== null ? existing.score : '';
       document.getElementById('input-modal-test-status').value = existing.status || 'ATTEMPTED';
+      document.getElementById('input-modal-test-revisited').checked = !!existing.revisited;
 
+      calculateTestDates();
       calculateTestMetrics();
       document.getElementById('modal-test-entry').classList.remove('hidden');
+    }
+
+    function calculateTestDates() {
+      const dateVal = document.getElementById('input-modal-test-date').value;
+      if (!dateVal) return;
+      const baseDate = new Date(dateVal);
+      const analyzeBy = addDaysToDate(baseDate, 2);
+      const revisitDue = addDaysToDate(baseDate, 10);
+
+      document.getElementById('modal-test-analyze-deadline').innerText = formatDateShort(analyzeBy);
+      document.getElementById('modal-test-revisit-date').innerText = formatDateShort(revisitDue);
     }
 
     function calculateTestMetrics() {
@@ -2016,16 +1865,23 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
       const incorrect = parseInt(document.getElementById('input-modal-test-incorrect').value) || 0;
       const score = parseFloat(document.getElementById('input-modal-test-score').value);
       const status = document.getElementById('input-modal-test-status').value;
+      const dateVal = document.getElementById('input-modal-test-date').value;
+      const revisited = document.getElementById('input-modal-test-revisited').checked;
 
       const attempted = correct + incorrect;
       const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
+
+      const attemptedAt = dateVal ? new Date(dateVal).toISOString() : new Date().toISOString();
 
       state.testsData[`${exam}_${activeModalTestId}`] = {
         correct: correct,
         incorrect: incorrect,
         score: isNaN(score) ? 0 : score,
         accuracy: accuracy,
-        status: status
+        status: status,
+        attemptedAt: attemptedAt,
+        revisited: revisited,
+        revisitedAt: revisited ? new Date().toISOString() : null
       };
 
       saveState();
@@ -2054,7 +1910,8 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
       const filterStatus = document.getElementById('mistake-filter-status').value;
       grid.innerHTML = '';
 
-      let list = state.mistakes.filter(m => m.exam === state.activeExam);
+      const mistakesList = Array.isArray(state.mistakes) ? state.mistakes : Object.values(state.mistakes || {});
+      let list = mistakesList.filter(m => m.exam === state.activeExam);
       if (filterType !== 'ALL') list = list.filter(m => m.type === filterType);
       if (filterStatus !== 'ALL') list = list.filter(m => m.status === filterStatus);
 
@@ -2260,6 +2117,107 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
       saveState();
     }
 
+    // GEMINI AI STUDY STRATEGIST
+    function openAiKeyModal() {
+      document.getElementById('input-gemini-key').value = state.geminiKey || "";
+      document.getElementById('modal-ai-key').classList.remove('hidden');
+    }
+
+    function closeAiKeyModal() {
+      document.getElementById('modal-ai-key').classList.add('hidden');
+    }
+
+    function saveAiKey() {
+      state.geminiKey = document.getElementById('input-gemini-key').value.trim();
+      saveState();
+      document.getElementById('ai-key-status-label').innerText = state.geminiKey ? "Gemini Key Active" : "Set API Key";
+      closeAiKeyModal();
+      alert("Gemini API key saved!");
+    }
+
+    async function generateAiDailyPlan() {
+      const hours = document.getElementById('ai-hours-input').value || 6;
+      const focus = document.getElementById('ai-focus-input').value.trim() || "Paper-1 ED Curves & Core EE Topics";
+      const btn = document.getElementById('btn-generate-ai-plan');
+      const suggestionBox = document.getElementById('ai-suggestion-box');
+      const preview = document.getElementById('ai-tasks-preview');
+
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Generating...`;
+
+      if (state.geminiKey) {
+        try {
+          const prompt = `You are an elite coach for ESE and GATE Electrical Engineering.
+Active Exam: ${state.activeExam}.
+Available study time: ${hours} hours today.
+Student's study priorities: "${focus}".
+Generate a realistic, time-slotted study schedule for an Electrical Engineer. Include break intervals.
+Return ONLY a valid JSON array of objects without markdown or code fences:
+[{"text": "09:00 AM - 10:30 AM: Study Conic Sections & Involutes in ED", "tag": "Theory"}, {"text": "10:45 AM - 12:30 PM: Solve 25 GATE/ESE PYQs on Machines", "tag": "PYQs"}]
+Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
+
+          const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${state.geminiKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{ parts: [{ text: prompt }] }]
+            })
+          });
+
+          if (!response.ok) throw new Error("API call error");
+          const data = await response.json();
+          let rawText = data.candidates[0].content.parts[0].text;
+          rawText = rawText.replace(/```json/gi, '').replace(/```/g, '').trim();
+          currentAiSuggestedTasks = JSON.parse(rawText);
+        } catch (err) {
+          console.warn("Falling back to intelligent local generator:", err);
+          currentAiSuggestedTasks = generateFallbackPlan(hours, focus);
+        }
+      } else {
+        currentAiSuggestedTasks = generateFallbackPlan(hours, focus);
+      }
+
+      preview.innerHTML = '';
+      currentAiSuggestedTasks.forEach(task => {
+        const item = document.createElement('div');
+        item.className = "flex items-center justify-between p-2 rounded bg-slate-900 border border-slate-800";
+        item.innerHTML = `
+          <span class="text-slate-200 font-medium">${task.text}</span>
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">${task.tag}</span>
+        `;
+        preview.appendChild(item);
+      });
+
+      suggestionBox.classList.remove('hidden');
+      btn.disabled = false;
+      btn.innerHTML = `<i class="fa-solid fa-bolt"></i> Generate Plan`;
+    }
+
+    function generateFallbackPlan(hours, focus) {
+      return [
+        { text: `09:00 AM - 10:45 AM: Deep Focus - ${focus} (Core Concepts & Formulas)`, tag: "Theory" },
+        { text: `11:00 AM - 01:00 PM: Solve 20-25 Previous Year Questions on ${focus}`, tag: "PYQs" },
+        { text: `03:00 PM - 04:30 PM: Take Subject Test / Quiz on ${state.activeExam} pattern`, tag: "Test" },
+        { text: `05:00 PM - 06:00 PM: Mistake Notebook Analysis & Formula Flashcards`, tag: "Revision" }
+      ];
+    }
+
+    function applyAiPlanToDay() {
+      const date = document.getElementById('planner-date').value;
+      if (!state.planner[date]) {
+        state.planner[date] = { tasks: [], reflection: '' };
+      }
+
+      currentAiSuggestedTasks.forEach(t => {
+        state.planner[date].tasks.push({ text: t.text, tag: t.tag, done: false });
+      });
+
+      saveState();
+      loadDaySchedule();
+      document.getElementById('ai-suggestion-box').classList.add('hidden');
+      alert("AI study schedule added to your active checklist!");
+    }
+
     // 6. UNIFIED CROSS-EXAM MATRIX
     function renderCrossExamMatrix() {
       const tbody = document.getElementById('cross-matrix-body');
@@ -2299,6 +2257,7 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
 
     function getSubjectProgressForExam(exam, coreSubjectName) {
       const schema = SYLLABUS_SCHEMAS[exam];
+      if (!schema) return 0;
       const keyword = coreSubjectName.split(' ')[0].toLowerCase();
       const matched = schema.subjects.find(s => s.name.toLowerCase().includes(keyword));
       if (!matched) return 0;
@@ -2308,6 +2267,7 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
     function populateSubjectDropdowns() {
       const exam = state.activeExam;
       const schema = SYLLABUS_SCHEMAS[exam];
+      if (!schema) return;
 
       const sylSelect = document.getElementById('syllabus-filter-subject');
       sylSelect.innerHTML = `<option value="ALL">All Subjects (${schema.subjects.length})</option>`;
