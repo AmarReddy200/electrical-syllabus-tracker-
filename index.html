@@ -48,7 +48,7 @@
           <div>
             <div class="flex items-center gap-2">
               <h1 class="font-black text-base sm:text-lg text-slate-900 dark:text-white leading-tight">PowerPrep EE</h1>
-              <span class="px-1.5 py-0.5 rounded text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">5-REV ENGINE</span>
+              <span class="px-1.5 py-0.5 rounded text-[10px] font-black bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">ULTRA+</span>
             </div>
             <div class="flex items-center gap-2">
               <span id="save-status-indicator" class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
@@ -113,7 +113,7 @@
         <i class="fa-solid fa-pen-ruler"></i><span>MADE EASY Test Series</span>
       </button>
       <button onclick="switchModule('mistakes')" id="mod-mistakes" class="mod-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center space-x-2 whitespace-nowrap">
-        <i class="fa-solid fa-bug text-rose-500"></i><span>Mistakes & Blindspots</span>
+        <i class="fa-solid fa-brain text-rose-500"></i><span>Mistakes & New Concepts</span>
       </button>
       <button onclick="switchModule('schedule')" id="mod-schedule" class="mod-tab-btn px-3 py-1.5 rounded-lg text-xs font-medium flex items-center space-x-2 whitespace-nowrap">
         <i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i><span>AI Schedule & Planner</span>
@@ -171,7 +171,11 @@
             <div id="stat-tests-written" class="text-xl font-black text-emerald-600 dark:text-emerald-400">0 / 0</div>
           </div>
           <div class="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 px-4 py-2.5 rounded-xl text-center flex-1 md:flex-initial shadow-sm">
-            <span class="text-[10px] uppercase text-slate-500 font-bold tracking-wider block">Blindspots</span>
+            <span class="text-[10px] uppercase text-slate-500 font-bold tracking-wider block">New Concepts</span>
+            <div id="stat-concepts-count" class="text-xl font-black text-amber-500">0</div>
+          </div>
+          <div class="bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 px-4 py-2.5 rounded-xl text-center flex-1 md:flex-initial shadow-sm">
+            <span class="text-[10px] uppercase text-slate-500 font-bold tracking-wider block">Pending Errors</span>
             <div id="stat-blindspots-count" class="text-xl font-black text-rose-600 dark:text-rose-400">0</div>
           </div>
         </div>
@@ -211,17 +215,17 @@
 
         <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-2xl shadow-sm flex flex-col items-center">
           <div class="w-full flex justify-between items-center mb-2">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">Mistakes Breakdown</h3>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">Mistakes & Concepts</h3>
             <i class="fa-solid fa-pie-chart text-rose-500"></i>
           </div>
           <div class="relative w-44 h-44 flex items-center justify-center">
             <canvas id="chart-mistakes"></canvas>
             <div id="chart-mistakes-label" class="absolute text-center">
               <span class="text-2xl font-black text-slate-800 dark:text-white">0</span>
-              <span class="block text-[10px] text-slate-400">Logged</span>
+              <span class="block text-[10px] text-slate-400">Items</span>
             </div>
           </div>
-          <p class="text-[11px] text-slate-500 mt-2 text-center">Conceptual, Calculation, Formula & Guesswork</p>
+          <p class="text-[11px] text-slate-500 mt-2 text-center">Mistakes vs New Unattempted Concepts</p>
         </div>
       </div>
 
@@ -243,7 +247,7 @@
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h2 class="text-xl font-bold text-slate-900 dark:text-white">Syllabus Completion & 5-Round Spaced Revisions</h2>
-          <p class="text-xs text-slate-500 dark:text-slate-400">Checking Theory stamps the completion date & time, auto-calculating deadlines for PYQs (+2d), R1 (+4d), R2 (+11d), R3 (+25d), R4 (+55d), and R5 (+100d / Dec 31)[cite: 3].</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Checking Theory stamps completion timestamp and triggers deadlines: PYQs (+2d), R1 (+4d), R2 (+11d), R3 (+25d), R4 (+55d), R5 (+100d / Dec 31)[cite: 3].</p>
         </div>
         <div class="flex items-center gap-2 flex-wrap">
           <select id="syllabus-filter-yield" onchange="renderSyllabusTree()" class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs rounded-lg px-3 py-1.5 font-semibold">
@@ -266,7 +270,7 @@
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h2 class="text-xl font-bold text-slate-900 dark:text-white">MADE EASY Online Test Series (OTS) Schedule</h2>
-          <p class="text-xs text-slate-500 dark:text-slate-400">Calibrated schedules for GATE EE (48 Tests) & ESE Prelims (34 Tests)[cite: 4, 5]. Auto-calculates Attempt Date, 48-Hour Analysis Deadline, and 10-Day Mistake Revisit Reminders.</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Calibrated schedules for GATE EE (48 Tests) & ESE Prelims (34 Tests)[cite: 4, 5]. Log marks, accuracy, analysis status, and 10-day mistake review loop.</p>
         </div>
         <div class="flex items-center gap-2 flex-wrap">
           <select id="test-filter-status" onchange="renderTestSeries()" class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs rounded-lg px-3 py-1.5 font-medium">
@@ -301,37 +305,75 @@
       </div>
     </section>
 
-    <!-- 4. MISTAKES & BLINDSPOTS NOTEBOOK -->
+    <!-- 4. MISTAKES & UNATTEMPTED CONCEPTS NOTEBOOK -->
     <section id="view-mistakes" class="hidden space-y-6">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h2 class="text-xl font-bold text-slate-900 dark:text-white">Mistakes Analysis & Blindspot Radar</h2>
-          <p class="text-xs text-slate-500 dark:text-slate-400">Classify every test error by cause to prevent repeat mistakes under exam conditions.</p>
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white">Mistakes & New Concepts Notebook</h2>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Classify test mistakes by root cause, and maintain a dedicated repository for unattempted questions & new concepts to write in notes.</p>
         </div>
-        <button onclick="openMistakeModal()" class="px-3.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-semibold flex items-center gap-2 shadow">
-          <i class="fa-solid fa-plus"></i> Record New Mistake
+        <div class="flex items-center gap-2">
+          <button onclick="openMistakeModal()" class="px-3.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow">
+            <i class="fa-solid fa-plus"></i> Record Mistake
+          </button>
+          <button onclick="openConceptModal()" class="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow">
+            <i class="fa-solid fa-lightbulb"></i> Add New Concept / Unattempted Q
+          </button>
+        </div>
+      </div>
+
+      <!-- Segmented View Selector -->
+      <div class="flex items-center bg-slate-200 dark:bg-slate-900 p-1 rounded-xl border border-slate-300 dark:border-slate-800 max-w-md">
+        <button onclick="switchMistakeTab('errors')" id="tab-btn-errors" class="flex-1 py-1.5 rounded-lg text-xs font-bold transition-all bg-indigo-600 text-white shadow">
+          <i class="fa-solid fa-bug mr-1.5"></i> Test Mistakes Analysis
+        </button>
+        <button onclick="switchMistakeTab('concepts')" id="tab-btn-concepts" class="flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-500 hover:text-slate-200">
+          <i class="fa-solid fa-book-bookmark mr-1.5"></i> Unattempted Qs & Notes Vault
         </button>
       </div>
 
-      <div class="flex flex-wrap items-center gap-3">
-        <select id="mistake-filter-type" onchange="renderMistakes()" class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs rounded-lg px-3 py-1.5 font-medium">
-          <option value="ALL">All Mistake Types</option>
-          <option value="Conceptual">Conceptual Flaw</option>
-          <option value="Calculation">Calculation / Silly Error</option>
-          <option value="Formula">Formula Forgot</option>
-          <option value="TimePressure">Time Pressure / Guessed</option>
-        </select>
-        <select id="mistake-filter-status" onchange="renderMistakes()" class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs rounded-lg px-3 py-1.5 font-medium">
-          <option value="ALL">All Statuses</option>
-          <option value="Pending">Analysis Pending</option>
-          <option value="Analyzed">Analyzed & Understood</option>
-          <option value="Mastered">Mastered & Re-tested</option>
-        </select>
+      <!-- VIEW A: TEST MISTAKES (ERRORS) -->
+      <div id="subview-errors" class="space-y-4">
+        <div class="flex flex-wrap items-center gap-3">
+          <select id="mistake-filter-type" onchange="renderMistakes()" class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs rounded-lg px-3 py-1.5 font-medium">
+            <option value="ALL">All Error Types</option>
+            <option value="Conceptual">Conceptual Flaw</option>
+            <option value="Calculation">Calculation / Silly Error</option>
+            <option value="Formula">Formula Forgot</option>
+            <option value="TimePressure">Time Pressure / Guessed</option>
+          </select>
+          <select id="mistake-filter-status" onchange="renderMistakes()" class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs rounded-lg px-3 py-1.5 font-medium">
+            <option value="ALL">All Analysis Statuses</option>
+            <option value="Pending">Analysis Pending</option>
+            <option value="Analyzed">Analyzed & Understood</option>
+            <option value="Mastered">Mastered & Re-tested</option>
+          </select>
+        </div>
+
+        <div id="mistakes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        <div id="mistakes-empty-state" class="hidden p-8 text-center text-slate-500 text-xs">
+          No test mistakes logged under this filter!
+        </div>
       </div>
 
-      <div id="mistakes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
-      <div id="mistakes-empty-state" class="hidden p-8 text-center text-slate-500 text-xs">
-        No mistakes found matching this filter!
+      <!-- VIEW B: UNATTEMPTED QUESTIONS & NEW CONCEPTS VAULT -->
+      <div id="subview-concepts" class="hidden space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-2">
+            <select id="concept-filter-status" onchange="renderConcepts()" class="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-xs rounded-lg px-3 py-1.5 font-medium">
+              <option value="ALL">All Learning Statuses</option>
+              <option value="To Learn">To Learn & Note</option>
+              <option value="Written in Notes">Written in Notes ✍️</option>
+              <option value="Mastered">Mastered & Retested 🎯</option>
+            </select>
+          </div>
+          <span class="text-xs text-slate-500" id="concepts-count-label">0 concepts stored</span>
+        </div>
+
+        <div id="concepts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        <div id="concepts-empty-state" class="hidden p-8 text-center text-slate-500 text-xs">
+          No unattempted questions or new concepts logged yet. Click "+ Add New Concept" to record points from test solutions!
+        </div>
       </div>
     </section>
 
@@ -496,7 +538,7 @@
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center">
         <div>
-          <h3 class="font-bold text-base text-slate-900 dark:text-white">Log Test Result & Schedule Review</h3>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white">Log Test Result & Analysis</h3>
           <p class="text-[11px] text-slate-500">Auto-computes marks, accuracy, analysis deadline & 10-day review date</p>
         </div>
         <button onclick="closeTestEntryModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white"><i class="fa-solid fa-xmark"></i></button>
@@ -508,14 +550,13 @@
           <div id="modal-test-name-display" class="font-bold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-950 p-2.5 rounded-lg"></div>
         </div>
 
-        <!-- Date Written Input -->
         <div class="grid grid-cols-2 gap-2">
           <div>
             <label class="block text-slate-500 dark:text-slate-400 mb-1">Date Written</label>
             <input type="date" id="input-modal-test-date" onchange="calculateTestDates()" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2 font-bold text-slate-900 dark:text-white"/>
           </div>
           <div>
-            <label class="block text-slate-500 dark:text-slate-400 mb-1">Analysis Deadline (+48h)</label>
+            <label class="block text-slate-500 dark:text-slate-400 mb-1">Analyze By (+48h)</label>
             <div id="modal-test-analyze-deadline" class="p-2 bg-slate-100 dark:bg-slate-950 rounded-lg font-bold text-indigo-500">--</div>
           </div>
         </div>
@@ -531,7 +572,7 @@
           </div>
         </div>
 
-        <!-- Questions Correct / Incorrect -->
+        <!-- Correct / Incorrect -->
         <div class="grid grid-cols-2 gap-2">
           <div>
             <label class="block text-emerald-600 dark:text-emerald-400 font-bold mb-1">
@@ -577,7 +618,7 @@
           </div>
         </div>
 
-        <!-- 10-Day Revisit Box -->
+        <!-- 10-Day Revisit Section -->
         <div class="p-2.5 bg-indigo-500/10 border border-indigo-500/20 rounded-xl space-y-1.5">
           <div class="flex items-center justify-between">
             <span class="font-bold text-indigo-400">10-Day Mistake Revisit Target</span>
@@ -590,11 +631,17 @@
         </div>
       </div>
 
-      <div class="flex justify-between items-center pt-2">
-        <button id="btn-modal-add-mistake" onclick="openMistakeFromTest()" class="text-xs text-rose-500 font-semibold hover:underline">
-          <i class="fa-solid fa-plus mr-1"></i> Log Mistake for this Test
-        </button>
-        <div class="flex gap-2">
+      <!-- Quick Action Buttons: Log Mistake OR Log Concept -->
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-2 pt-2 border-t border-slate-200 dark:border-slate-800">
+        <div class="flex items-center gap-3">
+          <button id="btn-modal-add-mistake" onclick="openMistakeFromTest()" class="text-xs text-rose-500 font-bold hover:underline">
+            <i class="fa-solid fa-bug mr-1"></i> Log Mistake
+          </button>
+          <button onclick="openConceptFromTest()" class="text-xs text-amber-500 font-bold hover:underline">
+            <i class="fa-solid fa-lightbulb mr-1"></i> Log Unattempted / New Concept
+          </button>
+        </div>
+        <div class="flex gap-2 w-full sm:w-auto justify-end">
           <button onclick="closeTestEntryModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-semibold">Cancel</button>
           <button onclick="saveTestEntry()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold shadow">Save Result</button>
         </div>
@@ -602,7 +649,7 @@
     </div>
   </div>
 
-  <!-- 3. MISTAKE MODAL -->
+  <!-- 3. MISTAKE MODAL (FOR WRONG QUESTIONS) -->
   <div id="modal-mistake" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
       <div class="flex justify-between items-center">
@@ -649,12 +696,75 @@
     </div>
   </div>
 
+  <!-- 4. NEW CONCEPT / UNATTEMPTED QUESTION MODAL -->
+  <div id="modal-concept" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+      <div class="flex justify-between items-center">
+        <div>
+          <h3 class="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-lightbulb text-amber-500"></i> Log Unattempted Question / New Concept
+          </h3>
+          <p class="text-[11px] text-slate-500">Add points from solutions to study and write down in short notes</p>
+        </div>
+        <button onclick="closeConceptModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block text-slate-500 dark:text-slate-400 mb-1">Subject / Source Test</label>
+          <input type="text" id="input-concept-subject" placeholder="e.g. Power Systems or MADE EASY Mock 2" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2.5"/>
+        </div>
+        <div>
+          <label class="block text-slate-500 dark:text-slate-400 mb-1">Question / Subtopic Heading</label>
+          <input type="text" id="input-concept-topic" placeholder="e.g. Unattempted Q.34 - Subsynchronous Resonance (SSR) in Series Caps" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2.5 focus:outline-none focus:border-amber-500"/>
+        </div>
+        <div>
+          <label class="block text-slate-500 dark:text-slate-400 mb-1">New Concept / Method / Formula Discovered</label>
+          <textarea id="input-concept-content" placeholder="Write down the core equation or solution method you learned from this question to copy into your notes..." class="w-full h-24 bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2.5 focus:outline-none focus:border-amber-500 resize-none"></textarea>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-slate-500 dark:text-slate-400 mb-1">Status</label>
+            <select id="input-concept-status" class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 rounded-lg p-2.5">
+              <option value="To Learn">To Learn & Note</option>
+              <option value="Written in Notes">Written in Notes ✍️</option>
+              <option value="Mastered">Mastered & Retested 🎯</option>
+            </select>
+          </div>
+          <div class="flex items-center pt-4">
+            <label class="inline-flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" id="input-concept-written" onchange="document.getElementById('input-concept-status').value = this.checked ? 'Written in Notes' : 'To Learn'" class="w-4 h-4 rounded text-amber-500"/>
+              <span class="text-slate-300 font-bold">Written in notes?</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeConceptModal()" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg text-xs font-semibold">Cancel</button>
+        <button onclick="saveConcept()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-xs font-semibold shadow">Save Concept</button>
+      </div>
+    </div>
+  </div>
+
   <!-- SCRIPT ENGINE -->
   <script>
     // PRE-CONFIGURED FIREBASE REALTIME DATABASE ENDPOINT
     const DB_ENDPOINT = "https://prep-tracker-3b08c-default-rtdb.firebaseio.com/users/amar-prep.json";
-    const STORAGE_KEY = "POWERPREP_EE_PERSIST_5REV_V1";
 
+    // HISTORICAL LOCAL STORAGE KEYS TO MIGRATE AUTOMATICALLY (NEVER LOSE DATA)
+    const MIGRATION_KEYS = [
+      "POWERPREP_EE_PERSIST_5REV_V1",
+      "POWERPREP_EE_PERSIST_AI_V8",
+      "POWERPREP_EE_PERSIST_FINAL_V7",
+      "POWERPREP_EE_ULTRA_PERSIST_V6",
+      "POWERPREP_EE_PERSIST_V5",
+      "POWERPREP_EE_PERSIST_V4",
+      "POWERPREP_EE_DB_ULTRA_V3",
+      "POWERPREP_EE_DB_V2",
+      "POWERPREP_EE_DB_V1"
+    ];
+    const ACTIVE_STORAGE_KEY = "POWERPREP_EE_MASTER_PERMANENT";
+
+    // ESE PAPER-1 GS SUBTOPICS (SHARED)
     const SHARED_PAPER_1 = [
       {
         id: "GS_ED",
@@ -983,10 +1093,12 @@
       theme: 'dark',
       activeExam: "ESE",
       activeModule: "dashboard",
+      mistakeTab: "errors", // 'errors' or 'concepts'
       syllabusProgress: {},
       testsData: {},
       customTests: [],
       mistakes: [],
+      newConcepts: [], // Dedicated array for unattempted Qs & new concepts
       planner: {},
       geminiKey: ""
     };
@@ -999,7 +1111,7 @@
     let cloudSaveTimer = null;
     let currentAiSuggestedTasks = [];
 
-    // HELPER FUNCTIONS FOR TIMELINE DATES
+    // TIMELINE DATE HELPERS
     function formatDateTime(isoString) {
       if (!isoString) return '';
       const d = new Date(isoString);
@@ -1019,9 +1131,9 @@
       return result;
     }
 
-    // INITIALIZATION
+    // INITIALIZATION & MIGRATION
     function init() {
-      loadLocalState();
+      loadAndMigrateLocalState();
       applyTheme(state.theme);
       renderExamPills();
       updateCountdowns();
@@ -1037,7 +1149,57 @@
       syncFromCloud(false);
     }
 
-    // CLOUD SYNC ENGINE (REST API)
+    // NON-DESTRUCTIVE MULTI-STORAGE MIGRATION (NEVER LOSES PREVIOUS DATA)
+    function loadAndMigrateLocalState() {
+      try {
+        let loaded = {};
+        // Read historical keys in reverse order to build accumulated data
+        for (let i = MIGRATION_KEYS.length - 1; i >= 0; i--) {
+          const historical = localStorage.getItem(MIGRATION_KEYS[i]);
+          if (historical) {
+            try {
+              const parsed = JSON.parse(historical);
+              loaded.syllabusProgress = Object.assign(loaded.syllabusProgress || {}, parsed.syllabusProgress || {});
+              loaded.testsData = Object.assign(loaded.testsData || {}, parsed.testsData || {});
+              if (Array.isArray(parsed.mistakes)) {
+                loaded.mistakes = (loaded.mistakes || []).concat(parsed.mistakes);
+              }
+              loaded.planner = Object.assign(loaded.planner || {}, parsed.planner || {});
+              if (parsed.theme) loaded.theme = parsed.theme;
+              if (parsed.activeExam) loaded.activeExam = parsed.activeExam;
+            } catch (err) {}
+          }
+        }
+
+        // Read active storage
+        const currentSaved = localStorage.getItem(ACTIVE_STORAGE_KEY);
+        if (currentSaved) {
+          const parsed = JSON.parse(currentSaved);
+          loaded = Object.assign(loaded, parsed);
+        }
+
+        if (Object.keys(loaded).length > 0) {
+          state.syllabusProgress = loaded.syllabusProgress || {};
+          state.testsData = loaded.testsData || {};
+          state.mistakes = Array.isArray(loaded.mistakes) ? loaded.mistakes : Object.values(loaded.mistakes || {});
+          state.newConcepts = Array.isArray(loaded.newConcepts) ? loaded.newConcepts : Object.values(loaded.newConcepts || {});
+          state.planner = loaded.planner || {};
+          if (loaded.theme) state.theme = loaded.theme;
+          if (loaded.activeExam) state.activeExam = loaded.activeExam;
+          if (loaded.geminiKey) state.geminiKey = loaded.geminiKey;
+        }
+      } catch (e) {
+        console.error("Local state migration error:", e);
+      }
+    }
+
+    function saveLocalState() {
+      try {
+        localStorage.setItem(ACTIVE_STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
+    }
+
+    // CLOUD SYNC ENGINE (DEEP NON-DESTRUCTIVE MERGE)
     async function syncFromCloud(showUserAlert) {
       updateSaveIndicator("Connecting to Cloud...", false);
       try {
@@ -1045,16 +1207,23 @@
         if (response.ok) {
           const cloudData = await response.json();
           if (cloudData) {
-            state.syllabusProgress = cloudData.syllabusProgress || {};
-            state.testsData = cloudData.testsData || {};
-            state.mistakes = Array.isArray(cloudData.mistakes) ? cloudData.mistakes : Object.values(cloudData.mistakes || {});
-            state.planner = cloudData.planner || {};
+            // Deep merge cloud and local state to preserve everything
+            state.syllabusProgress = Object.assign({}, state.syllabusProgress, cloudData.syllabusProgress || {});
+            state.testsData = Object.assign({}, state.testsData, cloudData.testsData || {});
+            
+            const cloudMistakes = Array.isArray(cloudData.mistakes) ? cloudData.mistakes : Object.values(cloudData.mistakes || {});
+            state.mistakes = mergeUniqueById(state.mistakes, cloudMistakes);
+
+            const cloudConcepts = Array.isArray(cloudData.newConcepts) ? cloudData.newConcepts : Object.values(cloudData.newConcepts || {});
+            state.newConcepts = mergeUniqueById(state.newConcepts, cloudConcepts);
+
+            state.planner = Object.assign({}, state.planner, cloudData.planner || {});
             if (cloudData.activeExam) state.activeExam = cloudData.activeExam;
 
             saveLocalState();
             renderActiveExamView();
             updateSaveIndicator("Live Synced to Cloud ☁️", true);
-            if (showUserAlert) alert("Synced latest progress from Cloud!");
+            if (showUserAlert) alert("All progress safely synced from Cloud!");
           } else {
             updateSaveIndicator("Cloud Ready ☁️", true);
           }
@@ -1063,6 +1232,13 @@
         console.error("Cloud fetch error:", err);
         updateSaveIndicator("Offline (Saved locally)", false);
       }
+    }
+
+    function mergeUniqueById(localArr, remoteArr) {
+      const map = new Map();
+      (localArr || []).forEach(item => { if (item && item.id) map.set(item.id, item); });
+      (remoteArr || []).forEach(item => { if (item && item.id) map.set(item.id, item); });
+      return Array.from(map.values());
     }
 
     async function pushToCloud() {
@@ -1075,6 +1251,7 @@
             syllabusProgress: state.syllabusProgress,
             testsData: state.testsData,
             mistakes: state.mistakes,
+            newConcepts: state.newConcepts,
             planner: state.planner,
             activeExam: state.activeExam,
             theme: state.theme,
@@ -1095,24 +1272,6 @@
       clearTimeout(cloudSaveTimer);
       updateSaveIndicator("Saving...", false);
       cloudSaveTimer = setTimeout(pushToCloud, 400);
-    }
-
-    function saveLocalState() {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      } catch (e) {}
-    }
-
-    function loadLocalState() {
-      try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-          state = { ...state, ...JSON.parse(saved) };
-          if (!Array.isArray(state.mistakes)) {
-            state.mistakes = Object.values(state.mistakes || {});
-          }
-        }
-      } catch (e) {}
     }
 
     function updateSaveIndicator(text, isCloud) {
@@ -1235,11 +1394,12 @@
       renderSyllabusTree();
       renderTestSeries();
       renderMistakes();
+      renderConcepts();
       populateSubjectDropdowns();
       renderCrossExamMatrix();
     }
 
-    // WEIGHTED SYLLABUS PROGRESS (ADAPTS FOR 5-REVISION VS SPRINT EXAMS)
+    // PROGRESS ENGINE
     function calculateExamSyllabusScore(exam) {
       const schema = SYLLABUS_SCHEMAS[exam];
       if (!schema) return 0;
@@ -1254,7 +1414,6 @@
           let topicScore = 0;
 
           if (is5Rev) {
-            // ESE & GATE: Theory (30%) + PYQs (30%) + 5 Revisions (8% each = 40%)
             if (p.theory) topicScore += 30;
             if (p.pyq) topicScore += 30;
             if (p.r1) topicScore += 8;
@@ -1263,7 +1422,6 @@
             if (p.r4) topicScore += 8;
             if (p.r5) topicScore += 8;
           } else {
-            // SSC JE & RRB JE Sprint: Theory (40%) + PYQs (40%) + R1 (10%) + R2 (10%)
             if (p.theory) topicScore += 40;
             if (p.pyq) topicScore += 40;
             if (p.r1) topicScore += 10;
@@ -1318,6 +1476,11 @@
         if (d.status === 'ATTEMPTED' || d.status === 'ANALYZED') attemptedTests++;
       });
       document.getElementById('stat-tests-written').innerText = `${attemptedTests} / ${testList.length}`;
+
+      // Update concepts count
+      const conceptsList = Array.isArray(state.newConcepts) ? state.newConcepts : Object.values(state.newConcepts || {});
+      const activeConcepts = conceptsList.filter(c => c.exam === exam);
+      document.getElementById('stat-concepts-count').innerText = activeConcepts.length;
 
       const matrixContainer = document.getElementById('subject-matrix-container');
       matrixContainer.innerHTML = '';
@@ -1459,13 +1622,17 @@
       const calculation = examMistakes.filter(m => m.type === 'Calculation').length;
       const formula = examMistakes.filter(m => m.type === 'Formula').length;
       const timeErr = examMistakes.filter(m => m.type === 'TimePressure').length;
-      const totalMistakes = examMistakes.length;
+      
+      const conceptsList = Array.isArray(state.newConcepts) ? state.newConcepts : Object.values(state.newConcepts || {});
+      const examConcepts = conceptsList.filter(c => c.exam === exam).length;
+
+      const totalItems = examMistakes.length + examConcepts;
 
       const labelMis = document.getElementById('chart-mistakes-label');
       if (labelMis) {
         labelMis.innerHTML = `
-          <span class="text-2xl font-black text-slate-800 dark:text-white">${totalMistakes}</span>
-          <span class="block text-[10px] text-slate-400">Errors</span>
+          <span class="text-2xl font-black text-slate-800 dark:text-white">${totalItems}</span>
+          <span class="block text-[10px] text-slate-400">Recorded</span>
         `;
       }
 
@@ -1476,10 +1643,10 @@
         chartMistakes = new Chart(ctxMis, {
           type: 'pie',
           data: {
-            labels: ['Conceptual', 'Calculation', 'Formula', 'Time Pressure'],
+            labels: ['Conceptual Errors', 'Calculation Errors', 'Formula Errors', 'Time Pressure', 'New Concepts/Unattempted'],
             datasets: [{
-              data: totalMistakes ? [conceptual, calculation, formula, timeErr] : [0, 0, 0, 1],
-              backgroundColor: totalMistakes ? ['#f43f5e', '#f59e0b', '#a855f7', '#0284c7'] : [isDark ? '#1e293b' : '#e2e8f0'],
+              data: totalItems ? [conceptual, calculation, formula, timeErr, examConcepts] : [0, 0, 0, 0, 1],
+              backgroundColor: totalItems ? ['#f43f5e', '#f59e0b', '#a855f7', '#0284c7', '#10b981'] : [isDark ? '#1e293b' : '#e2e8f0'],
               borderWidth: 0
             }]
           },
@@ -1515,7 +1682,6 @@
         let topicsHtml = sub.topics.map((t, idx) => {
           const prog = state.syllabusProgress[`${exam}_${sub.id}_${idx}`] || {};
           
-          // Timestamp & deadline calculations
           let theorySubText = '';
           if (prog.theory && prog.theoryAt) {
             theorySubText = `<span class="text-[9px] text-emerald-500 font-bold block">Done: ${formatDateTime(prog.theoryAt)}</span>`;
@@ -1553,7 +1719,6 @@
               ${getRevisionBlock('r5', prog.r5, prog.r5At, prog.r5Due)}
             `;
           } else {
-            // Sprint mode for SSC JE & RRB JE
             revisionsRender = `
               <div class="flex flex-col items-center">
                 <label class="cursor-pointer inline-flex items-center gap-1.5 px-2 py-1 rounded bg-white dark:bg-slate-900 border ${prog.pyq ? 'border-emerald-500 text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10' : 'border-slate-200 dark:border-slate-800 text-slate-400'}">
@@ -1580,7 +1745,6 @@
             <div class="p-3 bg-slate-50/60 dark:bg-slate-950/40 hover:bg-slate-100 dark:hover:bg-slate-950/80 transition-colors flex flex-col lg:flex-row lg:items-center justify-between gap-3 text-xs border-b border-slate-200 dark:border-slate-800/60 last:border-b-0">
               <span class="text-slate-700 dark:text-slate-300 font-medium flex-1">${t}</span>
               <div class="flex items-start gap-2 flex-wrap">
-                <!-- Theory Box -->
                 <div class="flex flex-col items-center">
                   <label class="cursor-pointer inline-flex items-center gap-1.5 px-2 py-1 rounded bg-white dark:bg-slate-900 border ${prog.theory ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-500/10' : 'border-slate-200 dark:border-slate-800 text-slate-400'}">
                     <input type="checkbox" onchange="toggleTheoryCompletion('${exam}', '${sub.id}', ${idx}, this.checked)" ${prog.theory ? 'checked' : ''} class="w-3.5 h-3.5 text-indigo-600 rounded"/>
@@ -1588,7 +1752,6 @@
                   </label>
                   ${theorySubText}
                 </div>
-
                 ${revisionsRender}
               </div>
             </div>
@@ -1614,7 +1777,6 @@
       });
     }
 
-    // THEORY COMPLETION & AUTOMATIC 5-STAGE DEADLINE ENGINE
     function toggleTheoryCompletion(exam, subId, topicIdx, isChecked) {
       const key = `${exam}_${subId}_${topicIdx}`;
       if (!state.syllabusProgress[key]) {
@@ -1627,14 +1789,12 @@
         const now = new Date();
         state.syllabusProgress[key].theoryAt = now.toISOString();
 
-        // Auto-calculate deadlines for PYQs (+2d), R1 (+4d), R2 (+11d), R3 (+25d), R4 (+55d), R5 (+100d capped at Dec 31)
         const pyqDue = addDaysToDate(now, 2);
         const r1Due = addDaysToDate(now, 4);
         const r2Due = addDaysToDate(now, 11);
         const r3Due = addDaysToDate(now, 25);
         const r4Due = addDaysToDate(now, 55);
 
-        // Cap R5 at Dec 31, 2026 before ESE & GATE 2027 exams
         const dec31 = new Date('2026-12-31T23:59:59');
         let r5Due = addDaysToDate(now, 100);
         if (r5Due > dec31) r5Due = dec31;
@@ -1655,7 +1815,6 @@
       renderSyllabusTree();
     }
 
-    // MILESTONE COMPLETION (PYQs, R1-R5)
     function toggleMilestone(exam, subId, topicIdx, milestone, isChecked) {
       const key = `${exam}_${subId}_${topicIdx}`;
       if (!state.syllabusProgress[key]) {
@@ -1694,7 +1853,6 @@
       testList.forEach(t => {
         const testState = state.testsData[`${exam}_${t.id}`] || { score: null, accuracy: null, status: 'PENDING' };
         
-        // Revisit status calculation
         let revisitBadge = '<span class="text-slate-500 font-mono text-[10px]">-</span>';
         let isRevisitDue = false;
 
@@ -1713,7 +1871,6 @@
           }
         }
 
-        // Filtering
         if (filterStatus === 'PENDING' && testState.status !== 'PENDING') return;
         if (filterStatus === 'ATTEMPTED' && testState.status !== 'ATTEMPTED') return;
         if (filterStatus === 'REVISIT_DUE' && (!isRevisitDue || testState.revisited)) return;
@@ -1797,7 +1954,6 @@
       document.getElementById('modal-test-total-ques-display').innerText = `${currentTestObject.ques} Questions`;
       document.getElementById('modal-test-total-marks-display').innerText = `${currentTestObject.marks} Marks`;
 
-      // Date written
       const todayISO = new Date().toISOString().split('T')[0];
       const attemptDateVal = existing.attemptedAt ? existing.attemptedAt.split('T')[0] : todayISO;
       document.getElementById('input-modal-test-date').value = attemptDateVal;
@@ -1870,7 +2026,6 @@
 
       const attempted = correct + incorrect;
       const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
-
       const attemptedAt = dateVal ? new Date(dateVal).toISOString() : new Date().toISOString();
 
       state.testsData[`${exam}_${activeModalTestId}`] = {
@@ -1893,7 +2048,6 @@
     }
 
     function openMistakeFromTest() {
-      const exam = state.activeExam;
       const testList = getActiveExamTestsList();
       const currentTest = testList.find(t => t.id === activeModalTestId);
       closeTestEntryModal();
@@ -1902,7 +2056,39 @@
       openMistakeModal();
     }
 
-    // 4. MISTAKES NOTEBOOK
+    function openConceptFromTest() {
+      const testList = getActiveExamTestsList();
+      const currentTest = testList.find(t => t.id === activeModalTestId);
+      closeTestEntryModal();
+
+      document.getElementById('input-concept-subject').value = currentTest ? currentTest.name : 'MADE EASY Test';
+      openConceptModal();
+    }
+
+    // 4. MISTAKES & NEW CONCEPTS NOTEBOOK ENGINE
+    function switchMistakeTab(tab) {
+      state.mistakeTab = tab;
+      const btnErrors = document.getElementById('tab-btn-errors');
+      const btnConcepts = document.getElementById('tab-btn-concepts');
+      const viewErrors = document.getElementById('subview-errors');
+      const viewConcepts = document.getElementById('subview-concepts');
+
+      if (tab === 'errors') {
+        btnErrors.className = "flex-1 py-1.5 rounded-lg text-xs font-bold transition-all bg-indigo-600 text-white shadow";
+        btnConcepts.className = "flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-500 hover:text-slate-200";
+        viewErrors.classList.remove('hidden');
+        viewConcepts.classList.add('hidden');
+        renderMistakes();
+      } else {
+        btnConcepts.className = "flex-1 py-1.5 rounded-lg text-xs font-bold transition-all bg-amber-600 text-white shadow";
+        btnErrors.className = "flex-1 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-500 hover:text-slate-200";
+        viewConcepts.classList.remove('hidden');
+        viewErrors.classList.add('hidden');
+        renderConcepts();
+      }
+    }
+
+    // A. MISTAKES (ERRORS)
     function renderMistakes() {
       const grid = document.getElementById('mistakes-grid');
       const empty = document.getElementById('mistakes-empty-state');
@@ -1944,7 +2130,7 @@
             </div>
           </div>
           <div class="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-800 text-xs">
-            <select onchange="updateMistakeStatus(${m.id}, this.value)" class="bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-[11px] rounded px-2 py-1">
+            <select onchange="updateMistakeStatus(${m.id}, this.value)" class="bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-[11px] rounded px-2 py-1 font-semibold">
               <option value="Pending" ${m.status === 'Pending' ? 'selected' : ''}>Pending</option>
               <option value="Analyzed" ${m.status === 'Analyzed' ? 'selected' : ''}>Analyzed</option>
               <option value="Mastered" ${m.status === 'Mastered' ? 'selected' : ''}>Mastered</option>
@@ -1974,7 +2160,7 @@
       const takeaway = document.getElementById('input-mistake-takeaway').value.trim();
 
       if (!topic) {
-        alert("Please enter the specific question or formula topic.");
+        alert("Please enter the question or topic reference.");
         return;
       }
 
@@ -2015,6 +2201,124 @@
         renderMistakes();
         updateDashboardStats();
         detectBlindspots();
+        renderCharts();
+      }
+    }
+
+    // B. UNATTEMPTED QUESTIONS & NEW CONCEPTS VAULT
+    function renderConcepts() {
+      const grid = document.getElementById('concepts-grid');
+      const empty = document.getElementById('concepts-empty-state');
+      const filterStatus = document.getElementById('concept-filter-status').value;
+      grid.innerHTML = '';
+
+      const conceptsList = Array.isArray(state.newConcepts) ? state.newConcepts : Object.values(state.newConcepts || {});
+      let list = conceptsList.filter(c => c.exam === state.activeExam);
+      if (filterStatus !== 'ALL') list = list.filter(c => c.status === filterStatus);
+
+      document.getElementById('concepts-count-label').innerText = `${list.length} concept(s) displayed`;
+
+      if (list.length === 0) {
+        empty.classList.remove('hidden');
+        return;
+      }
+      empty.classList.add('hidden');
+
+      list.forEach(c => {
+        const card = document.createElement('div');
+        card.className = "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 flex flex-col justify-between space-y-3 shadow-sm";
+
+        let statusChip = '';
+        if (c.status === 'Written in Notes') {
+          statusChip = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">Written in Notes ✍️</span>';
+        } else if (c.status === 'Mastered') {
+          statusChip = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">Mastered 🎯</span>';
+        } else {
+          statusChip = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">To Learn</span>';
+        }
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between text-xs text-slate-500 mb-1.5">
+              <span class="truncate max-w-[150px] font-bold text-slate-400">${c.subject}</span>
+              ${statusChip}
+            </div>
+            <h4 class="font-bold text-slate-900 dark:text-white text-xs leading-snug">${c.topic}</h4>
+            <div class="mt-2 p-2.5 bg-slate-50 dark:bg-slate-950 rounded-lg border border-slate-200 dark:border-slate-800 text-[11px] text-slate-700 dark:text-slate-300">
+              <strong class="text-amber-500 block mb-0.5"><i class="fa-solid fa-lightbulb mr-1"></i>New Concept / Solution Method:</strong>
+              ${c.content}
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-800 text-xs">
+            <select onchange="updateConceptStatus(${c.id}, this.value)" class="bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-700 text-[11px] rounded px-2 py-1 font-semibold">
+              <option value="To Learn" ${c.status === 'To Learn' ? 'selected' : ''}>To Learn</option>
+              <option value="Written in Notes" ${c.status === 'Written in Notes' ? 'selected' : ''}>Written in Notes ✍️</option>
+              <option value="Mastered" ${c.status === 'Mastered' ? 'selected' : ''}>Mastered 🎯</option>
+            </select>
+            <button onclick="deleteConcept(${c.id})" class="text-slate-400 hover:text-rose-500"><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function openConceptModal() {
+      document.getElementById('modal-concept').classList.remove('hidden');
+    }
+
+    function closeConceptModal() {
+      document.getElementById('modal-concept').classList.add('hidden');
+      document.getElementById('input-concept-topic').value = '';
+      document.getElementById('input-concept-content').value = '';
+      document.getElementById('input-concept-written').checked = false;
+      document.getElementById('input-concept-status').value = 'To Learn';
+    }
+
+    function saveConcept() {
+      const subject = document.getElementById('input-concept-subject').value.trim() || 'Core Electrical Engineering';
+      const topic = document.getElementById('input-concept-topic').value.trim();
+      const content = document.getElementById('input-concept-content').value.trim();
+      const status = document.getElementById('input-concept-status').value;
+
+      if (!topic || !content) {
+        alert("Please enter the question heading and the new concept/formula learned.");
+        return;
+      }
+
+      state.newConcepts.push({
+        id: Date.now(),
+        exam: state.activeExam,
+        subject,
+        topic,
+        content,
+        status,
+        date: new Date().toISOString().split('T')[0]
+      });
+
+      saveState();
+      closeConceptModal();
+      switchMistakeTab('concepts');
+      updateDashboardStats();
+      renderCharts();
+    }
+
+    function updateConceptStatus(id, newStatus) {
+      const item = state.newConcepts.find(c => c.id === id);
+      if (item) {
+        item.status = newStatus;
+        saveState();
+        renderConcepts();
+        updateDashboardStats();
+        renderCharts();
+      }
+    }
+
+    function deleteConcept(id) {
+      if (confirm("Delete this concept from your notebook?")) {
+        state.newConcepts = state.newConcepts.filter(c => c.id !== id);
+        saveState();
+        renderConcepts();
+        updateDashboardStats();
         renderCharts();
       }
     }
@@ -2117,7 +2421,7 @@
       saveState();
     }
 
-    // GEMINI AI STUDY STRATEGIST
+    // GEMINI AI STRATEGIST
     function openAiKeyModal() {
       document.getElementById('input-gemini-key').value = state.geminiKey || "";
       document.getElementById('modal-ai-key').classList.remove('hidden');
@@ -2198,7 +2502,7 @@ Tags must strictly be one of: 'Theory', 'PYQs', 'Test', 'Revision'.`;
         { text: `09:00 AM - 10:45 AM: Deep Focus - ${focus} (Core Concepts & Formulas)`, tag: "Theory" },
         { text: `11:00 AM - 01:00 PM: Solve 20-25 Previous Year Questions on ${focus}`, tag: "PYQs" },
         { text: `03:00 PM - 04:30 PM: Take Subject Test / Quiz on ${state.activeExam} pattern`, tag: "Test" },
-        { text: `05:00 PM - 06:00 PM: Mistake Notebook Analysis & Formula Flashcards`, tag: "Revision" }
+        { text: `05:00 PM - 06:00 PM: Review Unattempted Concepts & Flashcards`, tag: "Revision" }
       ];
     }
 
